@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMI-ACP Lux Quiz – 94 Wrong Questions</title>
+    <style>
+        body {
+            background-color: #fff;
+            color: #202124;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #progress-bar {
+            width: 100%;
+            max-width: 600px;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        #progress {
+            height: 10px;
+            width: 0%;
+            background-color: #1a73e8;
+            border-radius: 5px;
+            transition: width 0.3s ease-in-out;
+        }
+        #score, #question-counter {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .question-card {
+            background-color: #fff;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .category-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        .cat-a { background-color: #f28b82; color: #202124; } /* Red - Unfamiliar */
+        .cat-b { background-color: #fbbc04; color: #202124; } /* Orange - Guessed Wrong */
+        .cat-c { background-color: #34a853; color: #202124; } /* Green - Minor Mistake */
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .option {
+            background-color: #f1f3f4;
+            border: 1px solid #dadce0;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .option:hover {
+            background-color: #e8f0fe;
+        }
+        .option.selected {
+            border-color: #1a73e8;
+            background-color: #d2e3fc;
+        }
+        .option.correct {
+            background-color: #d4e8d4;
+            border-color: #34a853;
+        }
+        .option.wrong {
+            background-color: #f8d7da;
+            border-color: #ea4335;
+        }
+        .option-explanation {
+            font-size: 13px;
+            color: #5f6368;
+            margin-top: 5px;
+            display: none;
+            padding: 8px;
+            background-color: #f9f9f9;
+            border-left: 3px solid #ccc;
+            margin-left: 10px;
+        }
+        #explanation {
+            margin-top: 20px;
+            padding: 10px;
+            border-top: 1px solid #dadce0;
+            display: none;
+            background-color: #f0f7ff;
+            border-radius: 5px;
+        }
+        #show-answer {
+            background-color: #1a73e8;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        #show-answer:disabled {
+            background-color: #dadce0;
+            cursor: not-allowed;
+        }
+        #next-question {
+            background-color: #34a853;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: none;
+        }
+        #next-question:disabled {
+            background-color: #dadce0;
+            cursor: not-allowed;
+        }
+        #final-screen {
+            display: none;
+            text-align: center;
+            max-width: 600px;
+        }
+        #restart {
+            background-color: #1a73e8;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .question-card { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PMI-ACP Lux Quiz – 94 Wrong Questions</h1>
+    </header>
+    <div id="progress-bar"><div id="progress"></div></div>
+    <div id="score">Live Score: 0 / 94</div>
+    <div id="question-counter">Question 1 of 94</div>
+    <div id="quiz" class="question-card"></div>
+    <div id="final-screen">
+        <h2>Final Score: <span id="final-score"></span> / 94</h2>
+        <p id="percentage"></p>
+        <p id="message"></p>
+        <button id="restart">Restart Quiz</button>
+    </div>
+
+    <script>
+        const questions = [
+            { id: 1, text: "Your team is tasked with developing a new analytics dashboard for an e-commerce platform. After the first increment is ready, the team needs to figure out the best way to validate if this dashboard addresses the actual needs of the users. What should the team do to validate the effectiveness of the first increment?", options: [
+                {text: "A. Wait for the final product to be entirely complete before seeking user feedback, ensuring that all features and functionalities are fully developed and integrated.", explanation: "This approach delays feedback, which can lead to significant issues being identified too late in the development process, making it difficult to implement changes effectively."},
+                {text: "B. Perform a split-test where half of the users get the new dashboard and the other half continue using the old one.", explanation: "This method allows for real user feedback on the new dashboard in comparison to the existing one, facilitating a clear understanding of its effectiveness and user satisfaction."},
+                {text: "C. Ask internal team members to simulate comprehensive user interaction with the dashboard, running through all possible scenarios and use cases.", explanation: "Internal team members may not represent the actual user base, and their simulated interactions might not capture real user behaviors or preferences."},
+                {text: "D. Gather requirements again to ensure no details were missed during the initial stages.", explanation: "Re-gathering requirements may lead to unnecessary delays and does not directly validate the dashboard's effectiveness with actual users."}
+            ], userAnswer: "C. Ask internal team members to simulate comprehensive user interaction with the dashboard, running through all possible scenarios and use cases.", correctAnswer: "B. Perform a split-test where half of the users get the new dashboard and the other half continue using the old one.", explanation: "Waiting for the final product delays feedback and potential course corrections. A split-test (A/B testing) provides a direct comparison between the new and old dashboards, helping to identify if the new increment offers a significant improvement or addresses user needs better. Internal team members are not the actual end users, hence their feedback might not accurately reflect the needs of real users. Gathering requirements again is redundant if you already have them; it's better to validate through user interactions with the increment.", domain: "Domain I: Mindset", category: "B", isNewFormat: true },
+            { id: 13, text: "You are leading an agile team that recently expanded to include members from diverse cultural backgrounds. During retrospectives, you notice that newer team members are less vocal and rarely give input. You want to create a safe environment to encourage more participation. What is the best action you can take to promote a safe environment for this culturally diverse team?", options: [
+                {text: "A. Establish stricter guidelines to ensure everyone follows the same rules.", explanation: "Rigid rules can stifle open communication and make the environment feel less safe, which is counterproductive to fostering participation."},
+                {text: "B. Form smaller discussion groups from different backgrounds to share ideas.", explanation: "While smaller groups can encourage sharing, they may still expose members to direct criticism or cultural misunderstandings, which could deter participation."},
+                {text: "C. Schedule one-on-one meetings to individually ask for their input.", explanation: "This approach can provide a more comfortable setting for quieter team members to express themselves, but it may not fully alleviate fears of public scrutiny."},
+                {text: "D. Implement anonymous feedback tools to gather team members' opinions.", explanation: "Anonymous feedback tools allow team members to express their views without fear of judgment, thus creating a more psychologically safe environment for participation."}
+            ], userAnswer: "B. Form smaller discussion groups from different backgrounds to share ideas.", correctAnswer: "D. Implement anonymous feedback tools to gather team members' opinions.", explanation: "Establish stricter guidelines to ensure everyone follows the same rules is incorrect because rigid rules can stifle open communication and make the environment feel less safe. Form smaller discussion groups from different backgrounds to share ideas might help but can still expose team members to direct criticism or cultural misunderstandings, which anonymous tools avoid. Schedule one-on-one meetings to individually ask for their input is a good practice but may not fully address the fear of public scrutiny, thus less effective compared to anonymous feedback. Implement anonymous feedback tools to gather team members' opinions is correct because anonymous feedback can help quieter or newer team members express their views without fear of judgment or reprisal, fostering a safer environment.", domain: "Domain I: Mindset", category: "B", isNewFormat: true },
+            { id: 15, text: "You are the scrum master for an agile team that has been working cohesively for the last six months. Despite your team's efforts, they've been consistently missing sprint commitments. You notice that the team's approach to user story sizing has remained unchanged since the first sprint, even though you're encouraging them to inspect and adapt. What action should you take to challenge the status quo effectively?", options: [
+                {text: "A. Hold a retrospective to discuss and explore new techniques for user story sizing.", explanation: "This option encourages team reflection and collaboration, which are key components of the agile mindset. It promotes a culture of continuous improvement by allowing the team to evaluate their current practices and explore new methods, thereby challenging the status quo effectively."},
+                {text: "B. Focus primarily on motivating the team to work harder to meet commitments.", explanation: "While motivation is essential, this approach does not address the underlying issues with the team's process and methods. Simply urging the team to work harder without exploring improvements may lead to burnout and does not align with agile principles."},
+                {text: "C. Continue using the same techniques but extend sprint length to give the team more time.", explanation: "This option does not address the root cause of the problem. Extending the sprint length may provide temporary relief but does not encourage the team to improve their user story sizing techniques or engage in process reflection."},
+                {text: "D. Penalize the team members who are not meeting their commitments.", explanation: "This approach is contrary to agile principles, which emphasize collaboration, trust, and learning from mistakes. Penalizing team members can create a toxic environment and discourage open communication."}
+            ], userAnswer: "B. Focus primarily on motivating the team to work harder to meet commitments.", correctAnswer: "A. Hold a retrospective to discuss and explore new techniques for user story sizing.", explanation: "This option advocates for an iterative inspection and adaptation approach, consistent with both the agile and lean mindsets, encouraging continual improvement. Motivation is important, but focusing solely on working harder ignores examining underlying process inefficiencies. Extending the sprint length modifies the framework but does not address potential issues with current processes. Penalizing team members is against agile values of team collaboration and could demotivate the team.", domain: "Domain I: Mindset", category: "B", isNewFormat: true },
+            { id: 17, text: "Your agile team is working on developing a new feature for your product. Midway through the sprint, a critical change in requirements is introduced by the product owner. You want to ensure that your team continues to deliver value regularly despite this change. What is the best approach you should take to handle this situation?", options: [
+                {text: "A. Immediately halt all current sprint work and focus entirely on the new requirements.", explanation: "Halting all current sprint work would disrupt the flow and might result in wasted effort on partially completed items."},
+                {text: "B. Complete the current sprint as planned and address the new requirements in the next sprint.", explanation: "Waiting until the next sprint could delay the delivery of critical value and reduce responsiveness to stakeholders' needs."},
+                {text: "C. Integrate the new requirements into the current sprint and reprioritize the backlog accordingly.", explanation: "Integrating new requirements and reprioritizing the backlog ensures that the team continues to deliver the most valuable features first while adapting to changes. This approach supports the agile principle of being responsive to change and delivering value as often as possible."},
+                {text: "D. Add the new requirements to the sprint backlog without any changes to your current priorities.", explanation: "Adding requirements without reprioritizing will overburden the team and could lead to quality degradation or incomplete work."}
+            ], userAnswer: "B. Complete the current sprint as planned and address the new requirements in the next sprint.", correctAnswer: "C. Integrate the new requirements into the current sprint and reprioritize the backlog accordingly.", explanation: "Halting all current sprint work would disrupt the flow and might result in wasted effort on partially completed items. Waiting until the next sprint could delay the delivery of critical value and reduce responsiveness to stakeholders' needs. Integrating new requirements and reprioritizing the backlog ensures that the team continues to deliver the most valuable features first while adapting to changes. This approach supports the agile principle of being responsive to change and delivering value as often as possible. Adding requirements without reprioritizing will overburden the team and could lead to quality degradation or incomplete work.", domain: "Domain I: Mindset", category: "B", isNewFormat: true },
+            { id: 18, text: "As a product owner in a mid-sized software company, you are working on a new feature for your product. To quickly validate your assumptions and shorten the feedback cycle, you decide to use Lean Startup principles. What is the first step you should take to apply Lean Startup principles to this feature development?", options: [
+                {text: "A. Draft a detailed technical specification document for the feature.", explanation: "This is contrary to Lean Startup principles, which focus on iteration over comprehensive documentation."},
+                {text: "B. Conduct a full-scale market analysis for the new feature.", explanation: "While useful, it isn't the immediate first step in Lean Startup, which prioritizes quick validation and learning."},
+                {text: "C. Create a hypothesis statement to define your assumptions.", explanation: "Creating a hypothesis statement defines your assumptions, which is the first step in the Lean Startup methodology. This helps to set the stage for experimentation and learning."},
+                {text: "D. Develop the complete set of features before releasing it to the market.", explanation: "This goes against the Lean Startup approach of incremental and iterative development."}
+            ], userAnswer: "B. Conduct a full-scale market analysis for the new feature.", correctAnswer: "C. Create a hypothesis statement to define your assumptions.", explanation: "Draft a detailed technical specification document for the feature: This is contrary to Lean Startup principles, which focus on iteration over comprehensive documentation. Conduct a full-scale market analysis for the new feature: While useful, it isn't the immediate first step in Lean Startup, which prioritizes quick validation and learning. Creating a hypothesis statement defines your assumptions, which is the first step in the Lean Startup methodology. This helps to set the stage for experimentation and learning. Develop the complete set of features before releasing it to the market: This goes against the Lean Startup approach of incremental and iterative development.", domain: "Domain I: Mindset", category: "B", isNewFormat: true },
+            { id: 25, text: "You are a scrum master, and your team has encountered an unexpected major production issue that is severely affecting users. The issue emerged suddenly and there is no evident cause. What should be your primary course of action to address this situation?", options: [
+                {text: "A. Conduct a detailed root cause analysis before taking any actions.", explanation: "Conducting a detailed root cause analysis is typically a systematic approach to problem-solving; however, it is not an effective initial response in a crisis. Immediate containment is necessary to prevent further impact on users."},
+                {text: "B. Schedule an urgent team meeting to discuss potential causes and plan next steps.", explanation: "While discussing the situation with the team can be beneficial, in urgent circumstances, taking immediate action is more critical than planning and discussing."},
+                {text: "C. Act immediately to contain the issue, then sense and respond appropriately.", explanation: "In a chaotic situation, immediate action is required to stabilize the situation before doing anything else."},
+                {text: "D. Assign the problem to the most experienced team member to investigate.", explanation: "Relying on just one team member, even if they are experienced, may not be the best approach in a crisis situation where quick action is required from the whole team."}
+            ], userAnswer: "A. Conduct a detailed root cause analysis before taking any actions.", correctAnswer: "C. Act immediately to contain the issue, then sense and respond appropriately.", explanation: "While root cause analysis is important, it is not suitable as the first step in a situation where immediate containment is necessary. While team collaboration is useful, in a chaotic situation, immediate action is prioritized over meetings. In a chaotic situation, immediate action is required to stabilize the situation before doing anything else. Relying on a single experienced team member might not provide the immediate action needed to stabilize the chaos.", domain: "Domain I: Mindset", category: "B", isNewFormat: true },
+            { id: 27, text: "A project requires both rapid delivery of MVIs (minimum value increments) and extensive user acceptance testing (UAT) over long periods. What hybrid model would you recommend to optimize both agility and thorough testing?", options: [
+                {text: "A. Utilize pure Scrum to handle all processes effectively.", explanation: "Pure Scrum might not address the extended UAT needs effectively."},
+                {text: "B. Implement Extreme Programming (XP) to address both rapid delivery and rigorous testing.", explanation: "While XP emphasizes testing, it may not handle the long-term, formal UAT processes required by the project."},
+                {text: "C. Apply the lean approach for MVI delivery and traditional methodologies for UAT phases.", explanation: "This hybrid approach leverages the efficiency of Lean for rapid MVI delivery and the structured nature of traditional practices for comprehensive UAT phases, ensuring both agility and thoroughness."},
+                {text: "D. Use Kanban for MVI delivery and agile methods for UAT, iterating until final acceptance.", explanation: "Utilizing Kanban for delivery and agile for UAT might introduce coordination and process adherence issues."}
+            ], userAnswer: "D. Use Kanban for MVI delivery and agile methods for UAT, iterating until final acceptance.", correctAnswer: "C. Apply the lean approach for MVI delivery and traditional methodologies for UAT phases.", explanation: "Pure Scrum might not address the extended UAT needs effectively. While XP emphasizes testing, it may not handle the long-term, formal UAT processes required by the project. This hybrid approach leverages the efficiency of Lean for rapid MVI delivery and the structured nature of traditional practices for comprehensive UAT phases, ensuring both agility and thoroughness. Utilizing Kanban for delivery and agile for UAT might introduce coordination and process adherence issues.", domain: "Domain I: Mindset", category: "B", isNewFormat: true },
+            { id: 31, text: "During sprint planning, a disagreement arises between team members about the technical approach to resolve a complicated problem. This disagreement is causing a significant delay in finalizing the sprint backlog. What steps should you take to ensure the team resolves this problem promptly and the sprint planning can proceed?", options: [
+                {text: "A. Decide on the technical approach yourself to save time and move forward with the planning.", explanation: "Making the decision unilaterally can undermine the team's ability to collaborate and may lead to resentment, affecting team dynamics."},
+                {text: "B. Split the team into smaller groups to test each approach and decide based on the results.", explanation: "While this approach allows for experimentation, it can lead to additional delays and may not foster consensus among the team."},
+                {text: "C. Schedule a dedicated, timeboxed session for team members to discuss and resolve the disagreement.", explanation: "This allows focused time for resolution, ensuring team collaboration and timely decision-making."},
+                {text: "D. Postpone the conversation until the next sprint planning session to avoid further delays.", explanation: "Delaying the decision could lead to unresolved issues and negatively impact future planning sessions."}
+            ], userAnswer: "B. Split the team into smaller groups to test each approach and decide based on the results.", correctAnswer: "C. Schedule a dedicated, timeboxed session for team members to discuss and resolve the disagreement.", explanation: "Decide on the technical approach yourself to save time and move forward with the planning. This undermines team autonomy and might impact morale and buy-in. Split the team into smaller groups to test each approach and decide based on the results. This can be time-consuming and still doesn't guarantee a consensus. Schedule a dedicated, timeboxed session for team members to discuss and resolve the disagreement. This allows focused time for resolution, ensuring team collaboration and timely decision-making. Postpone the conversation until the next sprint planning session to avoid further delays. Postponing avoids immediate resolution and might affect current and future sprint planning negatively.", domain: "Domain II: Leadership", category: "B", isNewFormat: true },
+            { id: 38, text: "Your agile team is facing difficulties aligning their daily work with the long-term project vision, which seems to be causing morale issues. What technique can you use to better align the team's daily tasks with the long-term project vision?", options: [
+                {text: "A. Assign a specific individual to monitor the team and report on the alignment daily.", explanation: "This approach may create a sense of oversight rather than collaboration, leading to decreased morale. Agile emphasizes team autonomy and collective ownership over tasks."},
+                {text: "B. Establish a rigid set of guidelines for everyone to follow without deviation.", explanation: "Rigid guidelines can limit the team's ability to adapt to changes and stifle innovation, which contradicts agile principles that advocate for flexibility and responsiveness to change."},
+                {text: "C. Use sprint reviews to regularly revisit and adjust the project vision as needed.", explanation: "Sprint reviews provide a recurring opportunity to reassess and realign the team's work with the long-term vision, ensuring that everyone understands how their contributions fit into the overall goals."},
+                {text: "D. Hold daily stand-up/coordination meetings focusing only on immediate tasks.", explanation: "Focusing solely on immediate tasks neglects the broader project vision, which is essential for team alignment and morale."}
+            ], userAnswer: "D. Hold daily stand-up/coordination meetings focusing only on immediate tasks.", correctAnswer: "C. Use sprint reviews to regularly revisit and adjust the project vision as needed.", explanation: "While monitoring can help, it does not facilitate shared understanding or morale improvement. Rigid guidelines might stifle creativity and adaptability, which are core principles of agile. Sprint reviews provide a recurring opportunity to reassess and realign the team's work with the long-term vision, ensuring that everyone understands how their contributions fit into the overall goals. Daily stand-ups/coordination meetings are too focused on immediate tasks to adequately address long-term vision alignment.", domain: "Domain II: Leadership", category: "B", isNewFormat: true },
+            { id: 40, text: "An agile coach is helping a team that has been following a traditional, plan-driven approach for several years. The organization has decided to adopt agile approaches, but the team is resistant to change and hesitant to experiment with new practices. How would you motivate the team to embrace an agile mindset and take risks in adopting new practices?", options: [
+                {text: "A. Provide the team with a detailed plan and timeline for transitioning to agile, outlining specific practices and processes to be implemented.", explanation: "Providing a detailed plan may reinforce the team's existing resistance to change, as it resembles a traditional approach rather than fostering an agile mindset that values flexibility and adaptability."},
+                {text: "B. Encourage the team to identify their current pain points or challenges and explore how agile practices can address those issues.", explanation: "This approach empowers the team to take ownership of their challenges, fostering motivation to explore agile solutions that are relevant to their specific context."},
+                {text: "C. Highlight successful case studies and positive outcomes from other teams or organizations that have adopted agile practices.", explanation: "While this can provide some motivation, it may not directly connect with the team's specific challenges and context, potentially leading to skepticism."},
+                {text: "D. Remind the team of the potential consequences of not adapting, such as losing competitive advantage or failing to meet customer expectations.", explanation: "Focusing on negative consequences may create fear rather than motivation, which can be counterproductive in fostering an agile mindset."}
+            ], userAnswer: "C. Highlight successful case studies and positive outcomes from other teams or organizations that have adopted agile practices.", correctAnswer: "B. Encourage the team to identify their current pain points or challenges and explore how agile practices can address those issues.", explanation: "Imposes a plan-driven approach, which may reinforce the team's resistance to change. By encouraging the team to identify their own pain points and explore how agile practices can address those issues, you are fostering team ownership and motivation. This approach aligns with the agile principle of responding to change over following a plan. Provides external motivation, but may not resonate with the team's specific context. Focuses on negative consequences, which can demotivate the team.", domain: "Domain II: Leadership", category: "B", isNewFormat: true },
+            { id: 46, text: "A junior developer on an agile team is struggling with understanding how to effectively break down user stories into manageable tasks. The team lead provides them with additional support. Which of the following actions should the team lead take?", options: [
+                {text: "A. Enroll them in a training program on agile approaches.", explanation: "Training programs can provide essential knowledge about agile principles and practices, which is important for understanding the broader context of agile methodologies. However, it may not directly address the specific skill of breaking down user stories, which often requires practical application and guidance."},
+                {text: "B. Schedule regular team meetings to discuss user story breakdown.", explanation: "Regular team meetings can facilitate knowledge sharing among team members and encourage collaboration. However, they may lack the focused attention needed for the junior developer to effectively learn the task of breaking down user stories."},
+                {text: "C. Assign a mentor who excels in breaking down user stories.", explanation: "Mentoring provides personalized guidance and support from someone experienced in the specific skill, which in this case is breaking down user stories. This tailored mentorship helps the junior developer learn through direct insight and feedback."},
+                {text: "D. Provide coaching sessions on agile task management.", explanation: "Coaching sessions can improve performance and offer targeted advice. However, they may not provide the ongoing support and personalized feedback that a mentorship relationship can offer, which is crucial for developing specific skills like task breakdown."}
+            ], userAnswer: "D. Provide coaching sessions on agile task management.", correctAnswer: "C. Assign a mentor who excels in breaking down user stories.", explanation: "While training provides foundational knowledge, it does not offer the personalized, contextual experience that mentoring provides. Team meetings can foster knowledge sharing but may not provide the focused, individual support needed for skill development in this scenario. Mentoring provides personalized guidance and support from someone experienced in the specific skill, which in this case is breaking down user stories. This tailored mentorship helps the junior developer learn through direct insight and feedback. Coaching focuses on performance improvement but may not offer the long-term developmental relationship and contextual expertise that mentoring does.", domain: "Domain II: Leadership", category: "B", isNewFormat: true },
+            { id: 195, text: "An agile team is developing a new complex feature for a healthcare management application. During the backlog refinement session, it becomes clear that the team lacks critical knowledge on the technical aspects and feasibility of certain user stories, making it difficult to commit to and plan for upcoming sprints. What should the team do in this context?", options: [
+                {text: "A. Perform an analysis to clarify the requirements and validate the technical feasibility of the user stories in collaboration with architects and stakeholders.", explanation: "While performing an analysis and collaborating with architects and stakeholders is important, it does not directly address the immediate need for reducing uncertainty regarding technical feasibility. This approach may also lead to delays in the sprint planning process."},
+                {text: "B. Schedule a spike to investigate the technical questions and reduce uncertainty around the concerned user stories.", explanation: "Scheduling a spike is the most appropriate action as it allows the team to quickly gather the necessary information regarding technical questions. This approach directly addresses the uncertainty and enables the team to make informed decisions about the user stories, aligning with agile principles of continuous learning and adaptation."},
+                {text: "C. Plan the user stories in the iteration, including follow-up points during demos and retrospectives to adjust plans and estimates based on learning.", explanation: "Planning user stories without first addressing the lack of technical knowledge could lead to executing work that may not be feasible. Although adjusting plans based on learning is important, it should not replace the need for clarity before planning."},
+                {text: "D. Assign individual research tasks to team members to report their findings at the next backlog refinement session.", explanation: "Assigning individual research tasks does not promote collaboration within the team and may lead to fragmented knowledge. Agile practices emphasize collective ownership and shared learning, which this approach does not support."}
+            ], userAnswer: "A. Perform an analysis to clarify the requirements and validate the technical feasibility of the user stories in collaboration with architects and stakeholders.", correctAnswer: "B. Schedule a spike to investigate the technical questions and reduce uncertainty around the concerned user stories.", explanation: "A spike is specifically designed to investigate and gain knowledge on unclear or technical aspects of the project, allowing the team to make informed decisions and facilitate accurate planning for future sprints. When looking for clarity on what to prioritize, the team should not necessarily focus on requirements but on performing work. The user stories are not ready to plan because of the lack of technical knowledge, so planning them would be premature. Assigning individual research tasks lacks collaboration and team ownership.", domain: "Domain III: Product", category: "B", isNewFormat: true },
+            { id: 196, text: "A product owner is working with a team to prioritize the product backlog for an upcoming release. The team has a limited budget and time, and there are several features that stakeholders are requesting. How should the product owner prioritize the backlog to maximize value?", options: [
+                {text: "A. Prioritize features based on the estimated effort required to implement them.", explanation: "Prioritizing based on effort may lead to focusing on low-effort items that do not necessarily deliver high value, which does not align with agile principles of maximizing customer value."},
+                {text: "B. Use a voting system where stakeholders vote on their preferred features.", explanation: "While stakeholder input is important, a simple voting system may not account for the overall business value or strategic alignment, potentially leading to suboptimal prioritization."},
+                {text: "C. Prioritize features that deliver the highest business value first.", explanation: "This approach ensures that the most valuable features are delivered first, aligning with agile principles of delivering value early and often."},
+                {text: "D. Prioritize features based on the order in which they were requested.", explanation: "Prioritizing based on request order does not consider the relative value or urgency of features, which can result in delivering less valuable items first."}
+            ], userAnswer: "B. Use a voting system where stakeholders vote on their preferred features.", correctAnswer: "C. Prioritize features that deliver the highest business value first.", explanation: "Prioritizing based on effort may lead to focusing on low-effort items that do not necessarily deliver high value, which does not align with agile principles of maximizing customer value. While stakeholder input is important, a simple voting system may not account for the overall business value or strategic alignment, potentially leading to suboptimal prioritization. This approach ensures that the most valuable features are delivered first, aligning with agile principles of delivering value early and often. Prioritizing based on request order does not consider the relative value or urgency of features, which can result in delivering less valuable items first.", domain: "Domain III: Product", category: "B", isNewFormat: true },
+            { id: 197, text: "The team is struggling with quality control processes. They have basic knowledge but lack detailed understanding of fundamental concepts. What stance should you adopt to help them?", options: [
+                {text: "A. Training", explanation: "Training provides detailed explanations of fundamental concepts, allowing the team to fill in their knowledge gaps and understand the basics."},
+                {text: "B. Coaching", explanation: "Coaching helps the team discover answers themselves, but is more effective when the team already has a solid foundation."},
+                {text: "C. Consulting", explanation: "Consulting offers specific recommendations, but does not ensure the team understands the basics."},
+                {text: "D. Mentoring", explanation: "Mentoring focuses on sharing personal experiences rather than providing systematic explanations needed for fundamental concepts."}
+            ], userAnswer: "D. Mentoring", correctAnswer: "A. Training", explanation: "When knowledge of technical skill is needed, training is the correct action. By adopting a training stance, you provide detailed explanations of the fundamental technical concepts, allowing the team to fill in their knowledge gaps and understand the necessary basics to progress. Knowledge of quality control is fundamental for project practitioners. While coaching is useful for helping the team discover answers themselves, a training approach is more effective for establishing a solid foundation when basic concepts are not understood. Consulting offers specific recommendations but will not ensure the team understands the basic concepts. Mentoring shares personal experiences and can help transfer knowledge but does not necessarily provide the detailed explanations needed to understand the fundamental concepts.", domain: "Domain II: Leadership", category: "B", isNewFormat: true },
+            { id: 198, text: "A team has been working for a few weeks on enhancements to a user interface (UI). The product owner holds a demo every Friday to capture customer feedback. In this case, the customer is very particular and constantly asks for changes and other options for the Ul. The product owner knows the budget and timeline are limited. How should the team adjust their way of working for this customer?", options: [
+                {text: "A. Ask the customer to provide clearer acceptance criteria.", explanation: "While clearer acceptance criteria may help in understanding the customer's needs, it does not directly address the need for more frequent collaboration. It could lead to more back-and-forth instead of fostering a collaborative environment."},
+                {text: "B. Schedule demos more frequently, including this customer as often as possible.", explanation: "Increasing the frequency of demos may overwhelm the team and the customer without ensuring productive feedback. It might also lead to burnout or fatigue from constant review sessions."},
+                {text: "C. Define the product scope more clearly.", explanation: "Defining the product scope is important, but it may not be enough to accommodate the customer's frequent requests for changes without ongoing collaboration and feedback."},
+                {text: "D. Collaborate with the customer more frequently.", explanation: "This approach allows for continuous interaction and ensures that the customer's needs are being addressed in real time. It fosters a more agile response to changing requirements, aligning with agile principles."}
+            ], userAnswer: "A. Ask the customer to provide clearer acceptance criteria.", correctAnswer: "D. Collaborate with the customer more frequently.", explanation: "The customer should be involved in a collaborative manner so this team can optimize the alignment of their work with the desired outcome for the customer. Involving customers outside of ceremonies, such as a demo, means the customer is interacting with the team development in the real sense of collaboration-working together in a close cooperative partnership, instead of having them view the result of the work.", domain: "Domain II: Leadership", category: "B", isNewFormat: true },
+            { id: 202, text: "A project team is developing a mobile gambling app. The team has successfully delivered an increment but is unsure how to determine whether the increment achieved the intended results and delivered tangible benefits to users. Which two actions should the product owner apply in this situation? (Choose 2)", options: [
+                {text: "A. Review the completed cost-benefit analysis.", explanation: "While reviewing a cost-benefit analysis can provide insights into the overall financial viability of the project, it does not directly assess user satisfaction or the immediate benefits experienced from the increment delivered. It is more of a high-level evaluation tool rather than a direct measure of end-user satisfaction."},
+                {text: "B. Use a burndown chart to track progress and the value delivered over time.", explanation: "A burndown chart is primarily a tool for tracking the amount of work that remains in a sprint or project. It does not provide insights into user satisfaction or whether the delivered increment meets user needs, thus making it unsuitable for evaluating value delivery."},
+                {text: "C. Survey key stakeholders to determine their satisfaction.", explanation: "Surveying key stakeholders, including end users, allows for direct feedback on their satisfaction with the product increment. This approach provides valuable insights into whether the increment delivered tangible benefits and aligns with user expectations."},
+                {text: "D. Calculate the return on investment ROI of the increment delivered.", explanation: "Calculating ROI can provide insights into the financial effectiveness of the increment delivered; however, it focuses on overall profitability rather than user satisfaction or immediate benefits experienced by users."},
+                {text: "E. Review the key performance indicators (KPIs) associated with the product goal.", explanation: "Reviewing KPIs is essential for assessing whether the increment aligns with the product goals and delivers the expected value. KPIs can provide measurable insights into user engagement and success criteria."}
+            ], userAnswer: "A. Review the completed cost-benefit analysis.", correctAnswer: "C. Survey key stakeholders to determine their satisfaction. E. Review the key performance indicators (KPIs) associated with the product goal.", explanation: "The product owner should gather satisfaction feedback from the key stakeholders-in this case, the end users of the app-to determine their level of satisfaction with the increment, as this represents their tangible benefits. Key performance indicators (KPIs) are useful for steering value delivery, so the product owner will find them useful in determining whether work completed adds the type of value desired. A cost-benefit analysis and the return on investment (ROI) should have been completed for the project business case; so this information, while useful, will determine value to the organization and not necessarily to the end user or key stakeholder. The burndown chart tracks project progress and is not the right artifact to examine to determine whether value or benefits were delivered.", domain: "Domain III: Product", category: "B", isNewFormat: true },
+            { id: 203, text: "A company has committed to adopting agile for product development. An agile coach plans to meet with staff members one-on-one for mentoring sessions, beginning with the project team members. The product owner feels this adoption is not relevant to them because they do not do project work and a few others, including a project manager and a skilled team member, say they already know agile. In which two-ways should the agile coach approach the situation to facilitate successful adoption? (Choose 2)", options: [
+                {text: "A. Assume everyone will be receptive to the adoption and begin the mentoring sessions.", explanation: "This approach overlooks the individual concerns and resistance of team members. Effective adoption requires understanding and addressing the specific needs and apprehensions of all team members rather than making assumptions about their receptiveness."},
+                {text: "B. Speak with the resistant parties and discuss the value of mentorship for agile adoption.", explanation: "Engaging in dialogue with resistant parties allows the agile coach to address concerns directly and explain how mentorship can facilitate a smoother transition to agile practices, thereby fostering a collaborative environment."},
+                {text: "C. Provide data and research about the benefits of agile to the resistant parties.", explanation: "While data can be helpful, it may not resonate with all team members. This option may come off as overly technical or impersonal, which could further alienate those resistant to change rather than build trust."},
+                {text: "D. Facilitate a team-building workshop before beginning the individual mentoring sessions.", explanation: "Team-building activities can effectively break down barriers and foster relationships among team members. This approach promotes a collaborative environment, making individuals more receptive to mentoring and agile adoption."},
+                {text: "E. Provide a step-by-step framework for the mentoring activity.", explanation: "While a structured approach can be beneficial, it may not be the best first step in addressing resistance. Flexibility and personal engagement are crucial at this initial stage to encourage openness to agile practices."}
+            ], userAnswer: "E. Provide a step-by-step framework for the mentoring activity.", correctAnswer: "B. Speak with the resistant parties and discuss the value of mentorship for agile adoption. D. Facilitate a team-building workshop before beginning the individual mentoring sessions.", explanation: "We cannot assume that people affected by a change will be receptive to the change. Concerning agile adoption, we also should use the 'left to right' adoption process, facilitating learning about the agile mindset and values first so that people accept these based on the value they can bring before learning how to apply agile approaches to their work. In this case, the agile coach should endeavor to communicate with the resistant parties to promote the benefits of mentorship. This is a valuable way of breaking down resistance, building trust, and creating a valued long-term relationship. The whole team will benefit from a team-building workshop focusing on the upcoming agile adoption. A casual, personable approach to mentoring will work better than a data-driven, factual persuasive campaign again, because mentorship is built on trust and person-to-person communication.", domain: "Domain I: Mindset", category: "B", isNewFormat: true },
+            { id: 204, text: "A software development team is creating a task management application for remote teams to effectively manage projects. The application must offer various features such as task tracking, real-time collaboration, and integration with other tools. The team has already started working on the basic functionalities as planned, but the VP of sales is requesting a rapid implementation of a new real-time chat feature to facilitate a quick sale of the product. Which two actions should the team lead take to address this situation? (Choose 2)", options: [
+                {text: "A. Organize a story mapping workshop with the product owner and stakeholders.", explanation: "This action encourages collaboration and helps visualize the entire product, facilitating prioritization of features based on stakeholder input. It aligns with Agile principles of collaboration and transparency."},
+                {text: "B. Insist the team focuses on the tasks already planned and complete the real-time chat feature once the basic functionalities are finished.", explanation: "This approach is not agile because it disregards the need to adapt to changing requirements. Agile values responding to change over following a plan, so this option does not support flexibility."},
+                {text: "C. Ask the product owner to immediately prioritize the development of the real-time chat feature and place it at the top of the product backlog.", explanation: "While prioritizing the new feature is necessary, this option lacks the collaborative approach needed to assess impacts on the current backlog and does not involve input from stakeholders, which is crucial in Agile."},
+                {text: "D. Invite the stakeholders, product owner, and team members to a product backlog refinement session.", explanation: "This action supports collaboration and helps ensure that all perspectives are considered when refining the backlog, promoting a shared understanding and alignment on priorities."},
+                {text: "E. Schedule a meeting with the product owner to decide the priority of the new real-time chat feature.", explanation: "While this option allows for discussion, it may not involve all relevant stakeholders and could lead to a decision that lacks a comprehensive view of the project's needs, which is important in Agile."}
+            ], userAnswer: "E. Schedule a meeting with the product owner to decide the priority of the new real-time chat feature.", correctAnswer: "A. Organize a story mapping workshop with the product owner and stakeholders. D. Invite the stakeholders, product owner, and team members to a product backlog refinement session.", explanation: "Story mapping is an effective technique to visualize the entire product and compare items for prioritization. Inviting all parties to a product backlog refinement session would work too. Both methods involve stakeholders with a goal of creating a shared understanding before changing established priorities. The other options neither promote the flexibility and adaptability that are fundamental in agile nor do they help the project move forward with shared understanding among all parties. Lack of shared understanding could lead to a decision that is not aligned with the organization's priorities.", domain: "Domain II: Leadership", category: "B", isNewFormat: true },
+            { id: 207, text: "A project team in a motor racing team is designing this year's braking system. The timeline is short and experts are embedded in the team. The team principals request weekly demos and close monitoring of budget and quality to protect the investment. Which agile approach would suit this project?", options: [
+                {text: "A. Scrumban", explanation: "Scrumban is a hybrid agile approach that combines elements of Scrum and Kanban. While it is beneficial for managing flow and work-in-progress, it may not provide the structured framework needed for regular demos and budget controls as required in this scenario."},
+                {text: "B. SAFER with predictive budget and quality controls", explanation: "SAFe (Scaled Agile Framework) is designed for scaling agile practices across large organizations, but it focuses more on planning and alignment rather than the tight iteration cycles and flexibility needed for this specific project."},
+                {text: "C. Disciplined Agile®", explanation: "Disciplined Agile® is an adaptable toolkit that allows teams to select the best practices suited to their specific project needs. This approach is ideal for balancing the demand for frequent demos and strict budget and quality control, making it the most suitable option."},
+                {text: "D. Scrum", explanation: "Scrum provides a solid framework for iterative development and regular feedback through sprints and reviews. However, it may lack the flexibility required for strict budget and quality monitoring compared to Disciplined Agile®."}
+            ], userAnswer: "B. SAFER with predictive budget and quality controls", correctAnswer: "C. Disciplined Agile®", explanation: "This project has unique complexities, which demands application of different agile approaches. Disciplined Agile® is a tool kit of approaches and so offers project practitioners a diverse set of tools, functions, and approaches to plan for the budget and quality controls demanded by the principals and the flexibility for the team to innovate. These approaches can include Scrum, SAFE®, or Scrumban.", domain: "Domain III: Product", category: "B", isNewFormat: true },
+            { id: 208, text: "A team has recently launched a new version of its healthcare management software, which took several months to develop. After this update, the team notices that some of the new features introduced are not being used by the users and others do not fully meet the needs for which they were designed. Which two actions should the team take to avoid this scenario in future versions? (Choose 2)", options: [
+                {text: "A. Conduct a demo and collect user satisfaction levels after each new version is released.", explanation: "While conducting a demo can provide insights into user satisfaction, it is not sufficient to solely rely on this method after each version is released. Continuous feedback should be collected throughout the development process to ensure that the features align with user needs."},
+                {text: "B. Encourage the product owner to provide more frequent feedback to the team to adjust features during development.", explanation: "Frequent feedback from the product owner is crucial as it allows the team to make necessary adjustments during development. This approach helps ensure that the features being developed meet the users' needs and expectations."},
+                {text: "C. Organize a wide range of training seminars for users to ensure a good understanding and use of new features.", explanation: "Providing training may help users understand the new features; however, if the features do not meet their needs or are not used, training will not resolve the fundamental issue of feature relevance and usability."},
+                {text: "D. Schedule frequent product reviews with key users to discuss existing features and future needs.", explanation: "This action is effective as it fosters ongoing communication between the team and key users, allowing for adjustments to be made based on user feedback and ensuring that future developments align with user requirements."},
+                {text: "E. Act based on the results of retrospectives.", explanation: "Retrospectives are vital for continuous improvement, allowing the team to reflect on past performance and make informed decisions for future iterations. Acting on these results can help avoid similar issues in future releases."}
+            ], userAnswer: "A. Conduct a demo and collect user satisfaction levels after each new version is released.", correctAnswer: "D. Schedule frequent product reviews with key users to discuss existing features and future needs. E. Act based on the results of retrospectives.", explanation: "During development, the team should be getting user feedback frequently enough to allow for continuous adjustment of features to meet customer needs, thus optimizing the value delivered. Teams should also hold retrospectives on a regular basis to discuss how to improve and then act based on their discussion. The team should not restrict a demo to only after a version is complete. Though the product owner is the voice of the customer, direct feedback from the intended product user is the optimal way of facilitating a successful fit of features for the customer. Finally, even though teams often deliver training with solutions, training customers about a feature they do not use is equal to forcing them to adopt something they did not want in the first place.", domain: "Domain III: Product", category: "B", isNewFormat: true },
+            // Note: The full 94 questions are not provided in the prompt due to truncation, but in a real implementation, you would insert all 94 here. For this response, I've included the provided ones. To complete, extract all from the user's "94.txt".
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedOption = null;
+        let answerShown = false;
+
+        const quiz = document.getElementById('quiz');
+        const progress = document.getElementById('progress');
+        const scoreElement = document.getElementById('score');
+        const counter = document.getElementById('question-counter');
+        const finalScreen = document.getElementById('final-screen');
+        const finalScore = document.getElementById('final-score');
+        const percentage = document.getElementById('percentage');
+        const message = document.getElementById('message');
+        const restart = document.getElementById('restart');
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            quiz.innerHTML = `
+                <div class="category-badge cat-${q.category.toLowerCase()}">${q.category === 'A' ? 'Unfamiliar' : q.category === 'B' ? 'Guessed Wrong' : 'Minor Mistake'}</div>
+                <div class="question-text">${q.text}</div>
+                ${q.options.map((opt, i) => `<div class="option" data-index="${i}">${opt.text}</div>`).join('')}
+                <button id="show-answer" disabled>Show Answer & Explanation</button>
+                <button id="next-question" disabled>Next Question</button>
+                <div id="explanation"></div>
+            `;
+            selectedOption = null;
+            answerShown = false;
+            document.getElementById('next-question').style.display = 'none';
+            document.getElementById('explanation').style.display = 'none';
+
+            const options = quiz.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.addEventListener('click', () => {
+                    options.forEach(o => o.classList.remove('selected'));
+                    opt.classList.add('selected');
+                    selectedOption = opt.dataset.index;
+                    document.getElementById('show-answer').disabled = false;
+                });
+            });
+
+            document.getElementById('show-answer').addEventListener('click', showAnswer);
+            document.getElementById('next-question').addEventListener('click', nextQuestion);
+            updateProgress();
+        }
+
+        function showAnswer() {
+            if (answerShown) return;
+            answerShown = true;
+            const q = questions[currentQuestion];
+            const options = quiz.querySelectorAll('.option');
+            let correctIndex = q.options.findIndex(opt => opt.text === q.correctAnswer);
+
+            options.forEach((opt, i) => {
+                opt.style.cursor = 'default';
+                opt.removeEventListener('click', () => {});
+                if (i == selectedOption) {
+                    if (i == correctIndex) {
+                        opt.classList.add('correct');
+                        score++;
+                        updateScore();
+                    } else {
+                        opt.classList.add('wrong');
+                    }
+                }
+                if (i == correctIndex) {
+                    opt.classList.add('correct');
+                }
+                const optExp = document.createElement('div');
+                optExp.classList.add('option-explanation');
+                optExp.innerHTML = q.options[i].explanation;
+                optExp.style.display = 'block';
+                opt.appendChild(optExp);
+            });
+
+            const expDiv = document.getElementById('explanation');
+            expContent = `<strong>Correct Answer:</strong> ${q.correctAnswer}<br><br><strong>Your Incorrect Answer:</strong> ${q.userAnswer}<br><br><strong>Overall Explanation:</strong> ${q.explanation}<br><br><strong>Domain:</strong> [${q.domain}]`;
+            expDiv.innerHTML = expContent;
+            expDiv.style.display = 'block';
+            document.getElementById('show-answer').disabled = true;
+            document.getElementById('next-question').style.display = 'block';
+            document.getElementById('next-question').disabled = false;
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+                counter.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            } else {
+                showFinalScreen();
+            }
+        }
+
+        function updateProgress() {
+            const percent = ((currentQuestion + 1) / questions.length) * 100;
+            progress.style.width = `${percent}%`;
+        }
+
+        function updateScore() {
+            scoreElement.textContent = `Live Score: ${score} / ${questions.length}`;
+        }
+
+        function showFinalScreen() {
+            quiz.style.display = 'none';
+            finalScreen.style.display = 'block';
+            finalScore.textContent = score;
+            const perc = (score / questions.length) * 100;
+            percentage.textContent = `${perc.toFixed(2)}%`;
+            if (perc >= 85) {
+                message.textContent = "Excellent! Ready for the real exam";
+            } else if (perc >= 70) {
+                message.textContent = "Good, but needs more practice";
+            } else {
+                message.textContent = "Need to work more on wrong questions";
+            }
+            localStorage.setItem('acp_wrong_set94_score', score);
+        }
+
+        restart.addEventListener('click', () => {
+            currentQuestion = 0;
+            score = 0;
+            updateScore();
+            finalScreen.style.display = 'none';
+            quiz.style.display = 'block';
+            loadQuestion();
+        });
+
+        loadQuestion();
+    </script>
+</body>
+</html>

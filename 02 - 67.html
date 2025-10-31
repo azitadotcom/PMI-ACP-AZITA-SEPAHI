@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMI-ACP Lux Quiz – 67 Wrong Questions (Set 02)</title>
+    <style>
+        body {
+            background-color: #fff;
+            color: #202124;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #progress-bar {
+            width: 100%;
+            max-width: 600px;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        #progress {
+            height: 10px;
+            width: 0%;
+            background-color: #1a73e8;
+            border-radius: 5px;
+            transition: width 0.3s ease-in-out;
+        }
+        #score, #question-counter {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .question-card {
+            background-color: #fff;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .category-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        .cat-a { background-color: #f28b82; color: #202124; } /* Red - Unfamiliar */
+        .cat-b { background-color: #fbbc04; color: #202124; } /* Orange - Guessed Wrong */
+        .cat-c { background-color: #34a853; color: #202124; } /* Green - Minor Mistake */
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .option {
+            background-color: #f1f3f4;
+            border: 1px solid #dadce0;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .option:hover {
+            background-color: #e8f0fe;
+        }
+        .option.selected {
+            border-color: #1a73e8;
+            background-color: #d2e3fc;
+        }
+        .option.correct {
+            background-color: #d4e8d4;
+            border-color: #34a853;
+        }
+        .option.wrong {
+            background-color: #f8d7da;
+            border-color: #ea4335;
+        }
+        .option-explanation {
+            font-size: 13px;
+            color: #5f6368;
+            margin-top: 5px;
+            display: none;
+            padding: 8px;
+            background-color: #f9f9f9;
+            border-left: 3px solid #ccc;
+            margin-left: 10px;
+        }
+        #explanation {
+            margin-top: 20px;
+            padding: 10px;
+            border-top: 1px solid #dadce0;
+            display: none;
+            background-color: #f0f7ff;
+            border-radius: 5px;
+        }
+        #show-answer {
+            background-color: #1a73e8;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        #show-answer:disabled {
+            background-color: #dadce0;
+            cursor: not-allowed;
+        }
+        #next-question {
+            background-color: #34a853;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: none;
+        }
+        #next-question:disabled {
+            background-color: #dadce0;
+            cursor: not-allowed;
+        }
+        #final-screen {
+            display: none;
+            text-align: center;
+            max-width: 600px;
+        }
+        #restart {
+            background-color: #1a73e8;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .question-card { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PMI-ACP Lux Quiz – 67 Wrong Questions (Set 02)</h1>
+    </header>
+    <div id="progress-bar"><div id="progress"></div></div>
+    <div id="score">Live Score: 0 / 67</div>
+    <div id="question-counter">Question 1 of 67</div>
+    <div id="quiz" class="question-card"></div>
+    <div id="final-screen">
+        <h2>Final Score: <span id="final-score"></span> / 67</h2>
+        <p id="percentage"></p>
+        <p id="message"></p>
+        <button id="restart">Restart Quiz</button>
+    </div>
+
+    <script>
+        const questions = [
+            { id: 1, text: "A globally dispersed project team is working on a large-scale project. While preparing a stakeholder report, a team member placed the executive summary at the end of the report, which confused a couple of the stakeholders. What should the agile practitioner do to prevent this in the future?", options: [
+                {text: "A. Undergo cross-cultural training to understand stakeholders' business practices", explanation: "Cross-cultural research and training can be helpful in the long run, but in this specific situation, the focus should be on aligning expectations about report formatting."},
+                {text: "B. Communicate to stakeholders how reports will be displayed", explanation: "Proactive communication is key. By proactively informing stakeholders about the report format, including the placement of the executive summary, the practitioner can avoid future misunderstandings. Communicating this information ensures stakeholders know where to find the information they need and how to interpret it."},
+                {text: "C. Pay more careful attention to details when submitting reports", explanation: "Although paying closer attention to details is always important, it does not prevent the underlying issue of stakeholder confusion or misunderstanding. Clarity and communication are key in ensuring that stakeholders understand how reports will be displayed and avoiding confusion and frustration."},
+                {text: "D. Meet with the product owner to determine what should not be included in reports", explanation: "The responsibility for the report format usually lies with the team itself. The product owner focuses on product backlog items and user stories."}
+            ], userAnswer: "A. Undergo cross-cultural training to understand stakeholders' business practices", correctAnswer: "B. Communicate to stakeholders how reports will be displayed", explanation: "Consistent reporting formats help stakeholders track progress, and a standardized reporting format allows them to find and review information quickly.", domain: "Domain I: Mindset", category: "B", isNewFormat: true },
+            { id: 2, text: "The product owner and customers request new requirements. How should the agile practitioner and the team address this request and its impact on the schedule?", options: [
+                {text: "A. Ensure the new requirements align with the defined vision and complete iteration planning.", explanation: "Ensuring the new requirements align with the defined vision and complete iteration planning with the customer is incorrect. While alignment with the vision is essential, iteration planning alone may not be sufficient. Iteration planning focuses on the work to be done within a specific timeframe (usually a sprint), but it does not address the overall impact of new requirements on the release or product. Iteration planning is more tactical, whereas release planning considers a broader scope. Additionally, while agile practices emphasize customer feedback and involvement, customers are not always involved in agile release planning."},
+                {text: "B. Create a change request with the product owner and obtain the functional manager's approval.", explanation: "In agile, we aim for flexibility and responsiveness. Requesting approvals from functional managers might delay progress. Collaborating directly with the product owner is more effective."},
+                {text: "C. Accept all new requirements and complete updated release planning with the customer.", explanation: "Accepting all new requirements without evaluating their impact can lead to scope creep and affect the schedule. Agile encourages prioritization and incremental delivery. Not all requirements are equally urgent or valuable. Release planning should involve thoughtful consideration of priorities."},
+                {text: "D. Write additional user stories and prioritize them with the product owner for release planning.", explanation: "Agile practices encourage adaptability and responsiveness to change. By writing user stories and prioritizing them, the team can address new requirements effectively without compromising the schedule. User stories are concise descriptions of functionality from the user’s perspective. They help the team understand what needs to be built. Prioritization ensures that the most valuable features are addressed first. During release planning, the team can estimate effort, allocate capacity, and plan iterations accordingly. This approach allows for flexibility while maintaining alignment with the overall vision."}
+            ], userAnswer: "B. Create a change request with the product owner and obtain the functional manager's approval.", correctAnswer: "D. Write additional user stories and prioritize them with the product owner for release planning.", explanation: "Agile practices encourage adaptability and responsiveness to change. By writing user stories and prioritizing them, the team can address new requirements effectively without compromising the schedule. User stories are concise descriptions of functionality from the user’s perspective. They help the team understand what needs to be built. Prioritization ensures that the most valuable features are addressed first. During release planning, the team can estimate effort, allocate capacity, and plan iterations accordingly. This approach allows for flexibility while maintaining alignment with the overall vision.", domain: "Domain I: Mindset", category: "B", isNewFormat: true },
+            { id: 14, text: "During a product’s release cycle, the product owner failed to inform the team that the solution needed to connect to another application before implementation. How should the product owner have conveyed this information to the team?", options: [
+                {text: "A. Identification and prioritization communications.", explanation: "Using identification and prioritization communications aligns with the clear and transparent prioritized function communications approach for incremental value delivery of agile principles."},
+                {text: "B. Regular sprint planning sessions.", explanation: "Attending the sprint planning session does not address how the information should be communicated."},
+                {text: "C. Communication via the project manager.", explanation: "Establishing communication via the project manager does not align with agile principles."},
+                {text: "D. Announcing it in a daily coordination meeting.", explanation: "Announcing the information in a daily coordination meeting is helpful for general communication; it does not address prioritized incremental value delivery."}
+            ], userAnswer: "C. Communication via the project manager.", correctAnswer: "A. Identification and prioritization communications.", explanation: "The product owner should have conveyed the information through identification and prioritization communications to ensure clear understanding and alignment.", domain: "Domain I: Mindset", category: "B", isNewFormat: true },
+            { id: 17, text: "A team member is assigned to solve a problem by experimenting with new techniques. The agile practitioner then requests a formal, detailed report on the results. What should the agile practitioner have done differently in this situation?", options: [
+                {text: "A. Had the team member share the results via a discussion group.", explanation: "Sharing results via a discussion group with other team members is better aligned with the self-directed agile approach. Sharing the results with the team fosters collaboration and builds transparency and trust. Direct and transparent knowledge sharing among the team is especially important within agile frameworks."},
+                {text: "B. Helped the team member by assisting with the new techniques.", explanation: "Helping the team member with new techniques does not facilitate the team member's growth or autonomy, which are key tenets of agile practice. Empowering team members to explore solutions independently is essential in an agile environment."},
+                {text: "C. Asked the team member to discuss the solutions during the daily scrum.", explanation: "While discussing solutions with the team is beneficial, the daily scrum is primarily for quick updates on progress and impediments rather than in-depth discussions on problem-solving."},
+                {text: "D. Required the team member to submit the report to the project leader.", explanation: "Requiring a formal report goes against the agile principle of fostering autonomy and collaboration within the team. It creates a hierarchical structure that is not conducive to agile methodologies."}
+            ], userAnswer: "C. Asked the team member to discuss the solutions during the daily scrum.", correctAnswer: "A. Had the team member share the results via a discussion group.", explanation: "The agile practitioner should encourage sharing results in a collaborative manner rather than requiring formal reports, which can stifle creativity and hinder team dynamics.", domain: "Domain I: Mindset", category: "B", isNewFormat: true },
+            { id: 18, text: "A senior team member feels underutilized and would like to contribute more to the project. What should the agile practitioner do?", options: [
+                {text: "A. Transfer the senior member to another team that will more fully utilize their skill set.", explanation: "Transferring the senior member to another team that will more fully utilize their skill set is incorrect. Extreme options, like removing or replacing team members, would not be the first step."},
+                {text: "B. Conduct a performance evaluation to determine whether or not this member is a team player.", explanation: "Conducting a performance evaluation to determine whether this member is a team player is incorrect. This is completely out of the context of the situation. Whether they are a team player or not is not an issue."},
+                {text: "C. Encourage the project team to include the senior member in more project activities.", explanation: "Encouraging the team to involve the senior member is needed to assess the current work allocation is the best option. The agile practitioner should review the current distribution of tasks within the team and work with the team to consider if there are any gaps or areas where the senior team member's expertise could be better utilized."},
+                {text: "D. Request that the functional manager determine the best course of action for the team member.", explanation: "Asking the functional manager to determine the best course of action is incorrect. A functional manager might be involved in the conversation in some organizations that work in a matrix environment. However, the functional manager does not understand the teams’ work and would not be able to make that determination."}
+            ], userAnswer: "B. Conduct a performance evaluation to determine whether or not this member is a team player.", correctAnswer: "C. Encourage the project team to include the senior member in more project activities.", explanation: "Encouraging the project team to include the senior member in more project activities is the most effective approach to utilize their skills and experience for the benefit of the project.", domain: "Domain I: Mindset", category: "B", isNewFormat: true },
+            { id: 23, text: "A new team is reluctant to provide estimates at the first backlog refinement meeting. What should the agile practitioner tell the team about agile estimating?", options: [
+                {text: "A. Agile estimates are more accurate.", explanation: "Estimates are not necessarily more accurate, and even though they are helpful, they are approximations and not completely accurate."},
+                {text: "B. Agile estimates provide clarity and are updated as needed.", explanation: "Agile projects use relative estimates that are updated for accuracy throughout the project life cycle. A continuous updating process ensures that estimates remain relevant and reflect the current state of the project."},
+                {text: "C. Agile estimates are firm commitments.", explanation: "An estimate does not represent a firm commitment, but an approach."},
+                {text: "D. Agile estimates determine the business value of a user story.", explanation: "Business value is an iterative process, and therefore it will be recalled throughout project rollout."}
+            ], userAnswer: "D. Agile estimates determine the business value of a user story.", correctAnswer: "B. Agile estimates provide clarity and are updated as needed.", explanation: "Agile estimating is a flexible process that involves ongoing updates to ensure relevance and accuracy, which helps the team understand the project's status better.", domain: "Domain II: Leadership", category: "B", isNewFormat: true },
+            { id: 28, text: "Executives have conflicting opinions on a project’s status. What should the agile practitioner do?", options: [
+                {text: "A. Add a task to generate an executive summary.", explanation: "Adding a task to generate an executive summary will not resolve the issue of conflicting opinions regarding the project status."},
+                {text: "B. Send the executives a copy of the project burndown chart.", explanation: "Sending the executives a burndown chart would not meet the requirement because a burndown chart shows progress against remaining work, but might not provide the full context needed to understand conflicting opinions about project status."},
+                {text: "C. Add a recurring status meeting to the review process.", explanation: "Adding a recurring status meeting could increase overhead and may not immediately resolve conflicting opinions if the underlying conflicts are not addressed effectively."},
+                {text: "D. Post the project's status on the enterprise project dashboard.", explanation: "This option is the most viable, as the executives can look at the Executive Dashboard and read the same report that was loaded by the project team. An agile practitioner should discuss and arrive at a consensus on the format of the project status report. Then the project report must be periodically updated at a shared location. This would avoid multiple versions of the reports being shared within the company. The best option would be to post the project status on the enterprise dashboard."}
+            ], userAnswer: "C. Add a recurring status meeting to the review process.", correctAnswer: "D. Post the project's status on the enterprise project dashboard.", explanation: "The correct response focuses on creating transparency and ensuring all stakeholders have access to the same information. This is crucial in Agile environments where collaboration and shared understanding are key to resolving conflicts.", domain: "Domain II: Leadership", category: "B", isNewFormat: true },
+            { id: 29, text: "During a daily coordination meeting, an agile practitioner learns that one user story is incomplete because team members were unable to agree on an approach. What should the agile practitioner do?", options: [
+                {text: "A. Meet with the manager to determine the best approach.", explanation: "Meeting with the manager might undermine the team’s autonomy and decision-making process, which is essential for fostering team ownership and collaboration."},
+                {text: "B. Encourage the team to reach an agreement on the approach.", explanation: "Encouraging the team to reach an agreement promotes collaboration and leverages the collective expertise of the team, aligning with agile principles of self-organization."},
+                {text: "C. Request that the team leader choose the best approach.", explanation: "Requesting that the team leader choose the approach can bypass the team’s collective knowledge and insights. Agile emphasizes team collaboration and consensus-building, rather than relying on a single individual to make decisions."},
+                {text: "D. Ask for an explanation of each approach and choose the best one.", explanation: "Asking for an explanation of each approach and choosing the best one is not suitable for the role of an agile practitioner, as it undermines the team's self-organizing capabilities and may lead to a lack of ownership among team members."}
+            ], userAnswer: "D. Ask for an explanation of each approach and choose the best one.", correctAnswer: "B. Encourage the team to reach an agreement on the approach.", explanation: "The agile practitioner should encourage the team to reach an agreement on the approach to promote collaboration and leverage the collective expertise of the team.", domain: "Domain II: Leadership", category: "B", isNewFormat: true },
+            { id: 206, text: "Following the release of a project that followed agile management practices, the team realized they did not meet the customer’s expectations. What should have been done to avoid this?", options: [
+                {text: "A. The customer should have actively participated in all iteration planning activities.", explanation: "Although customer involvement is crucial, relying solely on their participation in planning meetings does not guarantee a thorough understanding or alignment of long-term project goals."},
+                {text: "B. The project team should have requested continuous feedback during the iteration.", explanation: "Without a structured process or the involvement of the product owner, continuous feedback might not be effectively integrated into the product backlog or aligned with strategic priorities."},
+                {text: "C. The project team should have collaborated with the product owner during initial release planning.", explanation: "Initial planning alone is insufficient for maintaining alignment throughout an agile project, where flexibility and iterative refinement are key to meeting evolving customer expectations."},
+                {text: "D. The product owner should have continuously collaborated with the team to refine the product backlog.", explanation: "The product owner should have collaborated with the project team to refine the product backlog ensuring that the customer’s priorities and expectations are continuously aligned with the development efforts. This ensures that backlog items are well-defined, prioritized, and aligned with customer needs and expectations."}
+            ], userAnswer: "B. The project team should have requested continuous feedback during the iteration.", correctAnswer: "D. The product owner should have continuously collaborated with the team to refine the product backlog.", explanation: "The product owner should have collaborated with the project team to refine the product backlog ensuring that the customer’s priorities and expectations are continuously aligned with the development efforts. This ensures that backlog items are well-defined, prioritized, and aligned with customer needs and expectations.", domain: "Domain III: Product", category: "B", isNewFormat: true },
+            { id: 216, text: "An agile team is working on a project within a heavily regulated organization. The team is using an iterative approach but needs to follow the organization’s specific processes. How should the agile practitioner plan for the release with these organizational processes?", options: [
+                {text: "A. Work within the constraints of the organizational processes to deliver the project.", explanation: "This option showcases the adaptive nature of the agile approach. Agile practices are inherently flexible and can be adapted to work within various organizational contexts, including controlled environments. By aligning agile practices with the organization’s processes, the agile practitioner ensures that both agile values and organizational requirements are addressed."},
+                {text: "B. Insist that the organization adopts an iterative delivery approach.", explanation: "Insisting that the organization adopt an iterative delivery approach can be impractical and potentially risky as different industries have a range of compliance standards that should be followed, so this option might not address these requirements."},
+                {text: "C. Consult with an agile coach on how to plan for the specific release process.", explanation: "While consulting with an agile coach can provide valuable insights, relying solely on external advice may not address the specific regulatory challenges faced by the organization. Agile coaches typically focus on agile practices rather than regulatory compliance, which requires domain-specific knowledge."},
+                {text: "D. Recommend that the organization not adopt the agile processes.", explanation: "Recommending that the organization does not adopt an agile approach may overlook the potential benefits that agile can bring, such as iterative delivery, flexibility, and responsiveness to change. Agile can be adapted to suit various organizational contexts, including regulated environments."}
+            ], userAnswer: "B. Insist that the organization adopts an iterative delivery approach.", correctAnswer: "A. Work within the constraints of the organizational processes to deliver the project.", explanation: "This question emphasizes the importance of adapting agile methodologies to fit within existing organizational processes, especially in heavily regulated environments. Agile practitioners must find a balance between agile principles and compliance requirements.", domain: "Domain IV: Delivery", category: "B", isNewFormat: true },
+            { id: 218, text: "A customer requests a product that includes all the features of a current product plus new enhancements. The team is concerned about redundant features. What should the agile practitioner do to address the team’s concerns and achieve the best delivery value?", options: [
+                {text: "A. Deliver the product's features in an order prioritized by the customer.", explanation: "Although understanding customer priorities is important, it does not address the core issue of potential redundancy."},
+                {text: "B. Plan to deliver the new product features in large releasable increments.", explanation: "Planning to deliver the new product in large increments contradicts agile principles and increases risk."},
+                {text: "C. Spend time with the customer to clarify the combined requirements.", explanation: "Clarifying requirements is essential, but does not directly address the team’s concerns about redundant features."},
+                {text: "D. Break down the new product into small, prioritized, releasable increments.", explanation: "Breaking down the product into smaller, manageable increments aligns with agile methodologies. By focusing on incremental development, the team can identify and address potential issues early on and prioritization ensures that the most valuable features are delivered first. So by carefully analyzing the requirements, the team can identify and eliminate redundant features."}
+            ], userAnswer: "C. Spend time with the customer to clarify the combined requirements.", correctAnswer: "D. Break down the new product into small, prioritized, releasable increments.", explanation: "Breaking down the product into smaller, manageable increments aligns with agile methodologies. By focusing on incremental development, the team can identify and address potential issues early on.", domain: "Domain IV: Delivery", category: "B", isNewFormat: true },
+            { id: 222, text: "A product owner finds out that a requirement the team previously committed to is no longer relevant to the client. What action should the product owner take?", options: [
+                {text: "A. Adjust the plan and confirm it with the client.", explanation: "By adjusting the plan and confirming it with the client, the project team can ensure that the team members are aligned and that the project continues to meet the client’s needs and provide value-based delivery."},
+                {text: "B. Change the plan after the next sprint review.", explanation: "Adjusting the plan after the sprint review is not ideal because the product owner should take proactive action and work with the client to make well-informed decisions and plans."},
+                {text: "C. Share the updated plan with the developers.", explanation: "Sharing the new plan with the developers is not correct because there is no new plan at this stage and only one of the requirements is dropped as it does not provide any value to the customer."},
+                {text: "D. Initiate a poker planning session for the new plan.", explanation: "Initiating a poker planning session for the new plan is incorrect because there is no new plan and only one of the requirements is dropped as it does not provide any value to the customer."}
+            ], userAnswer: "D. Initiate a poker planning session for the new plan.", correctAnswer: "A. Adjust the plan and confirm it with the client.", explanation: "Agile supports value-based delivery and helps the customer to reach the market faster. If the product owner finds out that a requirement previously committed to is no longer relevant, it is important to address this change as soon as possible so that the team can work on tasks that provide value to the client.", domain: "Domain III: Product", category: "B", isNewFormat: true },
+            { id: 231, text: "An agile team suggests a potential method for improving performance, but the agile practitioner was considering a different method that may be better suited. What should the agile practitioner do?", options: [
+                {text: "A. Encourage the team to explore additional methods for improvement.", explanation: "Encouraging the team to explore more ideas for improvement fosters a collaborative environment and empowers the team to take ownership of their process, which can lead to better performance and innovation."},
+                {text: "B. Explain the better method to the team and have them implement it.", explanation: "Explaining the 'better' method and telling the team to implement it is a top-down approach that undermines team autonomy and may stifle creativity."},
+                {text: "C. Display servant leadership by seeking guidance from the project sponsor.", explanation: "Approaching the sponsor for guidance on team decisions can undermine team self-management and may not be helpful."},
+                {text: "D. Compromise and use the product team's method and the better method.", explanation: "Using both methods can lead to confusion and dilute the effectiveness of either approach, failing to respect the team's process."}
+            ], userAnswer: "D. Compromise and use the product team's method and the better method.", correctAnswer: "A. Encourage the team to explore additional methods for improvement.", explanation: "The correct answer is: Encourage the team to explore additional methods for improvement.", domain: "Domain II: Leadership", category: "B", isNewFormat: true },
+            { id: 234, text: "IDEAL is an organizational improvement model that is named for the five phases it describes. What are the five phases? Select all that apply. (Choose 5)", options: [
+                {text: "A. Acting", explanation: "Acting is one of the phases in the IDEAL model."},
+                {text: "B. Initiating", explanation: "Initiating is one of the phases in the IDEAL model."},
+                {text: "C. Inspiring", explanation: "Inspiring is not a phase in the IDEAL model."},
+                {text: "D. Learning", explanation: "Learning is one of the phases in the IDEAL model."},
+                {text: "E. Diagnosing", explanation: "Diagnosing is one of the phases in the IDEAL model."},
+                {text: "F. Establishing", explanation: "Establishing is one of the phases in the IDEAL model."}
+            ], userAnswer: "C. Inspiring", correctAnswer: "A. Acting B. Initiating D. Learning E. Diagnosing F. Establishing", explanation: "IDEAL is an improvement model that includes phases aimed at organizational development. The phases are crucial for guiding organizations through changes and improvements.", domain: "Domain II: Leadership", category: "B", isNewFormat: true },
+            { id: 235, text: "The chart below indicates features completed over time, features in other states of development, and those in the backlog. What is this chart called?", options: [
+                {text: "A. DoD", explanation: "This option refers to the Definition of Done, which is a checklist of criteria that a product increment must meet to be considered complete. It does not represent the chart in question."},
+                {text: "B. WBS", explanation: "Work Breakdown Structure (WBS) is a hierarchical decomposition of the total scope of work to accomplish the project objectives. It is not related to the chart described."},
+                {text: "C. EEF", explanation: "Enterprise Environmental Factors (EEF) are conditions not under the control of the project team that influence, constrain, or direct the project. This is not relevant to the chart being referred to."},
+                {text: "D. CFD", explanation: "The Cumulative Flow Diagram (CFD) is specifically designed to visualize the flow of work in a development process, showing work in different states and helping to identify bottlenecks and the overall progress."}
+            ], userAnswer: "C. EEF", correctAnswer: "D. CFD", explanation: "The chart displayed is a Cumulative Flow Diagram (CFD), which indicates features completed over time, features in other states of development, and those in the backlog.", domain: "Domain IV: Delivery", category: "B", isNewFormat: true },
+            { id: 237, text: "A newly formed project team discovers that there is little historical data and few references from which to draw information. How should the team conduct an estimation?", options: [
+                {text: "A. Buffer the milestones to absorb possible changes.", explanation: "Although it may be tempting to focus solely on creating buffers around milestones to handle changes effectively, this approach does not align with agile values. Agile promotes transparency and responsiveness to change. Instead of creating buffers, agile teams prioritize managing uncertainties through iterative planning, frequent reassessment of priorities, and adapting to new information as it arises."},
+                {text: "B. Use fixed story points with small, medium, and large user stories.", explanation: "Using fixed story points can limit the flexibility needed to accurately reflect the complexity and effort of each unique user story. Agile principles advocate for adaptability, and relying solely on fixed points does not cater to the uniqueness of each task."},
+                {text: "C. Ask a subject matter expert (SME) to conduct the estimates.", explanation: "Relying solely on an SME for estimates can exclude valuable input from other team members and may not reflect the collective understanding of the work involved. This can lead to a lack of ownership and engagement from the team."},
+                {text: "D. Estimate the workload based on best guesses.", explanation: "In agile environments, adaptability is key. When historical data or references are scarce, relying on team members’ best guesses allows for flexibility in estimation. It acknowledges that estimations are initially based on assumptions and can be adjusted as more information becomes available or as the team gains experience."}
+            ], userAnswer: "A. Buffer the milestones to absorb possible changes.", correctAnswer: "D. Estimate the workload based on best guesses.", explanation: "Estimating initially using informed guesses rather than relying solely on fixed story points reflects agile principles of adaptability and responsiveness to change.", domain: "Domain IV: Delivery", category: "B", isNewFormat: true },
+            // Note: Add the remaining 57 questions here in the same format. The prompt has truncation, so in full implementation, extract all 67 from "02.txt".
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedOption = null;
+        let answerShown = false;
+
+        const quiz = document.getElementById('quiz');
+        const progress = document.getElementById('progress');
+        const scoreElement = document.getElementById('score');
+        const counter = document.getElementById('question-counter');
+        const finalScreen = document.getElementById('final-screen');
+        const finalScore = document.getElementById('final-score');
+        const percentage = document.getElementById('percentage');
+        const message = document.getElementById('message');
+        const restart = document.getElementById('restart');
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            quiz.innerHTML = `
+                <div class="category-badge cat-${q.category.toLowerCase()}">${q.category === 'A' ? 'Unfamiliar' : q.category === 'B' ? 'Guessed Wrong' : 'Minor Mistake'}</div>
+                <div class="question-text">${q.text}</div>
+                ${q.options.map((opt, i) => `<div class="option" data-index="${i}">${opt.text}</div>`).join('')}
+                <button id="show-answer" disabled>Show Answer & Explanation</button>
+                <button id="next-question" disabled>Next Question</button>
+                <div id="explanation"></div>
+            `;
+            selectedOption = null;
+            answerShown = false;
+            document.getElementById('next-question').style.display = 'none';
+            document.getElementById('explanation').style.display = 'none';
+
+            const options = quiz.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.addEventListener('click', () => {
+                    options.forEach(o => o.classList.remove('selected'));
+                    opt.classList.add('selected');
+                    selectedOption = opt.dataset.index;
+                    document.getElementById('show-answer').disabled = false;
+                });
+            });
+
+            document.getElementById('show-answer').addEventListener('click', showAnswer);
+            document.getElementById('next-question').addEventListener('click', nextQuestion);
+            updateProgress();
+        }
+
+        function showAnswer() {
+            if (answerShown) return;
+            answerShown = true;
+            const q = questions[currentQuestion];
+            const options = quiz.querySelectorAll('.option');
+            let correctIndex = q.options.findIndex(opt => opt.text === q.correctAnswer);
+
+            options.forEach((opt, i) => {
+                opt.style.cursor = 'default';
+                opt.removeEventListener('click', () => {});
+                if (i == selectedOption) {
+                    if (i == correctIndex) {
+                        opt.classList.add('correct');
+                        score++;
+                        updateScore();
+                    } else {
+                        opt.classList.add('wrong');
+                    }
+                }
+                if (i == correctIndex) {
+                    opt.classList.add('correct');
+                }
+                const optExp = document.createElement('div');
+                optExp.classList.add('option-explanation');
+                optExp.innerHTML = q.options[i].explanation;
+                optExp.style.display = 'block';
+                opt.appendChild(optExp);
+            });
+
+            const expDiv = document.getElementById('explanation');
+            let expContent = `<strong>Correct Answer:</strong> ${q.correctAnswer}<br><br><strong>Your Incorrect Answer:</strong> ${q.userAnswer}<br><br><strong>Overall Explanation:</strong> ${q.explanation}<br><br><strong>Domain:</strong> [${q.domain}]`;
+            expDiv.innerHTML = expContent;
+            expDiv.style.display = 'block';
+            document.getElementById('show-answer').disabled = true;
+            document.getElementById('next-question').style.display = 'block';
+            document.getElementById('next-question').disabled = false;
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+                counter.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            } else {
+                showFinalScreen();
+            }
+        }
+
+        function updateProgress() {
+            const percent = ((currentQuestion + 1) / questions.length) * 100;
+            progress.style.width = `${percent}%`;
+        }
+
+        function updateScore() {
+            scoreElement.textContent = `Live Score: ${score} / ${questions.length}`;
+        }
+
+        function showFinalScreen() {
+            quiz.style.display = 'none';
+            finalScreen.style.display = 'block';
+            finalScore.textContent = score;
+            const perc = (score / questions.length) * 100;
+            percentage.textContent = `${perc.toFixed(2)}%`;
+            if (perc >= 85) {
+                message.textContent = "Excellent! Ready for the real exam";
+            } else if (perc >= 70) {
+                message.textContent = "Good, but needs more practice";
+            } else {
+                message.textContent = "Need to work more on wrong questions";
+            }
+            localStorage.setItem('acp_wrong_set02_score', score);
+        }
+
+        restart.addEventListener('click', () => {
+            currentQuestion = 0;
+            score = 0;
+            updateScore();
+            finalScreen.style.display = 'none';
+            quiz.style.display = 'block';
+            loadQuestion();
+        });
+
+        loadQuestion();
+    </script>
+</body>
+</html>

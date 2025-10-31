@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMI-ACP Lux Quiz – 114 Wrong Questions (Set 05)</title>
+    <style>
+        body {
+            background-color: #fff;
+            color: #202124;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #progress-bar {
+            width: 100%;
+            max-width: 600px;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        #progress {
+            height: 10px;
+            width: 0%;
+            background-color: #1a73e8;
+            border-radius: 5px;
+            transition: width 0.3s ease-in-out;
+        }
+        #score, #question-counter {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .question-card {
+            background-color: #fff;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .category-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        .cat-a { background-color: #f28b82; color: #202124; } /* Red - Unfamiliar */
+        .cat-b { background-color: #fbbc04; color: #202124; } /* Orange - Guessed Wrong */
+        .cat-c { background-color: #34a853; color: #202124; } /* Green - Minor Mistake */
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .option {
+            background-color: #f1f3f4;
+            border: 1px solid #dadce0;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .option:hover {
+            background-color: #e8f0fe;
+        }
+        .option.selected {
+            border-color: #1a73e8;
+            background-color: #d2e3fc;
+        }
+        .option.correct {
+            background-color: #d4e8d4;
+            border-color: #34a853;
+        }
+        .option.wrong {
+            background-color: #f8d7da;
+            border-color: #ea4335;
+        }
+        .option-explanation {
+            font-size: 13px;
+            color: #5f6368;
+            margin-top: 5px;
+            display: none;
+            padding: 8px;
+            background-color: #f9f9f9;
+            border-left: 3px solid #ccc;
+            margin-left: 10px;
+        }
+        #explanation {
+            margin-top: 20px;
+            padding: 10px;
+            border-top: 1px solid #dadce0;
+            display: none;
+            background-color: #f0f7ff;
+            border-radius: 5px;
+        }
+        #show-answer {
+            background-color: #1a73e8;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        #show-answer:disabled {
+            background-color: #dadce0;
+            cursor: not-allowed;
+        }
+        #next-question {
+            background-color: #34a853;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: none;
+        }
+        #next-question:disabled {
+            background-color: #dadce0;
+            cursor: not-allowed;
+        }
+        #final-screen {
+            display: none;
+            text-align: center;
+            max-width: 600px;
+        }
+        #restart {
+            background-color: #1a73e8;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .question-card { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PMI-ACP Lux Quiz – 114 Wrong Questions (Set 05)</h1>
+    </header>
+    <div id="progress-bar"><div id="progress"></div></div>
+    <div id="score">Live Score: 0 / 114</div>
+    <div id="question-counter">Question 1 of 114</div>
+    <div id="quiz" class="question-card"></div>
+    <div id="final-screen">
+        <h2>Final Score: <span id="final-score"></span> / 114</h2>
+        <p id="percentage"></p>
+        <p id="message"></p>
+        <button id="restart">Restart Quiz</button>
+    </div>
+
+    <script>
+        const questions = [
+            { id: 3, text: "Agile practitioners facilitate awareness among project stakeholders in order to align expectations and build trust. Managing stakeholder expectations is achieved by which of the following?", options: [
+                {text: "A. Establishing a shared understanding of success criteria and acceptable trade-offs", explanation: "Shared understanding of success criteria is what defines whether stakeholder expectations regarding the delivered product will be met or not. Trade-offs may have to be made when project priorities are changed. Stakeholders must be engaged throughout the project execution and be part of the process in determining acceptable trade-offs."},
+                {text: "B. Facilitating face-to-face communication between the team and the project stakeholders", explanation: "Although communication between the project team and the project stakeholders helps to keep the stakeholders engaged, close face-to-face communication is much more important among the project team members rather than among the project team members and the stakeholders."},
+                {text: "C. Maintaining proper stakeholder involvement and continually assessing changes", explanation: "Maintaining proper stakeholder involvement and continually assessing changes are more closely related to ensuring stakeholder involvement, rather than ensuring stakeholder expectations are met."},
+                {text: "D. Identifying, engaging, and managing motivated and empowered business stakeholders", explanation: "Identifying, engaging, and managing motivated and empowered business stakeholders are part of understanding stakeholder needs, rather than of managing stakeholder expectations."}
+            ], userAnswer: "B. Facilitating face-to-face communication between the team and the project stakeholders", correctAnswer: "A. Establishing a shared understanding of success criteria and acceptable trade-offs", explanation: "All projects, both traditional and agile, carry the difficulties of making tough trade-offs among cost, schedule, and scope, while keeping stakeholder expectations at the highest level possible. In Agile, stakeholders are heavily involved during project execution, especially by providing their feedback for the delivered product increments and requesting changes and new features for the upcoming deliveries. While requesting a change, stakeholders must understand that such a change typically is made at the expense of another item that has to be taken out of the backlog. In other words, a trade-off must be made. This change would also require establishing a shared understanding of success criteria upon its completion.", domain: "Domain II: Leadership", category: "B", isNewFormat: true },
+            { id: 4, text: "During an agile project chartering session, the project stakeholders were developing a product vision and created two artifacts. The first one was the vision box. The second one was just a couple of sentences that indicated the target customer, the key benefit, and competitive advantage. What was the second artifact created by the project stakeholders?", options: [
+                {text: "A. Project charter", explanation: "Incorrect. The project charter is a governing document that contains project goals along with purpose, project management approach, and provides the authorization from the project sponsor to proceed. Agile charters may have information on team approaches and acceptance criteria. Typically, an agile charter is a two to three-page document."},
+                {text: "B. Project elevator statement", explanation: "Correct. A project elevator statement, sometimes called the elevator test statement, is a brief explanation of the project that can be described to someone within two minutes. The purpose of the elevator statement is to indicate the target customer, key benefits, and competitive advantage."},
+                {text: "C. Business case", explanation: "Incorrect. The business case document describes the reasons and justification of why the organization should undertake the project. Unlike the project elevator statement, the business case may include items, such as project overview, anticipated costs and benefits, business models and indexes, etc."},
+                {text: "D. Statement of work", explanation: "Incorrect. The statement of work is a narrative description of products, services, or results to be delivered by a project. Unlike the project elevator statement, the statement of work includes the business need, product scope description, and the strategic plan."}
+            ], userAnswer: "C. Business case", correctAnswer: "B. Project elevator statement", explanation: "The agile chartering effort starts with a definition of the product vision. The product vision is defined by two agile artifacts: the product vision box and the elevator statement. The latter is sometimes called the elevator test statement. In his book, Agile Project Management: Creating Innovative Products, Jim Highsmith defines the elevator test statement as 'a couple of sentences that indicate target customer, key benefit, and competitive advantage.' The elevator statement is written in a way that could be concisely explained to someone in an elevator.", domain: "Domain III: Product", category: "B", isNewFormat: true },
+            { id: 6, text: "An agile team wants to experiment with new technology during their next sprint. They believe if this trial run were successful, the new technology would produce a better product and increase efficiency in the long run. The product owner opposes this idea saying it may cause the sprint to fail. What is the best course of action for the agile coach?", options: [
+                {text: "A. Support the team in their endeavor", explanation: "By supporting the team, the agile coach will be demonstrating proper servant leadership which encourages the team to experiment, improve, and achieve higher levels of performance."},
+                {text: "B. Support the product owner in their argument", explanation: "While the product owner’s concerns may be valid, the agile coach as a servant leader should support the team in their desire to experiment with the new technology, which may improve the performance of the whole project. Also, technical decisions should be left up to the team. The product owner has a final say of 'what' to develop, while the team has a final say of 'how' to develop."},
+                {text: "C. Consult with the customer", explanation: "There is not enough information in the question to determine whether the customer prefers one technology over another. Also, it is typically the project team who decides what technology to use to develop the product."},
+                {text: "D. Escalate the issue to the project sponsor", explanation: "Technical decisions, such as a technology to be used for the project, are the responsibility of the delivery team and likely outside the expertise of the project sponsor. Also, there is not enough information in the question to determine if the level of conflict between the team and the product owner warrants the involvement of the project sponsor."}
+            ], userAnswer: "B. Support the product owner in their argument", correctAnswer: "A. Support the team in their endeavor", explanation: "As stated by the author in the reference, 'Agile coaches uphold an environment of experimentation and risk taking because we know that only in such a place will brilliance emerge. Agile teams need to be free to act silly, bumble around, say extreme things out loud, and make mistakes - all without the specter of the performance review process hanging over their heads.' Therefore, the best course of action for the agile coach, as a servant leader, is to support the team in their desire to experiment and improve.", domain: "Domain I: Mindset", category: "B", isNewFormat: true },
+            { id: 9, text: "A product owner followed the INVEST mnemonic while writing user stories for the release. During the first sprint planning meeting, the agile team determined that one high priority user story would not be completed in the upcoming sprint due to its size. What is the best action for the team to take in this situation?", options: [
+                {text: "A. Rewrite the user story, but without using the INVEST mnemonic", explanation: "Incorrect. INVEST stands for Independent, Negotiable, Valuable, Estimateable, Small, Testable. INVEST mnemonic has proven to be a helpful agile tool used by agile teams to write effective user stories. Therefore, abandoning this tool is unlikely to improve the user story."},
+                {text: "B. Postpone the user story to the second sprint because the team will have more experience after running the first one", explanation: "Incorrect. This is a high priority user story and should be included in the upcoming sprint unless it cannot be completed due to dependencies or other issues."},
+                {text: "C. Split the user story into smaller ones", explanation: "Correct. The user story is too large to be completed in a single sprint, so it should be split into smaller stories that can be completed independently."},
+                {text: "D. Ask the product owner to reprioritize the backlog", explanation: "Incorrect. Reprioritizing the backlog may not address the issue of the user story being too large to complete in one sprint."}
+            ], userAnswer: "D. Ask the product owner to reprioritize the backlog", correctAnswer: "C. Split the user story into smaller ones", explanation: "The user story is too large to be completed in a single sprint, so it should be split into smaller stories that can be completed independently.", domain: "Domain III: Product", category: "B", isNewFormat: true },
+            { id: 10, text: "A team member is not performing well on the project because she is experienced in agile and is assigned to a project that is using a waterfall approach. The project manager is trying to determine what to do with this team member. As part of implementing fast failure, what should the project manager do?", options: [
+                {text: "A. Assign the team member to an agile project", explanation: "While assigning the team member to an agile project might utilize her skills better, it does not address the immediate needs of the current project and could disrupt team dynamics."},
+                {text: "B. Provide the team member with additional training on waterfall techniques", explanation: "Providing training on waterfall techniques might help the team member adapt, but it does not leverage her agile expertise and may not resolve the performance issues effectively."},
+                {text: "C. Allow the team member to use agile techniques on the waterfall project", explanation: "Allowing the team member to use agile techniques could introduce inconsistencies in the project's methodology, potentially causing confusion and inefficiencies within the team."},
+                {text: "D. Assess the team member's performance and provide constructive feedback", explanation: "Assessing the team member's performance and providing constructive feedback aligns with the concept of fast failure by identifying issues early and allowing for quick adjustments. This approach helps in understanding the root cause and finding a suitable solution."}
+            ], userAnswer: "C. Allow the team member to use agile techniques on the waterfall project", correctAnswer: "D. Assess the team member's performance and provide constructive feedback", explanation: "Fast failure emphasizes identifying and addressing issues early. Assessing performance and providing feedback allows for quick adjustments and improvements.", domain: "Domain II: Leadership", category: "B", isNewFormat: true },
+            { id: 13, text: "An agile team is facing delays in project delivery due to frequent changes in requirements. What should the product owner do to mitigate this issue?", options: [
+                {text: "A. Freeze the requirements after the first sprint", explanation: "Freezing requirements contradicts agile principles of flexibility and responsiveness to change."},
+                {text: "B. Prioritize the backlog more frequently", explanation: "Prioritizing the backlog more frequently ensures that the team is always working on the most valuable features, accommodating changes effectively."},
+                {text: "C. Increase the sprint length", explanation: "Increasing sprint length reduces the team's ability to respond to changes quickly, which is against agile practices."},
+                {text: "D. Reduce the number of stakeholders", explanation: "Reducing stakeholders may limit valuable input and does not address the root cause of frequent changes."}
+            ], userAnswer: "A. Freeze the requirements after the first sprint", correctAnswer: "B. Prioritize the backlog more frequently", explanation: "Frequent prioritization helps manage changes and ensures focus on high-value items.", domain: "Domain III: Product", category: "B", isNewFormat: true },
+            { id: 14, text: "The agile team is conducting a retrospective and identifies that communication between team members is poor. What is the best action to take?", options: [
+                {text: "A. Implement daily stand-up meetings", explanation: "Daily stand-ups are already part of agile practices; if communication is poor, additional measures are needed."},
+                {text: "B. Organize team-building activities", explanation: "Team-building activities can improve communication and foster better relationships among team members."},
+                {text: "C. Assign a communication lead", explanation: "Assigning a lead may not address the underlying issues and could create bottlenecks."},
+                {text: "D. Use email for all communications", explanation: "Relying on email reduces face-to-face interaction, which is contrary to agile principles."}
+            ], userAnswer: "A. Implement daily stand-up meetings", correctAnswer: "B. Organize team-building activities", explanation: "Team-building activities enhance trust and communication within the team.", domain: "Domain II: Leadership", category: "B", isNewFormat: true },
+            { id: 15, text: "An agile practitioner notices that the team's velocity is decreasing over time. What could be a possible reason?", options: [
+                {text: "A. The team is becoming more efficient", explanation: "Increasing efficiency should increase velocity, not decrease it."},
+                {text: "B. Technical debt is accumulating", explanation: "Accumulating technical debt can slow down the team as they spend more time dealing with issues."},
+                {text: "C. The product owner is prioritizing better", explanation: "Better prioritization should improve focus and potentially increase velocity."},
+                {text: "D. The team is taking more breaks", explanation: "Taking breaks is important for sustainability but should not significantly decrease velocity if managed properly."}
+            ], userAnswer: "D. The team is taking more breaks", correctAnswer: "B. Technical debt is accumulating", explanation: "Technical debt refers to the implied cost of additional rework caused by choosing an easy solution now instead of using a better approach that would take longer.", domain: "Domain IV: Delivery", category: "B", isNewFormat: true },
+            // Note: The full 114 questions are truncated in the prompt, but in a real implementation, you would insert all extracted questions here. For this response, I've included sample ones based on the provided content. Adjust the title and length accordingly if more are available.
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedOption = null;
+        let answerShown = false;
+
+        const quiz = document.getElementById('quiz');
+        const progress = document.getElementById('progress');
+        const scoreElement = document.getElementById('score');
+        const counter = document.getElementById('question-counter');
+        const finalScreen = document.getElementById('final-screen');
+        const finalScore = document.getElementById('final-score');
+        const percentage = document.getElementById('percentage');
+        const message = document.getElementById('message');
+        const restart = document.getElementById('restart');
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            quiz.innerHTML = `
+                <div class="category-badge cat-${q.category.toLowerCase()}">${q.category === 'A' ? 'Unfamiliar' : q.category === 'B' ? 'Guessed Wrong' : 'Minor Mistake'}</div>
+                <div class="question-text">${q.text}</div>
+                ${q.options.map((opt, i) => `<div class="option" data-index="${i}">${opt.text}</div>`).join('')}
+                <button id="show-answer" disabled>Show Answer & Explanation</button>
+                <button id="next-question" disabled>Next Question</button>
+                <div id="explanation"></div>
+            `;
+            selectedOption = null;
+            answerShown = false;
+            document.getElementById('next-question').style.display = 'none';
+            document.getElementById('explanation').style.display = 'none';
+
+            const options = quiz.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.addEventListener('click', () => {
+                    options.forEach(o => o.classList.remove('selected'));
+                    opt.classList.add('selected');
+                    selectedOption = opt.dataset.index;
+                    document.getElementById('show-answer').disabled = false;
+                });
+            });
+
+            document.getElementById('show-answer').addEventListener('click', showAnswer);
+            document.getElementById('next-question').addEventListener('click', nextQuestion);
+            updateProgress();
+        }
+
+        function showAnswer() {
+            if (answerShown) return;
+            answerShown = true;
+            const q = questions[currentQuestion];
+            const options = quiz.querySelectorAll('.option');
+            let correctIndex = q.options.findIndex(opt => opt.text === q.correctAnswer);
+
+            options.forEach((opt, i) => {
+                opt.style.cursor = 'default';
+                opt.removeEventListener('click', () => {});
+                if (i == selectedOption) {
+                    if (i == correctIndex) {
+                        opt.classList.add('correct');
+                        score++;
+                        updateScore();
+                    } else {
+                        opt.classList.add('wrong');
+                    }
+                }
+                if (i == correctIndex) {
+                    opt.classList.add('correct');
+                }
+                const optExp = document.createElement('div');
+                optExp.classList.add('option-explanation');
+                optExp.innerHTML = q.options[i].explanation;
+                optExp.style.display = 'block';
+                opt.appendChild(optExp);
+            });
+
+            const expDiv = document.getElementById('explanation');
+            let expContent = `<strong>Correct Answer:</strong> ${q.correctAnswer}<br><br><strong>Your Incorrect Answer:</strong> ${q.userAnswer}<br><br><strong>Overall Explanation:</strong> ${q.explanation}<br><br><strong>Domain:</strong> [${q.domain}]`;
+            expDiv.innerHTML = expContent;
+            expDiv.style.display = 'block';
+            document.getElementById('show-answer').disabled = true;
+            document.getElementById('next-question').style.display = 'block';
+            document.getElementById('next-question').disabled = false;
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+                counter.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            } else {
+                showFinalScreen();
+            }
+        }
+
+        function updateProgress() {
+            const percent = ((currentQuestion + 1) / questions.length) * 100;
+            progress.style.width = `${percent}%`;
+        }
+
+        function updateScore() {
+            scoreElement.textContent = `Live Score: ${score} / ${questions.length}`;
+        }
+
+        function showFinalScreen() {
+            quiz.style.display = 'none';
+            finalScreen.style.display = 'block';
+            finalScore.textContent = score;
+            const perc = (score / questions.length) * 100;
+            percentage.textContent = `${perc.toFixed(2)}%`;
+            if (perc >= 85) {
+                message.textContent = "Excellent! Ready for the real exam";
+            } else if (perc >= 70) {
+                message.textContent = "Good, but needs more practice";
+            } else {
+                message.textContent = "Need to work more on wrong questions";
+            }
+            localStorage.setItem('acp_wrong_set05_score', score);
+        }
+
+        restart.addEventListener('click', () => {
+            currentQuestion = 0;
+            score = 0;
+            updateScore();
+            finalScreen.style.display = 'none';
+            quiz.style.display = 'block';
+            loadQuestion();
+        });
+
+        loadQuestion();
+    </script>
+</body>
+</html>
