@@ -2,172 +2,318 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <title>PMI-ACP – 94 Wrong Questions Trainer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PMI-ACP Lux Quiz – 94 Wrong Questions</title>
     <style>
+        :root {
+            --bg: #ffffff;
+            --card-bg: #f8f9fa;
+            --accent: #1a73e8;
+            --accent-soft: #e8f0fe;
+            --border: #dadce0;
+            --text-main: #202124;
+            --text-muted: #5f6368;
+            --correct: #0f9d58;
+            --incorrect: #d93025;
+        }
+        * {
+            box-sizing: border-box;
+        }
         body {
-            background-color: #fff;
-            color: #202124;
-            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
-            padding: 20px;
-            line-height: 1.6;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+        }
+        .app-shell {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 16px 40px;
+        }
+        header.app-header {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+        .title-group h1 {
+            margin: 0;
+            font-size: 22px;
+        }
+        .title-group p {
+            margin: 4px 0 0;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
             align-items: center;
         }
-        header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        #progress-bar {
-            width: 100%;
-            max-width: 600px;
-            background-color: #f3f3f3;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-        #progress {
-            height: 10px;
-            width: 0%;
-            background-color: #1a73e8;
-            border-radius: 5px;
-            transition: width 0.3s ease-in-out;
-        }
-        #score, #question-counter {
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        .question-card {
-            background-color: #fff;
-            border: 1px solid #dadce0;
-            border-radius: 8px;
-            padding: 20px;
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        .category-badge {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            margin-bottom: 10px;
-        }
-        .cat-a { background-color: #f28b82; color: #202124; } /* Red - Unfamiliar */
-        .cat-b { background-color: #fbbc04; color: #202124; } /* Orange - Guessed Wrong */
-        .cat-c { background-color: #34a853; color: #202124; } /* Green - Minor Mistake */
-        .question-text {
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-        .option {
-            background-color: #f1f3f4;
-            border: 1px solid #dadce0;
-            border-radius: 5px;
-            padding: 10px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .option:hover {
-            background-color: #e8f0fe;
-        }
-        .option.selected {
-            border-color: #1a73e8;
-            background-color: #d2e3fc;
-        }
-        .option.correct {
-            background-color: #d4e8d4;
-            border-color: #34a853;
-        }
-        .option.wrong {
-            background-color: #f8d7da;
-            border-color: #ea4335;
-        }
-        .option-explanation {
+        button {
+            border: 1px solid var(--border);
+            background: #fff;
+            border-radius: 999px;
+            padding: 6px 14px;
             font-size: 13px;
-            color: #5f6368;
-            margin-top: 5px;
-            display: none;
-            padding: 8px;
-            background-color: #f9f9f9;
-            border-left: 3px solid #ccc;
-            margin-left: 10px;
-        }
-        #explanation {
-            margin-top: 20px;
-            padding: 10px;
-            border-top: 1px solid #dadce0;
-            display: none;
-            background-color: #f0f7ff;
-            border-radius: 5px;
-        }
-        #show-answer {
-            background-color: #1a73e8;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
-        #show-answer:disabled {
-            background-color: #dadce0;
-            cursor: not-allowed;
-        }
-        #next-question {
-            background-color: #34a853;
+        button.primary {
+            background: var(--accent);
             color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            border-color: var(--accent);
+        }
+        button:disabled {
+            opacity: 0.6;
+            cursor: default;
+        }
+        .score-pill {
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            font-size: 12px;
+        }
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.1fr);
+            gap: 18px;
+        }
+        @media (max-width: 900px) {
+            .layout {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            padding: 16px 16px 18px;
+        }
+        .question-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .badge {
+            border-radius: 999px;
+            padding: 2px 8px;
+            font-size: 11px;
+            border: 1px solid var(--border);
+            background: #fff;
+        }
+        .cat-a { background: #fde8e8; color: #b00020; }
+        .cat-b { background: #fff4ce; color: #8a5300; }
+        .cat-c { background: #e6f4ea; color: #137333; }
+        .question-text {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .multi-hint {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+        .options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .option-item {
+            margin-bottom: 8px;
+        }
+        .option-label {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            padding: 8px 10px;
+            border-radius: 10px;
+            border: 1px solid transparent;
             cursor: pointer;
-            margin-top: 10px;
+        }
+        .option-label:hover {
+            background: #fff;
+        }
+        .option-label.correct {
+            border-color: var(--correct);
+            background: #e6f4ea;
+        }
+        .option-label.incorrect {
+            border-color: var(--incorrect);
+            background: #fce8e6;
+        }
+        .option-letter {
+            font-weight: 600;
+            min-width: 18px;
+        }
+        .option-text {
+            font-size: 14px;
+        }
+        .textarea-wrapper textarea {
+            width: 100%;
+            min-height: 90px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            padding: 8px 10px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+        .question-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            gap: 8px;
+        }
+        .question-footer .nav-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .explanation-panel {
+            margin-top: 8px;
+            border-top: 1px dashed var(--border);
+            padding-top: 10px;
             display: none;
         }
-        #next-question:disabled {
-            background-color: #dadce0;
-            cursor: not-allowed;
+        .explanation-panel.visible {
+            display: block;
         }
-        #final-screen {
-            display: none;
-            text-align: center;
-            max-width: 600px;
+        .explanation-panel h3 {
+            font-size: 14px;
+            margin: 0 0 6px;
         }
-        #restart {
-            background-color: #1a73e8;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
+        .explanation-panel .correct-answer-text {
+            font-size: 13px;
+            margin-bottom: 6px;
         }
-        @media (max-width: 600px) {
-            body { padding: 10px; }
-            .question-card { padding: 15px; }
+        .explanation-panel .overall-expl {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .side-card h2 {
+            font-size: 15px;
+            margin: 0 0 8px;
+        }
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+            gap: 6px;
+        }
+        .nav-btn {
+            padding: 4px 0;
+            border-radius: 8px;
+            font-size: 12px;
+            border-color: var(--border);
+            background: #fff;
+        }
+        .nav-btn.current {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+            font-weight: 600;
+        }
+        .nav-btn.correct {
+            border-color: var(--correct);
+        }
+        .nav-btn.incorrect {
+            border-color: var(--incorrect);
+        }
+        .nav-btn.info {
+            border-style: dashed;
+        }
+        .answer-key-list {
+            max-height: 420px;
+            overflow: auto;
+            padding-right: 6px;
+            margin: 0;
+            font-size: 12px;
+        }
+        .answer-key-list li {
+            margin-bottom: 4px;
+        }
+        .answer-key-list .q-label {
+            font-weight: 600;
+        }
+        .answer-key-list .ans-label-correct {
+            color: var(--correct);
+        }
+        .save-status {
+            font-size: 11px;
+            color: var(--text-muted);
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>PMI-ACP Lux Quiz – 94 Wrong Questions</h1>
+<div class="app-shell">
+    <header class="app-header">
+        <div class="title-group">
+            <h1>PMI‑ACP – 94 Wrong Questions Trainer</h1>
+            <p>One‑by‑one practice. Multi‑select where needed. Progress is saved in your browser.</p>
+        </div>
+        <div class="controls">
+            <span class="score-pill" id="score-pill">Score: 0 / 0</span>
+            <button id="save-btn">Save progress</button>
+            <span class="save-status" id="save-status">Not saved yet</span>
+        </div>
     </header>
-    <div id="progress-bar"><div id="progress"></div></div>
-    <div id="score">Live Score: 0 / 94</div>
-    <div id="question-counter">Question 1 of 94</div>
-    <div id="quiz" class="question-card"></div>
-    <div id="final-screen">
-        <h2>Final Score: <span id="final-score"></span> / 94</h2>
-        <p id="percentage"></p>
-        <p id="message"></p>
-        <button id="restart">Restart Quiz</button>
-    </div>
 
-    <script>
-        const questions = [
+    <div class="layout">
+        <main class="card" id="question-card">
+            <div class="question-meta">
+                <span id="q-counter">Q 1 / 94</span>
+                <span id="q-orig" class="badge">Orig #–</span>
+                <span id="q-domain" class="badge">Domain –</span>
+                <span id="q-category" class="badge">Cat –</span>
+            </div>
+            <div id="question-text" class="question-text"></div>
+            <div id="multi-hint" class="multi-hint" style="display:none;"></div>
+            <ul id="options-container" class="options-list"></ul>
+            <div id="textarea-container" class="textarea-wrapper" style="display:none;">
+                <label for="text-answer" style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px;">
+                    Your attempt (optional – this question is for reflection, not scoring):
+                </label>
+                <textarea id="text-answer" placeholder="Type your mapping or notes here..."></textarea>
+            </div>
+            <div id="explanation-panel" class="explanation-panel">
+                <h3>Answer & explanation</h3>
+                <div id="correct-answer-text" class="correct-answer-text"></div>
+                <div id="options-expl"></div>
+                <div id="overall-expl" class="overall-expl"></div>
+            </div>
+            <div class="question-footer">
+                <div class="nav-buttons">
+                    <button id="prev-btn">◀ Previous</button>
+                    <button id="next-btn">Next ▶</button>
+                </div>
+                <button class="primary" id="check-btn">Check answer</button>
+            </div>
+        </main>
+
+        <aside class="side-card card">
+            <section>
+                <h2>Jump to question</h2>
+                <div id="nav-grid" class="nav-grid"></div>
+            </section>
+            <section style="margin-top:14px;">
+                <h2>Answer key (letters)</h2>
+                <ol id="answer-key" class="answer-key-list"></ol>
+            </section>
+        </aside>
+    </div>
+</div>
+
+<script>
+const questions = [
     {
         "orig_question_number": 1,
         "id": 1,
@@ -190,11 +336,14 @@
                 "explanation": "Re-gathering requirements may lead to unnecessary delays and does not directly validate the dashboard's effectiveness with actual users."
             }
         ],
-        "userAnswer": "C. Ask internal team members to simulate comprehensive user interaction with the dashboard, running through all possible scenarios and use cases.",
         "correctAnswer": "B. Perform a split-test where half of the users get the new dashboard and the other half continue using the old one.",
         "explanation": "Waiting for the final product delays feedback and potential course corrections. A split-test (A/B testing) provides a direct comparison between the new and old dashboards, helping to identify if the new increment offers a significant improvement or addresses user needs better. Internal team members are not the actual end users, hence their feedback might not accurately reflect the needs of real users. Gathering requirements again is redundant if you already have them; it's better to validate through user interactions with the increment.",
         "domain": "Domain I: Mindset",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 13,
@@ -218,11 +367,14 @@
                 "explanation": "Anonymous feedback tools allow team members to express their views without fear of judgment, thus creating a more psychologically safe environment for participation."
             }
         ],
-        "userAnswer": "B. Form smaller discussion groups from different backgrounds to share ideas.",
         "correctAnswer": "D. Implement anonymous feedback tools to gather team members' opinions.",
         "explanation": "Establish stricter guidelines to ensure everyone follows the same rules is incorrect because rigid rules can stifle open communication and make the environment feel less safe. Form smaller discussion groups from different backgrounds to share ideas might help but can still expose team members to direct criticism or cultural misunderstandings, which anonymous tools avoid. Schedule one-on-one meetings to individually ask for their input is a good practice but may not fully address the fear of public scrutiny, thus less effective compared to anonymous feedback. Implement anonymous feedback tools to gather team members' opinions is correct because anonymous feedback can help quieter or newer team members express their views without fear of judgment or reprisal, fostering a safer environment.",
         "domain": "Domain I: Mindset",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "D"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 15,
@@ -246,11 +398,14 @@
                 "explanation": "This approach is contrary to agile principles, which emphasize collaboration, trust, and learning from mistakes. Penalizing team members can create a toxic environment and discourage open communication."
             }
         ],
-        "userAnswer": "B. Focus primarily on motivating the team to work harder to meet commitments.",
         "correctAnswer": "A. Hold a retrospective to discuss and explore new techniques for user story sizing.",
         "explanation": "This option advocates for an iterative inspection and adaptation approach, consistent with both the agile and lean mindsets, encouraging continual improvement. Motivation is important, but focusing solely on working harder ignores examining underlying process inefficiencies. Extending the sprint length modifies the framework but does not address potential issues with current processes. Penalizing team members is against agile values of team collaboration and could demotivate the team.",
         "domain": "Domain I: Mindset",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 17,
@@ -274,11 +429,14 @@
                 "explanation": "Adding requirements without reprioritizing will overburden the team and could lead to quality degradation or incomplete work."
             }
         ],
-        "userAnswer": "B. Complete the current sprint as planned and address the new requirements in the next sprint.",
         "correctAnswer": "C. Integrate the new requirements into the current sprint and reprioritize the backlog accordingly.",
         "explanation": "Halting all current sprint work would disrupt the flow and might result in wasted effort on partially completed items. Waiting until the next sprint could delay the delivery of critical value and reduce responsiveness to stakeholders' needs. Integrating new requirements and reprioritizing the backlog ensures that the team continues to deliver the most valuable features first while adapting to changes. This approach supports the agile principle of being responsive to change and delivering value as often as possible. Adding requirements without reprioritizing will overburden the team and could lead to quality degradation or incomplete work.",
         "domain": "Domain I: Mindset",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 18,
@@ -302,11 +460,14 @@
                 "explanation": "This goes against the Lean Startup approach of incremental and iterative development."
             }
         ],
-        "userAnswer": "B. Conduct a full-scale market analysis for the new feature.",
         "correctAnswer": "C. Create a hypothesis statement to define your assumptions.",
         "explanation": "Draft a detailed technical specification document for the feature: This is contrary to Lean Startup principles, which focus on iteration over comprehensive documentation. Conduct a full-scale market analysis for the new feature: While useful, it isn't the immediate first step in Lean Startup, which prioritizes quick validation and learning. Creating a hypothesis statement defines your assumptions, which is the first step in the Lean Startup methodology. This helps to set the stage for experimentation and learning. Develop the complete set of features before releasing it to the market: This goes against the Lean Startup approach of incremental and iterative development.",
         "domain": "Domain I: Mindset",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 25,
@@ -330,11 +491,14 @@
                 "explanation": "Relying on just one team member, even if they are experienced, may not be the best approach in a crisis situation where quick action is required from the whole team."
             }
         ],
-        "userAnswer": "A. Conduct a detailed root cause analysis before taking any actions.",
         "correctAnswer": "C. Act immediately to contain the issue, then sense and respond appropriately.",
         "explanation": "While root cause analysis is important, it is not suitable as the first step in a situation where immediate containment is necessary. While team collaboration is useful, in a chaotic situation, immediate action is prioritized over meetings. In a chaotic situation, immediate action is required to stabilize the situation before doing anything else. Relying on a single experienced team member might not provide the immediate action needed to stabilize the chaos.",
         "domain": "Domain I: Mindset",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 27,
@@ -358,11 +522,14 @@
                 "explanation": "Utilizing Kanban for delivery and agile for UAT might introduce coordination and process adherence issues."
             }
         ],
-        "userAnswer": "D. Use Kanban for MVI delivery and agile methods for UAT, iterating until final acceptance.",
         "correctAnswer": "C. Apply the lean approach for MVI delivery and traditional methodologies for UAT phases.",
         "explanation": "Pure Scrum might not address the extended UAT needs effectively. While XP emphasizes testing, it may not handle the long-term, formal UAT processes required by the project. This hybrid approach leverages the efficiency of Lean for rapid MVI delivery and the structured nature of traditional practices for comprehensive UAT phases, ensuring both agility and thoroughness. Utilizing Kanban for delivery and agile for UAT might introduce coordination and process adherence issues.",
         "domain": "Domain I: Mindset",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 31,
@@ -386,11 +553,14 @@
                 "explanation": "Delaying the decision could lead to unresolved issues and negatively impact future planning sessions."
             }
         ],
-        "userAnswer": "B. Split the team into smaller groups to test each approach and decide based on the results.",
         "correctAnswer": "C. Schedule a dedicated, timeboxed session for team members to discuss and resolve the disagreement.",
         "explanation": "Decide on the technical approach yourself to save time and move forward with the planning. This undermines team autonomy and might impact morale and buy-in. Split the team into smaller groups to test each approach and decide based on the results. This can be time-consuming and still doesn't guarantee a consensus. Schedule a dedicated, timeboxed session for team members to discuss and resolve the disagreement. This allows focused time for resolution, ensuring team collaboration and timely decision-making. Postpone the conversation until the next sprint planning session to avoid further delays. Postponing avoids immediate resolution and might affect current and future sprint planning negatively.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 38,
@@ -414,11 +584,14 @@
                 "explanation": "Focusing solely on immediate tasks neglects the broader project vision, which is essential for team alignment and morale."
             }
         ],
-        "userAnswer": "D. Hold daily stand-up/coordination meetings focusing only on immediate tasks.",
         "correctAnswer": "C. Use sprint reviews to regularly revisit and adjust the project vision as needed.",
         "explanation": "While monitoring can help, it does not facilitate shared understanding or morale improvement. Rigid guidelines might stifle creativity and adaptability, which are core principles of agile. Sprint reviews provide a recurring opportunity to reassess and realign the team's work with the long-term vision, ensuring that everyone understands how their contributions fit into the overall goals. Daily stand-ups/coordination meetings are too focused on immediate tasks to adequately address long-term vision alignment.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 40,
@@ -442,11 +615,14 @@
                 "explanation": "Focusing on negative consequences may create fear rather than motivation, which can be counterproductive in fostering an agile mindset."
             }
         ],
-        "userAnswer": "C. Highlight successful case studies and positive outcomes from other teams or organizations that have adopted agile practices.",
         "correctAnswer": "B. Encourage the team to identify their current pain points or challenges and explore how agile practices can address those issues.",
         "explanation": "Imposes a plan-driven approach, which may reinforce the team's resistance to change. By encouraging the team to identify their own pain points and explore how agile practices can address those issues, you are fostering team ownership and motivation. This approach aligns with the agile principle of responding to change over following a plan. Provides external motivation, but may not resonate with the team's specific context. Focuses on negative consequences, which can demotivate the team.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 46,
@@ -470,11 +646,14 @@
                 "explanation": "Coaching sessions can improve performance and offer targeted advice. However, they may not provide the ongoing support and personalized feedback that a mentorship relationship can offer, which is crucial for developing specific skills like task breakdown."
             }
         ],
-        "userAnswer": "D. Provide coaching sessions on agile task management.",
         "correctAnswer": "C. Assign a mentor who excels in breaking down user stories.",
         "explanation": "While training provides foundational knowledge, it does not offer the personalized, contextual experience that mentoring provides. Team meetings can foster knowledge sharing but may not provide the focused, individual support needed for skill development in this scenario. Mentoring provides personalized guidance and support from someone experienced in the specific skill, which in this case is breaking down user stories. This tailored mentorship helps the junior developer learn through direct insight and feedback. Coaching focuses on performance improvement but may not offer the long-term developmental relationship and contextual expertise that mentoring does.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 49,
@@ -498,11 +677,14 @@
                 "explanation": "There is no indication in the tool's output that unhealthy conflict is present; the focus is more on collaboration and task distribution."
             }
         ],
-        "userAnswer": "D. Team members are in a state of unhealthy conflict",
         "correctAnswer": "B. Some team members have become indispensable for specific tasks",
         "explanation": "The output of the tool does not mention or infer trust problems. Uneven task distribution and a recommendation to do more pair programming would suggest too much specialization. Nothing in the scenario or the tools output indicates a velocity issue. While the question mentions team dynamic issues, the tool output does not point towards team conflict resolution strategies.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 62,
@@ -526,11 +708,14 @@
                 "explanation": "Mandating the use of a tool without team input can lead to resistance and a lack of engagement from the team, which is counterproductive in an agile environment."
             }
         ],
-        "userAnswer": "B. Implement burnout charts to visualize progress against each sprint goal.",
         "correctAnswer": "C. Hold a workshop to collaboratively create a kanban board.",
         "explanation": "Gantt charts are less effective in agile environments, where work is not always linear and predefined. Burnout charts are useful for visualizing progress but do not provide a detailed view of task flow. A workshop encourages team involvement, fostering ownership and understanding of the kanban board, thereby gaining buy-in. Mandating a tool without team input can lead to resistance and lack of engagement.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 70,
@@ -554,11 +739,14 @@
                 "explanation": "Longer sprints may delay feedback and reduce agility, which can lead to missing critical customer requirements."
             }
         ],
-        "userAnswer": "A. Ensure customer feedback is collected during sprint retrospectives and make necessary adjustments.",
         "correctAnswer": "B. Define and validate user stories with customer representatives before development starts.",
         "explanation": "Collecting feedback during retrospectives is useful internally but might be too late in the process to correct alignment issues. Defining and validating user stories with customer representatives ensures that the development work aligns with customer expectations, improving satisfaction. Reducing waste is valuable, but the problem here is more about understanding customer needs, not process efficiency. Longer sprints to include more features can delay feedback and decrease agility, potentially missing critical customer requirements.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 73,
@@ -582,11 +770,14 @@
                 "explanation": "By shifting focus away from the identified non-value-added steps, the team risks missing out on valuable improvement opportunities and may delay necessary changes."
             }
         ],
-        "userAnswer": "A. Immediately eliminate all non-value-added steps to enhance efficiency.",
         "correctAnswer": "C. Pilot changes on a small scale to measure the impact before fully implementing.",
         "explanation": "Immediately eliminating all non-value-added steps can be disruptive and might lead to unforeseen issues. While brainstorming workshops can generate ideas, they do not provide a structured approach to prioritizing and testing improvements. Piloting changes on a small scale allows the team to test improvements, measure their impact, and iterate based on feedback without risking the entire process. Shifting focus away from identified issues can lead to stagnation and missed opportunities for improvement.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 75,
@@ -610,11 +801,14 @@
                 "explanation": "Ignoring complaints can lead to further dissatisfaction and does not provide any opportunity to address the usability issues proactively."
             }
         ],
-        "userAnswer": "B. Hold an internal meeting to discuss the possible causes of the usability issues.",
         "correctAnswer": "C. Conduct usability testing sessions with a sample of customers for direct feedback.",
         "explanation": "This allows you to obtain specific insights from customers about the problems they are experiencing, leading to more informed and effective solutions. While this can be useful, it does not provide direct customer insights, which are crucial for understanding the true nature of their needs. This could address some symptoms but likely will not solve the underlying issues and may waste resources. This delays necessary action and could further frustrate customers.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 81,
@@ -638,11 +832,14 @@
                 "explanation": "Postponing feedback may lead to dissatisfaction among stakeholders and could result in a lack of trust in the team's ability to respond to their needs, impacting future collaboration."
             }
         ],
-        "userAnswer": "C. Discuss the feedback in the retrospective and adjust the development and feedback process for future sprints.",
         "correctAnswer": "B. Conduct a team meeting after the review to understand the feedback and create new user stories.",
         "explanation": "Disrupts the current sprint and may lead to poor planning and rushed decisions. Ensures that the feedback is understood and appropriately translated into actionable items for future iterations. While discussing feedback in a retrospective is important, it does not immediately convert feedback into actionable items. Number of user stories completed is a raw count that does not provide detailed insights into waste reduction or flow improvement. Postpones addressing important feedback, which may delay improvements and stakeholder satisfaction.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 83,
@@ -666,11 +863,14 @@
                 "explanation": "An automated dashboard provides real-time data, ensuring stakeholders have continuous access to the most current information, fostering transparency."
             }
         ],
-        "userAnswer": "C. Implement a physical kanban board as well for more visual tracking in the office.",
         "correctAnswer": "D. Set up an automated dashboard displaying real-time metrics from the kanban board.",
         "explanation": "Daily coordination meetings are not scalable for large stakeholder groups and can be time-consuming. Weekly status updates do not provide real-time visibility and can become outdated quickly. A physical kanban board might not be accessible to all stakeholders, particularly if they are geographically dispersed. Setting up an automated dashboard displaying real-time metrics provides immediate and continuous visibility to stakeholders without additional manual effort, ensuring that everyone has access to current data. This enhances transparency and decision-making and aligns well with good practices in agile for radiating information.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "D"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 88,
@@ -694,33 +894,40 @@
                 "explanation": "This is the most appropriate action as it allows the team to reflect on and reinforce their shared expectations regarding workspace maintenance. It encourages team ownership and responsibility for their environment and promotes a collaborative approach to problem-solving."
             }
         ],
-        "userAnswer": "B. Discuss the issue at the next daily standup or coordination meeting.",
         "correctAnswer": "D. Review team working agreements.",
         "explanation": "The scrum master should try to resolve the issue and conflict in the team by referring to the working agreements. The team would have provided input into this artifact and therefore, they agreed to the conditions. If details about workplace hygiene are missing, now is the time to discuss this issue with the team and add them to the agreements. Even though this is a serious problem affecting workplace hygiene and team happiness, it is not a suitable topic for a daily coordination meeting. Facilitating a workaround, such as hiring a second cleaning service, will not address the flawed team dynamic, which needs improvement so that the team can work in a healthy environment. Teams should address these matters on their own whenever possible. Teams should only consider third-party interventions when they absolutely can't resolve conflicts or problems on their own.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "D"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 89,
         "id": 20,
-        "text": "Please fill the blank field(s) in the statement with the right words.  Review each of the scenarios below. Which listed problem-solving technique should the team in the scenario choose?  (Match each scenario with the appropriate problem-solving technique)  __: A manufacturing company is facing recurring defects  __: A software company wants to optimize their E2E  __: A government department faces complex challenges  __: A project team encounters recurring issues  __: A team faces critical project delays  Copy and paste these techniques into the corresponding blank:  Fishbone diagram, Value stream mapping, Causal loop diagram, 5 Whys technique, A3 problem‑solving  Fishbone diagram, Value stream mapping,, Causal loop diagram,, 5 Whys technique, _ Correct answer Fishbone diagram, Value stream mapping, Causal loop diagram, 5 Whys technique, A3 problem‑solving Explanation Each technique serves a specific purpose and can be adapted to various project contexts. Choosing the right tool depends on the problem's nature, team collaboration, and desired outcomes.  A team can use a fishbone diagram to systematically analyze potential causes. Categories can help identify the root cause and guide corrective actions.  Value stream mapping helps map the flow of work, identify bottlenecks, and reveal opportunities for process optimization. By visualizing the value stream, the team can improve efficiency and reduce time-to-market.  The 5 Whys technique involves iteratively asking \"why\" to uncover the fundamental cause of a problem.  Causal loop diagrams help reinforce and balance feedback loops that drive system behavior. By mapping cause-and-effect relationships, the organization can identify leverage points for interventions and address root causes.  A3 problem-solving guides problem-solving on an A3-sized paper and involves roles such as the owner, mentor, and responders. The A3 report captures the current situation, root cause, countermeasures, and implementation.  Domain Domain IV: Delivery",
+        "text": "Please fill the blank field(s) in the statement with the right words.  Review each of the scenarios below. Which listed problem-solving technique should the team in the scenario choose?  (Match each scenario with the appropriate problem-solving technique)  __: A manufacturing company is facing recurring defects  __: A software company wants to optimize their E2E  __: A government department faces complex challenges  __: A project team encounters recurring issues  __: A team faces critical project delays  Copy and paste these techniques into the corresponding blank:  Fishbone diagram, Value stream mapping, Causal loop diagram, 5 Whys technique, A3 problem‑solving  Fishbone diagram, Value stream mapping,, Causal loop diagram,, 5 Whys technique, _",
         "options": [],
-        "userAnswer": "",
         "correctAnswer": "",
         "explanation": "",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "type": "info",
+        "answerText": "Fishbone diagram, Value stream mapping, Causal loop diagram, 5 Whys technique, A3 problem‑solving",
+        "correctLetters": []
     },
     {
         "orig_question_number": 91,
         "id": 21,
-        "text": "Please fill the blank field(s) in the statement with the right words.  The Cynefin Framework helps leaders and executives categorize situations into five distinct domains, each requiring a different approach for effective decision-making: Simple, Complicated, Complex, Chaotic, and Disorder.  Match each Cynefin category on the left to the statement about or example of typical associated risk on the right.  __: The business case for a project proposes 80% solution discovery and multiple inputs.  __: A project team is aware of a few potential problems, conducts root-cause analysis, and now they have a few possible solutions.  __: A team is using new technology and working with a team of experts to discover the roadmap for a solution.  __: The project suffers from many issues because the team underestimated the need for a thorough risk analysis.  Copy and paste these values into the corresponding blank:  Chaos, Complicated, Complex, Simple  Complex, Simple, Complicated, Chaotic Correct answer Chaos, Complicated, Complex, Simple Explanation The project suffers from many issues because the team underestimated the need for a thorough risk analysis this project is categorized as simple or clear. It seems this team made an assumption that the risk level of the project was low, but even so, it would have benefited from a better risk analysis. In the simple or clear domain, projects are characterized by stability and clear cause-and-effect relationships.  A project team is aware of a few potential problems, conducts a root cause analysis, and now they have a few possible solutions this project is categorized as complicated. The relationship between cause and effect requires analysis or expertise. There may be multiple right answers.  A team is using new technology and working with a team of experts to discover the roadmap for a solution this project is categorized as complex. In the complex domain, a project involves unknown unknowns and requires experimentation and emergent practices to understand the situation.  The business case for a project proposes 80% solution discovery and multiple inputs this project is categorized as chaotic. In this domain, there is no clear relationship between cause and effect. Immediate action is required to stabilize the situation, and then the team will need to take steps to move the situation to a more stable domain.  Domain Domain II: Leadership",
+        "text": "Please fill the blank field(s) in the statement with the right words.  The Cynefin Framework helps leaders and executives categorize situations into five distinct domains, each requiring a different approach for effective decision-making: Simple, Complicated, Complex, Chaotic, and Disorder.  Match each Cynefin category on the left to the statement about or example of typical associated risk on the right.  __: The business case for a project proposes 80% solution discovery and multiple inputs.  __: A project team is aware of a few potential problems, conducts root-cause analysis, and now they have a few possible solutions.  __: A team is using new technology and working with a team of experts to discover the roadmap for a solution.  __: The project suffers from many issues because the team underestimated the need for a thorough risk analysis.  Copy and paste these values into the corresponding blank:  Chaos, Complicated, Complex, Simple  Complex, Simple, Complicated, Chaotic",
         "options": [],
-        "userAnswer": "",
         "correctAnswer": "",
         "explanation": "",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "type": "info",
+        "answerText": "Chaos, Complicated, Complex, Simple",
+        "correctLetters": []
     },
     {
         "orig_question_number": 92,
@@ -744,22 +951,27 @@
                 "explanation": "Involvement in user story creation and release planning can foster collaboration, but without addressing the underlying resistance, it may not be enough to change stakeholders' perceptions about digital currency."
             }
         ],
-        "userAnswer": "B. Hold a kickoff meeting with all stakeholders and promote the benefits of the project",
         "correctAnswer": "C. Coach and train the resistant stakeholders in growth mindset principles",
         "explanation": "When a project has stakeholders resistant to an element of the project or a change, we need to enable them to think about the problem or situation differently. A project that has been authorized has the support of the organization. When stakeholder resistance still exists, the project practitioner needs to guide or coach people to decrease that resistance. The growth mindset is a feature of successful agile organizations. By embracing a growth mindset, people believe they can learn new skills. All of the answer choices in this question will help the situation, but only one choice addresses enabling change and dismantling resistance.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 93,
         "id": 23,
-        "text": "Please fill the blank field(s) in the statement with the right words.  A large digital transformation project involves several stakeholders, including the project sponsor, functional managers, project team, and steering committee.  Which metrics should be prioritized for each listed stakeholder?  Match the stakeholder with the metric that should be prioritized for them.  __: Key performance indicators (KPIs) on strategic objectives  __: Team engagement rate  __: Defect evolution  __: Burnup chart  Copy and paste these stakeholders into the corresponding blank:  Project sponsor, Functional manager, Project team, Steering committee  functional managers,, steering committee, project sponsor,, project team Correct answer Project sponsor, Functional manager, Project team, Steering committee Explanation The project sponsor should have visibility into key performance indicators (KPIs) on strategic alignment. These are essential for the sponsor to ensure value optimization for the organization.  Functional managers should see the team engagement rate so they can act to support the team in case of issues.  The project team should see the evolution of defects because this allows the team to monitor and manage quality issues, which is their responsibility.  The steering committee should have access to the burnup chart because it provides a clear visualization of the backlog evolution and project progress, enabling the steering committee to make strategic decisions.  Domain Domain I: Mindset",
+        "text": "Please fill the blank field(s) in the statement with the right words.  A large digital transformation project involves several stakeholders, including the project sponsor, functional managers, project team, and steering committee.  Which metrics should be prioritized for each listed stakeholder?  Match the stakeholder with the metric that should be prioritized for them.  __: Key performance indicators (KPIs) on strategic objectives  __: Team engagement rate  __: Defect evolution  __: Burnup chart  Copy and paste these stakeholders into the corresponding blank:  Project sponsor, Functional manager, Project team, Steering committee  functional managers,, steering committee, project sponsor,, project team",
         "options": [],
-        "userAnswer": "",
         "correctAnswer": "",
         "explanation": "",
         "domain": "Domain I: Mindset",
-        "category": "B"
+        "category": "B",
+        "type": "info",
+        "answerText": "Project sponsor, Functional manager, Project team, Steering committee",
+        "correctLetters": []
     },
     {
         "orig_question_number": 94,
@@ -783,11 +995,14 @@
                 "explanation": "Kanban boards are effective tools for managing and visualizing work across various domains. They provide a clear visual representation of tasks and their statuses, helping teams improve efficiency and ensure a continuous flow of work."
             }
         ],
-        "userAnswer": "A. Story maps",
         "correctAnswer": "D. Kanban boards",
         "explanation": "Kanban boards are effective tools for managing and visualizing work across various domains. They are particularly useful in software development, project management, operations and maintenance, marketing and sales, and human resources. By providing a clear visual representation of tasks and their statuses, kanban boards help teams improve efficiency, identify bottlenecks, and ensure a continuous flow of work.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "D"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 95,
@@ -811,11 +1026,14 @@
                 "explanation": "This option is inappropriate as it may not be suitable for addressing a personal concern that is specific to team member A. Bringing the entire team into the situation could exacerbate the issue rather than resolve it."
             }
         ],
-        "userAnswer": "C. Coach team member A in professional interpersonal skills in a casual setting.",
         "correctAnswer": "A. Promote psychological safety with team member A, and discuss communication style with team member B.",
         "explanation": "The team lead needs to ensure a psychologically safe environment, where all team members have or feel challenger safety, the ability to present their thoughts or opinions without fear. Team member A clearly is suffering from anxious feelings and needs support from the team lead and the team. The team lead could also have a conversation with team member B about adapting their communication style to help improve the team dynamic. Because the issue seems isolated to team member A, this is not an occasion for a group brainstorming session. When working with different personalities on a team, we should encourage everyone to see how small changes to their behaviors can benefit the larger dynamic. Asking team member B to provide written feedback for team member A is probably too much of an adaptation in this situation; it imposes extra work on team member B and is counterintuitive to a free-flowing, collaborative environment.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 96,
@@ -839,11 +1057,14 @@
                 "explanation": "A value stream map is an effective tool for visualizing the flow of value and identifying inefficiencies. It can help optimize resources, but it does not directly address the need for demonstrating ROI to skeptical leaders."
             }
         ],
-        "userAnswer": "B. Use a pilot to demonstrate the increasing return on investment (ROI) based on optimization.",
         "correctAnswer": "D. Use a value stream map.",
         "explanation": "Knowledge of the product manager and product owner roles is essential to answering this question. The product manager and product owner roles are both essential for the successful delivery of a product. The product manager focuses on the strategic aspects, long-term vision, and alignment with business goals, whereas the product owner is more tactical, working closely with development teams to ensure the product meets customer needs and delivers value. Both roles require a deep understanding of customer needs, effective communication, and the ability to manage and prioritize work to achieve the desired outcomes. The product manager should use a value stream map to optimize the resources and investments in an attempt to demonstrate how the product will deliver value and allay senior leaders' fears. This is the most strategic choice on the list of options.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "D"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 98,
@@ -871,22 +1092,29 @@
                 "explanation": "Making retrospective outcomes visible encourages accountability and keeps the team focused on the agreed-upon actions, thus promoting continuous improvement."
             }
         ],
-        "userAnswer": "B. Use the time for improving knowledge of agile.",
         "correctAnswer": "C. Make a list of improvement topics to address and prioritize them. D. Vote on decisions or actions to take at the end of each meeting. E. Radiate the retrospective outcomes on the team dashboard.",
         "explanation": "The retrospective allows the team to learn about, improve, and adapt its processes. To do this, the team makes a list of improvement topics to address by generating insights, voting on decisions or actions to take, and then radiating the retrospective outcomes on the team dashboard to keep them visible to everyone. Retrospectives help the team learn from its previous work on the product and its process. One of the principles from the Agile Manifesto is: 'At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly.' The other answers may help to assist with conducting the actual retrospectives, but the team wants to ensure they can make their retrospectives productive.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C",
+            "D",
+            "E"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 99,
         "id": 28,
         "text": "Study the image, then choose all relevant terms to answer this question: What are the velocity chart axis labels?    (Choose 2 - X and Y axis labels)  Project Costs  Explanation This option is incorrect because project costs are not typically represented on the axes of a velocity chart. A velocity chart focuses on the team's output over time rather than financial metrics.  Team Morale  Explanation This option is incorrect as team morale is a qualitative measure and not represented on a velocity chart. Velocity charts do not track team sentiment directly.  Correct selection Sprint Number  Explanation This option is correct because the x-axis of a velocity chart typically represents the sprint number, allowing teams to visualize their performance over various iterations.  Story Points  Explanation This option is correct as the y-axis of a velocity chart usually indicates the total story points completed in each sprint, helping teams understand their capacity and performance.  Overall explanation A velocity chart is a key agile metric that helps teams visualize their work completed in relation to the time taken, helping to assess their productivity and predict future performance.  Domain Domain IV: Delivery",
         "options": [],
-        "userAnswer": "",
         "correctAnswer": "",
         "explanation": "A velocity chart is a key agile metric that helps teams visualize their work completed in relation to the time taken, helping to assess their productivity and predict future performance.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "type": "info",
+        "answerText": "",
+        "correctLetters": []
     },
     {
         "orig_question_number": 101,
@@ -910,11 +1138,14 @@
                 "explanation": "DA is ideal for this scenario as it supports both non-software development and allows for a mix of workflows, accommodating the need for iterative design with various customer subsets."
             }
         ],
-        "userAnswer": "C. Feature-driven development (FDD)",
         "correctAnswer": "D. Disciplined Agile (DA)",
         "explanation": "Disciplined Agile® (DA) is the only approach in this list that allows for both development of work outside of software (the workplace safety improvements) and a mix of cadences between continuous flow and timeboxed life cycles. A DA approach would also accommodate ideation to generate the design. Lean is not a relevant choice because the scenario does not mention any workflow or waste issue. Feature-drive development (FDD) is also incorrect because even though it would help the team understand the design features most important to the users, FDD is only used in software development. Though Scrum can be used for software development, it is not the correct choice because a hybrid cadence is required.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "D"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 102,
@@ -942,11 +1173,15 @@
                 "explanation": "Presenting risks during the sprint review is not an effective way to address them as reviews occur at the end of the sprint. This timing does not allow the team to take immediate action on the risks, which should be managed throughout the sprint."
             }
         ],
-        "userAnswer": "A. Discuss the risks during the next retrospective.",
         "correctAnswer": "B. Visualize the risks in a risk burndown chart. D. Use a risk log.",
         "explanation": "This team should first establish a risk log to analyze the risks identified during the daily coordination meetings, then use a risk burndown chart to visualize the risks and manage them. Discussing the risks during the sprint review or the retrospective will be too late. The team needs to track the risks while completing work during the sprint. Prioritizing the product backlog will not address the risks.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B",
+            "D"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 105,
@@ -974,11 +1209,15 @@
                 "explanation": "While continuous monitoring is important, it is most effective when informed by a clear understanding and planning of risk mitigation strategies. This should ideally come after thorough risk assessment rather than being a standalone strategy."
             }
         ],
-        "userAnswer": "E. Establish continuous risk monitoring to adjust the project strategy by setting up regular meetings with stakeholders.",
         "correctAnswer": "C. Organize a risk management session with the team and key stakeholders to identify, prioritize, and develop mitigation strategies. D. Integrate risks into the product backlog to continuously address them during iterations.",
         "explanation": "Organizing a risk management session involves a critical collaborative process to identify, assess, and prioritize risks, as well as to plan appropriate mitigation measures. This aligns all participants with the upcoming regulatory and technical challenges and engage them to find the most appropriate course of action. Another valid way of managing risk is to integrate risks into the product backlog. This ensures that risk management is an integrated component of the development cycle, allowing for an agile and continuous response to identified risks during iteration planning and review. While focusing on low-risk functionalities can expedite value delivery, this approach may inadvertently place the project and investments at greater risk, potentially overlooking critical risks that could impact product success and compliance. Collaborating with the technical team focuses on resolving technical challenges but doesn't encompass the broader spectrum of risks, including regulatory changes and resource availability, which are equally important. Finally, continuous monitoring is indeed important, but as a first action, it is more effective after a clear understanding and planning of risk mitigation strategies. Moreover, iteration planning, review, and retrospective should be used whenever possible to keep the whole team involved and avoid adding processes when not necessary.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C",
+            "D"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 106,
@@ -1002,11 +1241,14 @@
                 "explanation": "While adjusting the cadence of feedback loops might improve some aspects of the process, it does not address the critical issue of technical debt and stakeholder concerns. Changing feedback loops without understanding their impact could lead to additional risks."
             }
         ],
-        "userAnswer": "B. Revisit the product roadmap",
         "correctAnswer": "A. Apply a cost of change curve",
         "explanation": "The cost of change curve is a concept that describes how the cost of fixing a defect increases exponentially the longer it takes to discover it. This is because design and development work have typically already occurred based on the flawed component, and activities are more costly to modify as the project progresses because more stakeholders are impacted. Understanding when a pivot or change might improve the outcome will be beneficial for this team. Simply revisiting the product roadmap does not include the analysis required to understand the cause and impact of the approach. The varying degrees of success suggest the approach is working but needs to be better understood, and changing the way of working now by reconsidering the approach may introduce more risk. The Kanban framework can be a way to improve the current way of working but should not be used before understanding the cost and risk impacts of the current method.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 107,
@@ -1030,11 +1272,14 @@
                 "explanation": "Avoidance of accountability typically manifests in team members not taking responsibility for their actions or decisions. However, in this case, the issue is more about the inability to move forward with agreed-upon decisions rather than avoiding responsibility."
             }
         ],
-        "userAnswer": "A. Absence of trust",
         "correctAnswer": "B. Lack of commitment",
         "explanation": "The framework referenced in this question is Patrick Lencioni's model of team dysfunction. This scenario illustrates a lack of commitment from team members. When decisions appear to have been made but discussions continue afterward, it suggests that team members have not truly bought into the decisions during the meetings. This can result from a reluctance to fully commit due to a lack of clarity or the absence of consensus during initial decision-making. This often leads to ongoing confusion and a lack of clear direction, which can weaken the effectiveness of the team and delay progress toward project objectives.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 108,
@@ -1062,11 +1307,15 @@
                 "explanation": "Empowering the team to utilize design thinking and creativity encourages innovative solutions and can lead to quicker iterations. This approach aligns well with Agile principles and can help meet project deadlines effectively."
             }
         ],
-        "userAnswer": "",
         "correctAnswer": "C. Engage the customer directly in the design and prototyping. E. Empower the team to employ design thinking, experimentation, and creativity.",
         "explanation": "The team should collaborate with the customer to obtain design ideas and feedback in real time. The team should also be empowered to think creatively and experiment to move more quickly through the design phase. Both of these are good options for the product owner to consider. Spikes are used for learning, but at this point work needs to be completed. Lengthening iterations is not recommended as a way of planning work. Wireframes or 3-D models are a business planning tool and not needed here. The prototype is needed here as soon as possible.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C",
+            "E"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 110,
@@ -1090,11 +1339,14 @@
                 "explanation": "This option is the sensible as it allows the team to stay within the timebox while delivering additional value without compromising the iteration's commitments. However, the team needs to consult the PO before deciding because their input is crucial in making informed decisions about story inclusion."
             }
         ],
-        "userAnswer": "D. Add user story 8 because it can fit within the iteration length.",
         "correctAnswer": "C. Ask the product owner.",
         "explanation": "Since the product owner is the voice of the customer, when faced with a decision that would extend the time of a sprint by a short interval to achieve desired value, the product owner should be involved in that decision.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 111,
@@ -1118,11 +1370,14 @@
                 "explanation": "This option could lead to further delays in development. Dedication of an entire iteration to research may not be necessary if a team member could handle it concurrently, which would allow for both research and development to proceed."
             }
         ],
-        "userAnswer": "C. Coach the product owner on timeline management.",
         "correctAnswer": "B. Propose dedicating one team member to research so other team members can start development.",
         "explanation": "The product owner owns the scope of a project, but because the research has delayed the start of the project, the scrum master should take action. In Scrum, the schedule aspect of a project is managed through iterations, so it's not the scrum master's responsibility, but the scrum master is in charge of removing impediments. The delay has become an impediment. Dedicating a team member to do the research requested by the product owner gets both the research and the project work in progress. This is a better option than dedicating one iteration to research, because it seems this research will be ongoing throughout the project.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 113,
@@ -1150,11 +1405,15 @@
                 "explanation": "CLV estimates the total revenue a business can expect from a single customer account throughout the business relationship. While it reflects the long-term value of customers, it does not measure their immediate satisfaction."
             }
         ],
-        "userAnswer": "A. Conversion rate",
         "correctAnswer": "B. Net Promoter Score (NPS) D. Customer satisfaction score (CSAT)",
         "explanation": "The correct answers are Net Promoter Score (NPS) and customer satisfaction score (CSAT). The NPS® is a widely used metric to gauge customer loyalty and satisfaction, particularly relevant in understanding how likely customers are to recommend the website or its products to others. The CSAT metric directly measures customer satisfaction with their experience on the website, usually obtained through surveys asking customers to rate their satisfaction. The other options, while relevant for analyzing the website's performance, do not directly measure customer satisfaction. Conversion rate is crucial for evaluating how effectively the website turns visitors into buyers but does not measure satisfaction. Click-through rate (CTR) assesses the effectiveness of online advertisements in driving clicks and is an indicator of engagement rather than satisfaction. Customer lifetime value (CLV) is an important metric for understanding the long-term value of a customer, which can be influenced by their satisfaction and loyalty but it's more of an indirect measure of satisfaction over time.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B",
+            "D"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 114,
@@ -1178,11 +1437,14 @@
                 "explanation": "This statement is misleading as the team scored low in key areas, indicating significant challenges rather than harmony."
             }
         ],
-        "userAnswer": "D. This team is harmonious and has a few minor challenges.",
         "correctAnswer": "B. The team should focus on commitment and how to optimize conflict.",
         "explanation": "This team scored lowest in the 'constructive disagreement' and 'committed team' categories, averaging scores of '1' and '3,' respectively. The team should focus on commitment and how to optimize conflict. The Tabaka Model, as described by Jean Tabaka, focuses on building effective and cohesive teams through leadership principles and behaviors that foster trust and collaboration. This model emphasizes the importance of the leader's role in creating a positive team environment and includes both principles to embrace and principles to avoid.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 115,
@@ -1210,11 +1472,15 @@
                 "explanation": "Implementing a hardening iteration focuses on refining and stabilizing the product before release, which is essential for minimizing errors. It allows for extensive testing and resolution of outstanding issues."
             }
         ],
-        "userAnswer": "D. Plan spikes to evaluate any risks and experiment with potential solutions before implementation.",
         "correctAnswer": "C. Review lessons learned from versions 1 through 3 of the product. E. Use a hardening iteration.",
         "explanation": "Use of a hardening iteration or lessons learned can help this team minimize errors in the upcoming release. A hardening iteration is a project life cycle phase that focuses on finalizing and stabilizing the solution before its release. This iteration is crucial for ensuring the product is robust, reliable, and ready for deployment. It typically involves intensive testing, fixing any remaining issues, and preparing the necessary documentation and training materials. Reviewing lessons learned from previous projects should also be an efficient way of discovering potential problem areas or fixes. Brainstorming or spikes for further experimentation can add complexity and risk, whereas this team wants to finish development by applying quality assurance. Logging the risks in the product backlog means adding more work items to the list-useful for queuing up work for prioritization but does not enact the action needed in the scenario.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C",
+            "E"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 116,
@@ -1238,11 +1504,14 @@
                 "explanation": "While rework may sometimes lead to improved outcomes, it is generally seen as a negative aspect of project management. It often results in wasted resources and time, so it is not typically regarded as beneficial."
             }
         ],
-        "userAnswer": "C. Teams can avoid rework if they work closely with stakeholders throughout the project.",
         "correctAnswer": "B. Rework is a symptom of a project team environment with high complexity or poor quality.",
         "explanation": "Rework can be limited but not avoided. It is not a normal part of all projects and represents a mistake and a trigger for unnecessary work. Rework can be defined as the unnecessary effort of redoing a process or activity that was incorrectly implemented the first time. It is often triggered by poor-quality production of the original work undertaken to complete a task or the use of inferior materials, leading to the release of incomplete or imperfect task products. Rework can have dramatic effects on projects in terms of their cost and time performance as well as adversely impacting safety. The specific technical content of undiscovered rework is, by definition, unknown at any point in the program. However, it is imperative to program management success that it be acknowledged, actively sought out, and prevented as much as possible.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 118,
@@ -1270,11 +1539,15 @@
                 "explanation": "If the team cannot complete an increment, it may reflect issues with the backlog, but it could also stem from team dynamics or external factors. Thus, while it suggests a need for refinement, it is not a direct cause."
             }
         ],
-        "userAnswer": "B. After three iterations, the project has significant technical debt.",
         "correctAnswer": "A. Acceptance criteria remain unclear, even after working for a few iterations. D. The product owner rejects the increment at the end of an iteration.",
         "explanation": "Two of these options are possible. We need to perform backlog refinement if the acceptance criteria are not clear or when the product owner rejects the increment at the end of the iteration. Backlog refinement aims to ensure continuous and efficient value delivery on a project. If the product owner needs to reject an increment at the end of an iteration, then the team needs to perform intensive backlog refinement to clarify the complexity, effort, and time required to complete the work. Unclear acceptance criteria would also prompt a team to refine the backlog and make better estimates to understand the complexity of the work. If a team is unable to complete the work during an iteration, the problem may be the backlog, but there could be other reasons—for example, team performance or external conditions. Technical debt is a result of prioritizing speed or cost over quality, and bottlenecks are a symptom of ill-planned work.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A",
+            "D"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 122,
@@ -1298,11 +1571,14 @@
                 "explanation": "This option involves assessing the team's understanding of Agile ceremonies, which is crucial for improving their practices. By evaluating their knowledge, the team lead can identify gaps and provide necessary guidance to help the team align with Agile practices."
             }
         ],
-        "userAnswer": "C. Coach the product owner on the value of agile ceremonies.",
         "correctAnswer": "D. Evaluate the team on their perception and knowledge of agile ceremonies.",
         "explanation": "This team does not seem to know how to use the retrospective. Agile ceremonies contain certain decision-making moments and each has their own purpose. The ceremony for discussing what is next on the product backlog is the iteration planning meeting. In fact, the product owner does not typically attend the retrospective. The retrospective is primarily intended for the team itself, but the product owner can attend if their presence is beneficial for learning, relationship building, and sharing valuable perspectives. The key is ensuring that the team is comfortable, and that the product owner's role is nonevaluative.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "D"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 123,
@@ -1326,11 +1602,14 @@
                 "explanation": "Scheduling a specific weekly meeting might help in tracking improvements, but it may not be efficient or necessary if the improvements are already integrated into the iteration planning process. This can lead to unnecessary overhead."
             }
         ],
-        "userAnswer": "D. Schedule a specific weekly team meeting to identify an action plan and follow up on improvement priorities.",
         "correctAnswer": "B. Prioritize improvement actions and include the top improvement action in the next iteration with the product owner's approval.",
         "explanation": "To implement improvement actions, the improvements first need to be placed on the product backlog and prioritized. This is the product owner's responsibility. The team pulls the improvements into the iteration backlog according to priority. In this way, we can be sure the improvement actions are implemented.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 125,
@@ -1354,11 +1633,14 @@
                 "explanation": "Canceling the project is a valid option when the budget constraints cannot be met and no feasible alternative exists to deliver the MVP within acceptable costs. This decision aligns with the need to manage project delivery effectively."
             }
         ],
-        "userAnswer": "B. Revise the stories to a lower complexity to reduce the cost.",
         "correctAnswer": "D. Suggest canceling the project.",
         "explanation": "In the context of this scenario, the team faces a difficult go/no-go decision. In this case, rising inflation presents a significant problem for the team. The budget is the way of measuring cost. When this metric indicates the cost of the project exceeds what is allowed, the team needs to make the appropriate decision. In this case, the team should suggest canceling the project.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "D"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 129,
@@ -1386,11 +1668,15 @@
                 "explanation": "Customer-centricity is a core principle of agile methodologies. A lack of focus on the customer can lead to the development of features that do not align with user needs, resulting in dissatisfaction with the product."
             }
         ],
-        "userAnswer": "A. The definition of ready (DoR) was not complete.",
         "correctAnswer": "B. The acceptance criteria were not agreed on. E. Lack of customer-centricity.",
         "explanation": "This project is suffering from a lack of customer-centricity and faulty acceptance criteria, which is a related problem. Agile projects prioritize the customer and thrive on frequent feedback from the customer to develop the product. Creating appropriate acceptance criteria and following up with frequent review and feedback from the customer enable a focused effort on building the product that all stakeholders want. Agile projects can start with undefined scope and, through customer interaction and development work, the scope becomes defined. This team should probably be working more frequently and meaningfully with stakeholders. Analysis of the key stakeholders may or may not have been done, but the issue described here is related to the nature of the team's engagement with the stakeholders. The definition of ready is a series of conditions that the entire team agrees to complete before a user story is considered sufficiently understood so that work can begin to construct it. It ensures that the user story is sufficiently elaborated and ready to be brought into an iteration, designed, constructed, and delivered. An incomplete DoR is a secondary issue to the primary issue of failing to engage the customer frequently and meaningfully enough.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B",
+            "E"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 131,
@@ -1414,11 +1700,14 @@
                 "explanation": "Although this option suggests discussing the increment's value, it may lead to inefficiencies as it does not utilize the established iteration review meeting format. A separate meeting could delay feedback and complicate communication, making it less effective than an iteration review."
             }
         ],
-        "userAnswer": "D. Schedule a separate meeting with stakeholders to discuss the increment's value.",
         "correctAnswer": "B. Organize an iteration review meeting to showcase the completed increment to stakeholders.",
         "explanation": "The correct option is to organize an iteration review meeting to showcase the completed increment to stakeholders. The iteration review is an essential agile ceremony where the team presents the completed work to stakeholders for feedback. It allows for early validation and ensures alignment with stakeholder expectations. A retrospective addresses feedback but focuses only on the team's perspective. A detailed report would provide technical details but may not effectively communicate the increment's value to stakeholders. The last option suggests a separate meeting, which could add unnecessary complexity and delay feedback.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 132,
@@ -1446,11 +1735,15 @@
                 "explanation": "This technique involves two developers working together at one workstation, which enhances code quality and knowledge sharing but does not address coordination across multiple teams, making it unsuitable for this context."
             }
         ],
-        "userAnswer": "C. Scrumban",
         "correctAnswer": "A. Scrum of Scrums D. Feature-driven development (FDD)",
         "explanation": "Feature-driven development (FDD) provides the most complete set of methods specifically for the needs of large software development projects. Scrum of Scrums is a scaled agile technique that offers a way to connect multiple teams who need to work together to deliver complex solutions. Mobbing is a collaborative technique in which multiple team members focus simultaneously and coordinate their contributions on a particular work item. This approach is often used in software development and other project-based environments to enhance productivity and quality through collective effort. Scrumban is a hybrid agile approach that combines elements of Scrum and Kanban to create a flexible and efficient approach to project management. Pair programming is a collaborative technique in software development, where two programmers work together at one workstation. None of these approaches is going to help coordinate the work of eight teams.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A",
+            "D"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 134,
@@ -1478,11 +1771,15 @@
                 "explanation": "This is correct as burn charts visually represent the number of user stories completed to date, giving the team clear visibility into their progress toward the sprint goal."
             }
         ],
-        "userAnswer": "D. Next work to be completed",
         "correctAnswer": "A. Potential changes in scope of work E. Number of user stories completed",
         "explanation": "By using burn charts on an information radiator, the scrum master will be able to visualize project progress, or the number of user stories completed, and potential changes in the scope of work. Burn charts provide a visual representation of how much work has been completed and how much remains, enabling teams to identify any deviations from the plan and take corrective actions as needed. Keeping everyone on the team aware of progress is a great way of motivating team members and keeping communication about project objectives clear. However, the burn charts do not contain information related to the urgency of particular backlog items or prioritization criteria for stories. The next set of work to be completed is decided at iteration planning meetings.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A",
+            "E"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 135,
@@ -1506,11 +1803,14 @@
                 "explanation": "While showing the roadmap can help in aligning expectations, it does not directly involve stakeholders in addressing their concerns about the proposed features. It is important to directly engage them in setting the increment goals."
             }
         ],
-        "userAnswer": "C. Proceed with development based on the team's understanding of business priorities.",
         "correctAnswer": "B. Involve stakeholders in defining increment goals before the meeting.",
         "explanation": "Increment goals should be defined prior to sprint planning. Stakeholders should agree with the goals based on the roadmap and project charter. If stakeholders do not agree, as in this case here, the product owner should ensure alignment prior to continuing work on the project.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 139,
@@ -1534,11 +1834,14 @@
                 "explanation": "This approach encourages discussion about the necessity and value of real-time updates. Engaging the product owner in this dialogue can lead to a better understanding of their needs and possibly a more effective communication strategy."
             }
         ],
-        "userAnswer": "A. Deploy a digital information radiator to display real-time information.",
         "correctAnswer": "D. Challenge the product owner about the need for real-time information.",
         "explanation": "Daily coordination meetings are the method a team uses to update progress on work. Therefore, the maximum granularity for updates is daily, but this product owner seems to require more frequent updates. The team lead should challenge the product owner about the value of having more frequent, real-time updates. Together they would decide on the value of having those updates to the team dynamic.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "D"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 140,
@@ -1562,11 +1865,14 @@
                 "explanation": "While pairing can be beneficial for skill development, it does not directly address the issue of boredom. This approach may provide temporary relief but does not foster long-term engagement or satisfaction."
             }
         ],
-        "userAnswer": "C. Propose a new working agreement that would enable team members to select work items on a rotating basis.",
         "correctAnswer": "A. Coach the team member on the importance of working as a cohesive team.",
         "explanation": "This team member should be reminded that the team works as a cohesive unit. Sometimes the work will be boring, but it needs to be done. This team member seems to have a mindset or attitude that is not team focused. Situations like this really should not arise often if team members have adopted an agile mindset and the team has a cohesive culture. Rotating responsibilities or pairing team members are both valid ways of working. Seniority is not a factor for self-organizing teams in terms of assigning tasks. Fairness is a sustained value that every team member in a self-organizing team should prioritize.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 143,
@@ -1590,11 +1896,14 @@
                 "explanation": "Encouraging the use of new technologies may lead to innovative solutions, but it does not directly address the underlying issue of team members' hesitation to engage and share their thoughts."
             }
         ],
-        "userAnswer": "B. Improve emotional intelligence and conflict management.",
         "correctAnswer": "C. Increase their trust level through activities.",
         "explanation": "The scenario indicates that team members are at the first stage of psychological safety, inclusion safety, where they are still gauging whether it is safe to be themselves and to be socially integrated into the team. The observed behavior hesitancy to engage deeply or offer feedback suggests that team members do not yet feel fully accepted or included, which is the foundation for feeling safe to learn, contribute, and challenge. This team would benefit from activities designed to build trust. These could be work-related, professional development, or social activities appropriate for the group such as games designed to foster relationships, improve communication, and build trust among team members.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 144,
@@ -1622,11 +1931,15 @@
                 "explanation": "While training can be beneficial, introducing new team members at this stage may disrupt the established dynamics and not address the current morale issues. It's more important to focus on the existing team's cohesion and motivation first."
             }
         ],
-        "userAnswer": "D. Implement a reward and recognition program to motivate individual performance.",
         "correctAnswer": "A. Focus team attention on continuous improvement using the Kaizen loop. B. Encourage team members to actively solicit feedback from others, provide constructive feedback to others, and implement action plans for improvement.",
         "explanation": "To improve team performance, this team lead should encourage team members to actively solicit feedback from others, provide constructive feedback to others, and implement action plans for improvement. They can also use the Kaizen loop to focus team attention on continuous improvement. A Kaizen loop is an approach where a team experiments with a small change in their way of working (WoW), adopting the change if it works in their given context and abandoning it if it doesn't. Introducing new team members will change the dynamics of this team, so this decision comes with some risk of affecting morale or causing interpersonal conflict, for example. Reprioritizing the iteration backlog to match the slower velocity is lowering the standard; this team needs motivation! A reward and recognition program to highlight individual performance takes the focus away from the whole team effort.",
         "domain": "Domain I: Mindset",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A",
+            "B"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 145,
@@ -1654,11 +1967,15 @@
                 "explanation": "While recognizing the product owner's leadership is important, this option does not directly acknowledge the team's collective efforts in adopting agile practices. Team recognition should focus on the group's accomplishments rather than singling out one individual."
             }
         ],
-        "userAnswer": "A. Record lessons learned, noting the specific contributions of the team members and successful use of agile.",
         "correctAnswer": "B. Reward the team members through the organizations bonus scheme. D. Convey the teams successful efforts and excellence to leadership.",
         "explanation": "This project manager should recognize the excellent work of the team in adopting agile approaches for the project. Two effective ways include using the organization's bonus plan and commending them to leadership. Recognizing and rewarding people for agile behavior requires a thoughtful and consistent approach. Personalized acknowledgments, peer recognition, public praise, reward systems, and regular feedback are all effective strategies. By recognizing and rewarding team-focused behavior and outcomes, leaders can foster a positive and productive work environment that encourages continuous improvement and high performance.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B",
+            "D"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 146,
@@ -1682,11 +1999,14 @@
                 "explanation": "While collaborating with leads to establish feedback cycles can enhance communication, it does not directly address the frequency of value delivery. This approach may lead to delays in actual product releases."
             }
         ],
-        "userAnswer": "B. Develop usable increments and monitor usability by capturing direct end user feedback.",
         "correctAnswer": "C. Define the minimum viable product (MVP), obtain appropriate feedback, and release it.",
         "explanation": "Focusing on minimum functionality to organize a release is the best choice of these four options. Value can be delivered using any of these approaches, but the question asks which approach enables the team to deliver value as often as possible. In that case, using the MVP is the method of ensuring frequent value delivery.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 147,
@@ -1710,11 +2030,14 @@
                 "explanation": "This option is the most constructive as it aims to identify the root cause of the conflict and fosters collaboration between the team and the experts. Understanding the issues is critical to moving forward effectively."
             }
         ],
-        "userAnswer": "C. Ask the product owner to reprioritize the backlog.",
         "correctAnswer": "D. Contact the experts and the team to discover the problems.",
         "explanation": "This team is working collaboratively with experts on a difficult and complex project. To resolve this conflict, the team lead needs to understand the nature of the problems by conducting a root cause analysis with the team and the experts together. After the conflict is resolved, then a go/no go decision can be made. Backlog prioritization will not help in this case unless the team and stakeholders decide to revise the scope. Empowering the team to work without the experts is unwise, considering the expertise needed. This team needs to find a way forward together by discovering the problems first and collaborating on a resolution.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "D"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 149,
@@ -1742,11 +2065,16 @@
                 "explanation": "This method allows the team to reflect on the changes made and assess their impact on the development process. Retrospectives facilitate continuous improvement by identifying what worked, what didn’t, and how to enhance future processes."
             }
         ],
-        "userAnswer": "B. Apply value stream mapping.",
         "correctAnswer": "A. Use acceptance test-driven development C. Review the Net Promoter Score (NPS) with the customers. E. Review the new processes during each iteration retrospective.",
         "explanation": "This team can gain qualitative and quantitative feedback about their process improvements through the use of retrospectives, acceptance-test driven development, and obtaining New Promoter Score® (NPS®) scores. This will help the team have a holistic view of how the improvements are helping in their product development process during the new or next release. Brainstorming is an ideation tool and this team needs to conduct analysis or evaluate the effectiveness of a process. Value stream mapping is a Lean enterprise method used to document, analyze, and improve the flow of information or materials required to produce a product or service for a customer. It is a visual tool that helps organizations understand the current state of their processes and identify areas for improvement-but it can't do what's needed here, which is to evaluate the effectiveness of an update.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A",
+            "C",
+            "E"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 151,
@@ -1770,11 +2098,14 @@
                 "explanation": "Unit tests are essential for verifying individual components of the application but do not provide a holistic view of whether the entire deliverable meets the acceptance criteria. They focus on isolated pieces rather than the integrated functionality of the application."
             }
         ],
-        "userAnswer": "B. The product owner should validate acceptance criteria so they can approve or reject the user stories and features.",
         "correctAnswer": "C. The team should use test scenarios to automatically validate the deliverables meet the acceptance criteria.",
         "explanation": "Test scenarios allow for automatic validation that the deliverables meet the acceptance criteria. This approach ensures quick and efficient verification, reducing the risk of human errors and ensuring that each feature works as intended. Systematic validation allows for systematic and repeatable validation of deliverables, ensuring complete coverage of the acceptance criteria and greater confidence in the quality of the results. While the other options may provide some value, they do not offer the same levels of rigor and efficiency in validating deliverables as automated test scenarios. Manual testing by testers and manual reviews with the product owner can be labor intensive and error prone. Unit testing is important for ensuring code quality but does not comprehensively validate the deliverables meet all the acceptance criteria, as it typically focuses on individual components rather than integrated functionality.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 152,
@@ -1798,11 +2129,14 @@
                 "explanation": "Tailoring an iterative approach with lean practices can help the team minimize waste and optimize their workflow. This option balances the need for structure with flexibility, allowing for adjustments based on ongoing feedback."
             }
         ],
-        "userAnswer": "C. Use the Scrum framework.",
         "correctAnswer": "D. Tailor an iterative approach with lean practices.",
         "explanation": "While this team could reject using iterations and choose the safe approach of using Kanban again but with limits, trying an iterative approach shows the team's willingness and commitment to learn and improve. They should trust their instincts about the project requiring an iterative approach and tailor a life cycle with lean elements, which will help optimize the workflow.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "D"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 153,
@@ -1826,11 +2160,14 @@
                 "explanation": "Postponing the project does not address the complexity and chaos the team faces. Instead, it is more beneficial for the team to engage with the challenges and explore them through agile practices rather than avoiding them."
             }
         ],
-        "userAnswer": "B. Use flow-based agile with a plan-based risk strategy.",
         "correctAnswer": "A. Decompose the project and plan to use a blend of agile approaches.",
         "explanation": "On the Stacey complexity matrix, this project is extremely complex since it is plotted near the \\\"chaos domain.\\\" In this case, using a blend of agile approaches to probe or experiment with the problem or situation and trying to form an initial sense of scope is the best choice. When we have a high level of complexity bordering on chaos, we should stabilize the situation first; forming an initial sense of scope is the way to do this. We don't have enough information from the situation to determine whether a flow-based approach would be suitable. Postponing a project because it seems too complex is possible, but the team does not normally have this power or authority; this is the decision of the business. Test cases are used for validating the functionality and performance of software by providing a structured approach to testing by defining specific conditions and expected outcomes. This team is newly formed, so this project is not at the validation stage.",
         "domain": "Domain I: Mindset",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 156,
@@ -1858,11 +2195,16 @@
                 "explanation": "Empowering reluctant team members as mentors can be a transformative strategy. It encourages them to engage with others and share their knowledge, fostering a sense of responsibility and ownership over their expertise."
             }
         ],
-        "userAnswer": "B. Make sure knowledge sharing is in the agreed team charter.",
         "correctAnswer": "A. Reward and recognize knowledge sharing. C. Facilitate one-on-one meetings to discuss the reluctance to share knowledge. E. Empower the team members who are reluctant to share as mentors to others.",
         "explanation": "Team members who refuse or are reluctant to share knowledge can present a serious impediment to team performance and the project. The team lead should try to understand the source of the reluctance by speaking with the team members. Empowering team members as leaders who can share valuable knowledge with others through mentorship may also demonstrate the practice's value. These kinds of reward and recognition gestures can help people change their mindsets. These kinds of resistant attitudes can persist even in violation of a team charter because they are sometimes rooted in fear or insecurity. The solution lies in addressing these root causes. Updating the information radiators with more information doesn't address the problem of being unable to access information because of gatekeeping behaviors.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A",
+            "C",
+            "E"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 157,
@@ -1886,11 +2228,14 @@
                 "explanation": "While this option is valid in structure, it omits the level of features, which are essential in Agile decomposition. The correct breakdown should include features between epics and user stories."
             }
         ],
-        "userAnswer": "B. Epic-user story-feature-task",
         "correctAnswer": "A. Epic-feature-user story-task",
         "explanation": "An epic is a significantly big initiative that cannot be delivered in a single iteration. The team will break down the approved epic into manageable chunks of work to accommodate iterations. In this question, since the app will deliver multiple features, the correct decomposition sequence would be to decompose the epic into features, then into stories and further down to tasks. Epics are typically used in SAFE®, Disciplined Agile ® (DA), and large agile initiatives.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 159,
@@ -1918,11 +2263,15 @@
                 "explanation": "A product roadmap is a strategic tool that outlines the vision and direction of the product over time. It helps stakeholders understand the planned timeline for releases and is particularly useful in coordinating efforts across different versions."
             }
         ],
-        "userAnswer": "A. Use a minimum viable product MVP for each version to enable the team to get early feedback and speed up all the work.",
         "correctAnswer": "B. Consolidate the work for all three versions into one product backlog. E. Produce a product roadmap to show the anticipated sequence of deliverables over time.",
         "explanation": "This product will have a single backlog. A backlog is the ordered list of all the work, presented in story form, for a team. Product owners (or, in this case, a product owner value team that includes the product manager and all relevant product owners for that area of the product) might produce a product roadmap to show the anticipated sequence of deliverables over time.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B",
+            "E"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 160,
@@ -1946,11 +2295,14 @@
                 "explanation": "Increasing testing frequency can be beneficial, but without a clear incremental approach to development, this may lead to wasted effort and time without adequately addressing the underlying complexities of requirements."
             }
         ],
-        "userAnswer": "C. Collaborate with the stakeholders to set development guidelines.",
         "correctAnswer": "A. Propose incremental development with continuous evaluation.",
         "explanation": "When work is complex, we should deliver work in small increments to obtain feedback from the customer and be ready to adapt to change in the external environment or with requirements.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 161,
@@ -1978,11 +2330,16 @@
                 "explanation": "A group chat provides a platform for continuous communication, allowing team members to share ideas and updates in real time. This can significantly enhance collaboration and engagement among distributed team members."
             }
         ],
-        "userAnswer": "C. Record all daily coordination meetings.",
         "correctAnswer": "A. Use real-time CCTV cameras in each office. B. Hold an in-person kickoff meeting. E. Start a group chat.",
         "explanation": "This team needs to be able to communicate in real time. The challenge with virtual global distributed working is ensuring all team members have a sense of belonging and active participation in the work. This is best achieved through an in-person kickoff meeting, so the team has a chance to bond. A group chat can keep conversations fluid during work, and the real-time CCTV will give a sense of presence and coworking. Scrum of Scrums is appropriate for interteam communication, but this scenario describes only one team that happens to be globally distributed. While recording daily coordination meetings can be helpful to remembering tasks, this process really will not help improve collaboration and communication. Even a globally distributed team would strive to ensure that the daily coordination meetings were held at a time that every team member could attend.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A",
+            "B",
+            "E"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 164,
@@ -2006,11 +2363,14 @@
                 "explanation": "While gathering metrics can provide valuable quantitative data, it may not fully capture the qualitative changes in team dynamics or morale. Metrics alone cannot tell the full story of the agile adoption process and its effectiveness."
             }
         ],
-        "userAnswer": "D. Gather metrics that compare talent and resource allocations and project success rates from 1 year ago and today.",
         "correctAnswer": "C. Request and share stories from teams that borrowed other team members, people who attended training, and mentorship participants.",
         "explanation": "To evaluate the effectiveness of the process improvements, including this organization-wide agile adoption, this organization has decided to hold a retrospective. In this context, members of this organization should come together to share stories of what went well and what could be improved about the adoption. An organizational retrospective is a regularly occurring workshop in which team members explore their work and results to improve both the process and product. Team members may decide to retrospect at key times, such as when the team completes a release or ships something, when more than a few weeks have passed since the previous retrospective, when the team appears to be stuck and completed work is not flowing through the team, or when the team reaches any other milestone. The retrospective is about looking at the qualitative (people's feelings) and quantitative (measurements) data, then using those data to find root causes of problems and make small improvements. The retrospective is not about blame, but rather a time for the team to learn from previous work.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 166,
@@ -2034,11 +2394,14 @@
                 "explanation": "This issue is relevant to the team's ability to complete their work and can be addressed quickly in the meeting. Resolving access issues is critical for team efficiency."
             }
         ],
-        "userAnswer": "A. I have a doctor's appointment later, so I will be leaving early.",
         "correctAnswer": "C. Why do we always seem to be 2 days behind schedule?",
         "explanation": "The daily coordination meeting is a primary collaborative practice, designed to keep the team cohesive in purpose and practice. Team members raise topics related to the following topics: what I did yesterday, what I am doing today, and any impediments. This would include notification of team member absences and questions relevant to completing work such as having updated brand guidelines or access to the vendor SharePoint site. Any larger questions, such as ongoing concerns about the pace of work and the schedule, should be addressed in the retrospective.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 172,
@@ -2062,11 +2425,14 @@
                 "explanation": "Involving the product owner as a mediator is a good approach, as they can help facilitate discussions and encourage collaboration. However, the Team A lead must also take responsibility for resolving the conflict."
             }
         ],
-        "userAnswer": "D. Ask the product owner to mediate and facilitate collaborative team working.",
         "correctAnswer": "A. Facilitate negotiation of a formal working agreement or team charter.",
         "explanation": "The team lead of Team A should respect the product owner's wish and include them in the way of working for this collaborative effort. The responsibility of the problem resolution is Team lead A's responsibility. Team B's lack of responsibility has caused a problem, which has led to a conflict; therefore, the Team A lead is responsible for resolving the conflict. While colocation is a great option, if possible and to facilitate collaboration, the issue that needs to be addressed in this scenario is Team B's lack of responsibility for time and quality. A collaboratively written and negotiated working agreement or team charter is the optimal artifact for providing agreement of both parties to the way of working.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 173,
@@ -2090,11 +2456,14 @@
                 "explanation": "An MVP is typically used to test hypotheses about customer needs with minimal features. While getting customer feedback is crucial, the term 'light version' in this context suggests a readiness for customer validation without the experimental nature of an MVP. An MVP may introduce unnecessary complexity at this stage."
             }
         ],
-        "userAnswer": "A. Create acceptance criteria with the customer.",
         "correctAnswer": "C. Build a light version to be validated by the customer.",
         "explanation": "The product owner should prepare a light version or prototype of the website to gain customer approval or validation. Because the project is developing functionality as well as design, the customer needs to be able to test interactions and a full range of functions to validate. Screenshots will not allow the customer to test the design and feedback. Acceptance criteria are not the same as validation, although the criteria are needed to determine what is required for the customer to accept the product. The customer and team will use the acceptance criteria to judge the fulfillment of the design as acceptable or not. In this case, a light version is more appropriate than an MVP. An MVP is a strategic tool used to validate product ideas and understand customer needs with minimal investment, whereas a light version is a simplified, high-quality product designed to offer essential features to a specific segment of users. MVPs are experiments that may evolve into more refined products, whereas light versions are typically stable, standalone offerings. This scenario does not suggest that experimentation is required. The issue is meeting the customer's needs. Knowing that the product owner and team have never met the customer is an additional dynamic that makes the light version a better choice than the MVP. As the product owner gets to know the customer's needs, they can tailor the product backlog, and the team can build according to those specifications and incorporate customer feedback until they achieve validation.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 174,
@@ -2118,11 +2487,14 @@
                 "explanation": "This approach is effective for collaborative root cause analysis. The 5 Whys technique encourages team members to ask 'why' multiple times to drill down to the root cause. Coupling it with a fishbone diagram helps visualize the relationships between causes, making it easier to identify and address underlying issues."
             }
         ],
-        "userAnswer": "A. Use the plan-do-check-act (PDCA) paradigm in a brainstorming session",
         "correctAnswer": "D. Use the 5 Whys technique and then investigate the most likely cause using a fishbone diagram",
         "explanation": "The situation in the question demands exhaustive exploration for identifying the root cause analysis from a list of potential primary causes. Using the 5 Whys technique will be the most suitable tool for this situation. The 5 Whys technique is often used in conjunction with the fishbone (Ishikawa) diagram to illustrate the network of root causes and their effects.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "D"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 175,
@@ -2146,11 +2518,14 @@
                 "explanation": "Applying a work-in-progress limit helps to control the number of items in the testing phase, thereby promoting a smoother flow of work and encouraging collaboration among team members to resolve issues faster."
             }
         ],
-        "userAnswer": "C. Add automated tests to accelerate the validation process of the items 'In Test.'",
         "correctAnswer": "D. Apply a work-in-progress limit to the 'In Test' column and encourage programmers to actively participate in testing before fixing new defects.",
         "explanation": "Applying a work-in-progress limit to the 'In Test' column prevents accumulation and forces the team to address bottlenecks, allowing for a short-term problem resolution and optimizes the flow in the long term by respecting the team's overall capacity.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "D"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 176,
@@ -2174,11 +2549,14 @@
                 "explanation": "Voting may not be effective in this situation as it assumes the team has already achieved a shared understanding of the backlog items. Without consensus, voting could lead to division rather than unity, making it a less desirable approach."
             }
         ],
-        "userAnswer": "D. Suggest voting or other decision-making methods",
         "correctAnswer": "B. Encourage the team to try collaborating in different ways",
         "explanation": "In this situation, collaboration is not yet yielding results. In this case, the team lead could help to diversify the collaboration method. The team decision-making process is stuck and needs to be pushed through to eventual consensus. Voting is not a good choice because the team has not reached a shared understanding of the situation yet. Collaboration and consensus are not individual focused, and allowing individuals to continue expressing their points of view would likely entrench existing opinions. Collaboration requires active listening and communication. The information from lessons learned should already be a valuable part of the team discussion, but the historical or benchmark information may not totally reopen collaboration in a useful way because this team seems to have entered a non-collaborative mode and needs a leadership solution to recenter them.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 178,
@@ -2202,11 +2580,14 @@
                 "explanation": "While the team's opinion is valuable and should be considered, it should not take precedence over the alignment with organizational goals. The product owner must weigh the team's insights against the broader objectives of the company."
             }
         ],
-        "userAnswer": "D. Team's opinion",
         "correctAnswer": "B. Organizational goals",
         "explanation": "In this scenario, the product owner should consider how the risk of a planned next release of a product can impact a successful product that is delivering value for the company. Is it worth the risk? This is a go-to-market decision. It is clear that there is some risk involved in this product development related to the team's capability, but the organization is committed to improving the product. This product owner needs to decide the optimal timing for this release and the value of the improvement to the organization's goals.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 180,
@@ -2230,11 +2611,14 @@
                 "explanation": "Escalating the issue could be seen as a last resort if other measures fail. However, it does not directly resolve the problem of stakeholder engagement and may lead to further delays while waiting for a response."
             }
         ],
-        "userAnswer": "A. Establish attendance guidelines for iteration reviews.",
         "correctAnswer": "B. Review the stakeholder engagement plan at the next retrospective.",
         "explanation": "Deciding to wait for stakeholders to be available to collaborate and provide feedback to the team was probably a wrong decision. The team needs to be able to collaborate with the stakeholders as a necessary part of development. So this team needs to review and revise its stakeholder engagement plan at the next retrospective.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 183,
@@ -2262,11 +2646,15 @@
                 "explanation": "Escalating the issues may not resolve the root cause of the miscommunication and may create further tension. It is more effective to address concerns within the team framework instead."
             }
         ],
-        "userAnswer": "C. Address the product owner's complaining during the retrospective and their participation at the demos.",
         "correctAnswer": "A. Ensure the definition of ready is clear. D. Reinforce team roles, including how the product owner works as part of the team during the retrospective.",
         "explanation": "Noting the repeated complaining by the product owner in this scenario, the person in this role seems to envision themselves apart from the team. This dynamic should be addressed so that the product owner is part of the team, and their feedback provides helpful constructive guidance for developing the product. Another issue in the scenario is the perceived misalignment between the original design and the developing function. This can be addressed with a clear definition of ready before work starts in an iteration. If the team is functioning like an agile team is supposed to, then updating the product owner is unnecessary. Team members are active participants and have access to information radiators and the product.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A",
+            "D"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 184,
@@ -2290,11 +2678,14 @@
                 "explanation": "This option correctly identifies the need to manage the backlog as it continues to grow. Adjusting priorities is essential to ensure that the team focuses on the most important tasks, thereby preventing potential delays."
             }
         ],
-        "userAnswer": "B. The amount of work completed per iteration is increasing, and although the number of emerging items is rising, there is no need to intervene as the project will be completed on time.",
         "correctAnswer": "D. The amount of work completed per iteration is stable, and the number of emerging items is increasing. It is necessary to review the priorities and adjust the number of items in the backlog to avoid delays.",
         "explanation": "The amount of work completed per iteration is stable, but the number of items in the backlog is steadily increasing. This indicates that the team is working consistently but the backlog continues to grow, which can lead to delays if priorities are not adjusted. Reviewing priorities and adjusting the number of items in the backlog will ensure the team focuses on the most critical tasks and avoids delays. Increasing the number of team members does not guarantee an immediate increase in velocity; on the contrary, it may reduce velocity in the short term and create additional delays.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "D"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 185,
@@ -2318,11 +2709,14 @@
                 "explanation": "Correct. The hallmark of a high‐functioning Agile team is continuous interaction, collective problem solving, and joint responsibility for outcomes. The sudden shift to quiet, individual work suggests team members no longer share a clear vision of the goals, nor do they feel accountable to each other—so collaboration collapses. This explanation aligns directly with Agile principles of self‐organization, collaboration, and transparency."
             }
         ],
-        "userAnswer": "D. The team dynamic lacks shared understanding and accountability.",
         "correctAnswer": "B. The team disagrees with the methodology of the stakeholders and product owner.",
         "explanation": "Agile teams thrive on collaboration, transparency, and shared ownership. When team members lose sight of common goals or do not hold each other accountable, they retreat into individual work, stifling creativity and reducing trust. According to the Agile Practice Guide, self‐organizing teams maintain constant dialogue to inspect progress, adapt plans, and foster a sense of collective responsibility. The observed quietness and lack of peer interaction indicate that this shared understanding and accountability have eroded.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 186,
@@ -2346,11 +2740,14 @@
                 "explanation": "This option overestimates the time required. While the calculations show that the team needs 14 weeks, this option includes extra time that is not necessary based on the provided velocity and story points."
             }
         ],
-        "userAnswer": "B. 12 weeks after the start",
         "correctAnswer": "C. 14 weeks after the start",
         "explanation": "By incorporating a 20% contingency into the total story points, the requirement increases to 120 points. With a velocity of 20 points per iteration, six iterations are required to cover the 120 points (120/20). Adding an additional iteration dedicated to production readiness, the total becomes seven iterations. As each iteration lasts 2 weeks, the delivery is therefore planned for 14 weeks after the start.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 187,
@@ -2374,11 +2771,14 @@
                 "explanation": "Metrics and performance analysis tools are valuable, but they should be established only after understanding the processes involved. Without this context, metrics may not accurately reflect the situation."
             }
         ],
-        "userAnswer": "B. Use kanban boards to improve the visibility of work in progress and identify bottlenecks.",
         "correctAnswer": "C. Conduct a value stream mapping workshop with team members and key stakeholders.",
         "explanation": "Conducting a value stream mapping workshop is essential for identifying waste not just across the development cycle, but throughout the entire value creation cycle for the medical staff. This initial step provides the insights needed for the strategic implementation of kanban boards and metrics, ensuring they accurately reflect the process's value flow and inefficiencies.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 188,
@@ -2402,11 +2802,14 @@
                 "explanation": "While simplicity is a key principle in agile, it does not specifically address the need for collaboration with the customer, which is crucial for facilitating team success in this scenario."
             }
         ],
-        "userAnswer": "B. Agile processes promote sustainable development.",
         "correctAnswer": "C. Business people and developers must work together daily throughout the project.",
         "explanation": "This team is focused on observation of the company's current process before speaking to the customer. The team wants to learn what needs improvement before beginning work; however, they need to work with the customer to facilitate team success. This aspect of agile will enable the team to better incorporate feedback from the customer into their work and have a shared understanding of the problem.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 189,
@@ -2430,11 +2833,14 @@
                 "explanation": "This option allows for a more in-depth discussion of the workroom conditions with the entire team, which is appropriate for a retrospective setting. It ensures that all team members can contribute their thoughts and collaborate on potential improvements, aligning with the principles of Agile teamwork."
             }
         ],
-        "userAnswer": "A. Address workroom conditions in tomorrow's daily coordination meeting.",
         "correctAnswer": "D. Discuss workroom conditions in the next retrospective.",
         "explanation": "This workroom is hectic, and the team member who calmly asked to work remotely should be allowed to do so. This seems like a normal response to a noisy workspace. The best approach is discussing workroom conditions in the next retrospective where everyone can contribute their opinion about the conditions and suggest improvements, if necessary. The scrum master should not address workplace conditions in tomorrow's daily coordination meeting unless others identify it as an impediment. The team member who decided to work remotely seems to have made the decision voluntarily. This action is not clearly linked to isolation. Reading the team member's actions and words, they are calm and taking a logical action to find a better space to work. Asking if they feel isolated in this context seems like an overreaction. Reminding the team member about working agreements and task accountabilities seems awkward and not demonstrative of a scrum master who can use emotional intelligence to understand others. It seems clear that this team member just needs a little peace and quiet.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "D"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 190,
@@ -2458,11 +2864,14 @@
                 "explanation": "A chaotic project lacks any clear cause-and-effect relationships. Although the project faces challenges, it is not yet in a state of chaos but rather complexity, where some order can still be established."
             }
         ],
-        "userAnswer": "D. The project is chaotic.",
         "correctAnswer": "C. The project is complex.",
         "explanation": "This is a complex project. The unforeseen challenges represent unknowns; frequent changes in client requirements and difficult integration with existing systems indicate dynamic and unpredictable interactions among project elements. The Cynefin framework aids decision-making by categorizing situations into five distinct domains: Clear, Complicated, Complex, Chaotic, and Disorder, highlighting that this project fits within the Complex domain.",
         "domain": "Domain I: Mindset",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 191,
@@ -2490,11 +2899,15 @@
                 "explanation": "Spikes are used to address uncertainty or explore solutions to specific problems. While they can help mitigate risks, they do not provide a systematic approach to sharing risk information across multiple projects."
             }
         ],
-        "userAnswer": "C. Run a Scrum of Scrums to specifically share risk information.",
         "correctAnswer": "A. Record project risks in a common risk register. B. Launch an information radiator that collates the risk lists for each project.",
         "explanation": "The three team leads need to work together to record project risks in a common register and share that information transparently with the portfolio managers. This solution enables visibility about risk across the three projects so that the portfolio managers can observe, analyze, and redirect efforts if necessary. A Scrum of Scrums can address issues at a project or program level. The communication required here is at a higher level - the portfolio level. Retrospectives occur after the work is completed, so this option is not proactive and won't allow the portfolio managers to exploit opportunities to share strategies. A spike is a valuable agile technique for addressing uncertainties and exploring potential solutions, but it does not provide the continuous risk management that is required in this scenario.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A",
+            "B"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 192,
@@ -2518,11 +2931,14 @@
                 "explanation": "Adapting Scrum can enhance team collaboration, but merely adding user stories for waste reduction may not be enough to control waste effectively."
             }
         ],
-        "userAnswer": "D. Adapt Scrum and include user stories for waste-reduction activities.",
         "correctAnswer": "B. Use quality loops.",
         "explanation": "The concept of a quality loop refers to a continuous cycle of quality improvement that involves identifying and addressing defects and issues in a project. The quality loop typically involves three interconnected loops that reinforce one another. These loops are: Loop 1 involves quality-assurance activities that aim to identify defects and issues during the project's development phase. The defects identified during this phase are then addressed through corrective action or change requests. Loop 2 involves quality-control activities that aim to ensure that the project meets the required quality standards. This loop also addresses issues related to staff fatigue and mistakes made during construction. Loop 3 involves continuous improvement activities that aim to identify and address defects and issues that arise during the project's operational phase.",
         "domain": "Domain IV: Delivery",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 193,
@@ -2546,11 +2962,14 @@
                 "explanation": "Integrating the UX team into the development team can enhance collaboration but may not address the immediate need for the product owner to clarify the product features and obtain structured feedback."
             }
         ],
-        "userAnswer": "D. Add the user experience (UX) team to the development team to borrow their skill set, knowledge, and expertise.",
         "correctAnswer": "B. The product owner should discuss the features with the user experience (UX) team, obtain continuous feedback, and update the product backlog after each increment.",
         "explanation": "The user experience (UX) team should be used as a resource for product development. The team needs to understand the product features they will develop first. Although embedding UX team members seems like a great idea, we do not need troubleshooting information yet. We need to understand which aspects of the product will deliver value to the customer. The way to do this is for the product owner to collaborate with the UX team, relying on their expertise and knowledge, enabling continuous feedback during development, and updating the product backlog after each increment.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 194,
@@ -2574,11 +2993,14 @@
                 "explanation": "Revising acceptance criteria without a clear understanding of alignment may lead to further confusion. It is more effective to clarify the user story's alignment first."
             }
         ],
-        "userAnswer": "C. Communicate the issue to the customer and collaborate to find a solution.",
         "correctAnswer": "B. Leave the user story in the product backlog until it can be clarified.",
         "explanation": "In this case, the user story might not be ready for development. The team, including the product owner, should determine the value of each user story in achieving the project goals before starting work on it. Collaboration with the customer is not correct because the team is responsible for the user stories on the backlog. The customer and the team would have agreed on the acceptance criteria for the final product before beginning development, and the criteria would not be changed because one user story might be misaligned.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 195,
@@ -2602,11 +3024,14 @@
                 "explanation": "Assigning individual research tasks does not promote collaboration within the team and may lead to fragmented knowledge. Agile practices emphasize collective ownership and shared learning, which this approach does not support."
             }
         ],
-        "userAnswer": "A. Perform an analysis to clarify the requirements and validate the technical feasibility of the user stories in collaboration with architects and stakeholders.",
         "correctAnswer": "B. Schedule a spike to investigate the technical questions and reduce uncertainty around the concerned user stories.",
         "explanation": "A spike is specifically designed to investigate and gain knowledge on unclear or technical aspects of the project, allowing the team to make informed decisions and facilitate accurate planning for future sprints. When looking for clarity on what to prioritize, the team should not necessarily focus on requirements but on performing work. The user stories are not ready to be worked in the next iteration if the team is unable to ascertain technical accuracy or feasibility. The final option, to assign tasks to team members, does not demonstrate the agile mindset or way of working to allow team members to self-organize. A research task may or may not be a good solution anyway. A spike to experiment and troubleshoot is the best option.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 196,
@@ -2630,11 +3055,14 @@
                 "explanation": "Mentoring can be beneficial; however, it primarily relies on sharing personal experiences rather than providing the systematic explanations needed for fundamental concepts. This may not fully address the team's knowledge gaps."
             }
         ],
-        "userAnswer": "B. Adopt a coaching stance and ask open-ended questions to help the team discover the answers themselves.",
         "correctAnswer": "A. Adopt a training stance and provide explanations of the fundamental concepts.",
         "explanation": "When knowledge of technical skill is needed, training is the correct action. By adopting a training stance, you provide detailed explanations of the fundamental technical concepts, allowing the team to fill in their knowledge gaps and understand the necessary basics to progress. Knowledge of quality control is fundamental for project practitioners. While coaching is useful for helping the team discover answers themselves, a training approach is more effective for establishing a solid foundation when basic concepts are not understood. Consulting offers specific recommendations but will not ensure the team understands the basic concepts. Mentoring shares personal experiences and can help transfer knowledge but does not necessarily provide the detailed explanations needed to understand the fundamental concepts.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 198,
@@ -2658,11 +3086,14 @@
                 "explanation": "This approach allows for continuous interaction and ensures that the customer's needs are being addressed in real time. It fosters a more agile response to changing requirements, aligning with agile principles."
             }
         ],
-        "userAnswer": "A. Ask the customer to provide clearer acceptance criteria.",
         "correctAnswer": "D. Collaborate with the customer more frequently.",
         "explanation": "The customer should be involved in a collaborative manner so this team can optimize the alignment of their work with the desired outcome for the customer. Involving customers outside of ceremonies, such as a demo, means the customer is interacting with the team development in the real sense of collaboration-working together in a close cooperative partnership, instead of having them view the result of the work.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "D"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 202,
@@ -2690,11 +3121,15 @@
                 "explanation": "Reviewing KPIs is essential for assessing whether the increment aligns with the product goals and delivers the expected value. KPIs can provide measurable insights into user engagement and success criteria."
             }
         ],
-        "userAnswer": "A. Review the completed cost-benefit analysis.",
         "correctAnswer": "C. Survey key stakeholders to determine their satisfaction. E. Review the key performance indicators (KPIs) associated with the product goal.",
         "explanation": "The product owner should gather satisfaction feedback from the key stakeholders-in this case, the end users of the app-to determine their level of satisfaction with the increment, as this represents their tangible benefits. Key performance indicators (KPIs) are useful for steering value delivery, so the product owner will find them useful in determining whether work completed adds the type of value desired. A cost-benefit analysis and the return on investment (ROI) should have been completed for the project business case; so this information, while useful, will determine value to the organization and not necessarily to the end user or key stakeholder. The burndown chart tracks project progress and is not the right artifact to examine to determine whether value or benefits were delivered.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C",
+            "E"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 203,
@@ -2722,11 +3157,15 @@
                 "explanation": "While a structured approach can be beneficial, it may not be the best first step in addressing resistance. Flexibility and personal engagement are crucial at this initial stage to encourage openness to agile practices."
             }
         ],
-        "userAnswer": "E. Provide a step-by-step framework for the mentoring activity.",
         "correctAnswer": "B. Speak with the resistant parties and discuss the value of mentorship for agile adoption. D. Facilitate a team-building workshop before beginning the individual mentoring sessions.",
         "explanation": "We cannot assume that people affected by a change will be receptive to the change. Concerning agile adoption, we also should use the 'left to right' adoption process, facilitating learning about the agile mindset and values first so that people accept these based on the value they can bring before learning how to apply agile approaches to their work. In this case, the agile coach should endeavor to communicate with the resistant parties to promote the benefits of mentorship. This is a valuable way of breaking down resistance, building trust, and creating a valued long-term relationship. The whole team will benefit from a team-building workshop focusing on the upcoming agile adoption. A casual, personable approach to mentoring will work better than a data-driven, factual persuasive campaign again, because mentorship is built on trust and person-to-person communication.",
         "domain": "Domain I: Mindset",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "B",
+            "D"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 204,
@@ -2754,11 +3193,15 @@
                 "explanation": "While this option allows for discussion, it may not involve all relevant stakeholders and could lead to a decision that lacks a comprehensive view of the project's needs, which is important in Agile."
             }
         ],
-        "userAnswer": "E. Schedule a meeting with the product owner to decide the priority of the new real-time chat feature.",
         "correctAnswer": "A. Organize a story mapping workshop with the product owner and stakeholders. D. Invite the stakeholders, product owner, and team members to a product backlog refinement session.",
         "explanation": "Story mapping is an effective technique to visualize the entire product and compare items for prioritization. Inviting all parties to a product backlog refinement session would work too. Both methods involve stakeholders with a goal of creating a shared understanding before changing established priorities. The other options neither promote the flexibility and adaptability that are fundamental in agile nor do they help the project move forward with shared understanding among all parties. Lack of shared understanding could lead to a decision that is not aligned with the organization's priorities.",
         "domain": "Domain II: Leadership",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "A",
+            "D"
+        ],
+        "type": "multi"
     },
     {
         "orig_question_number": 207,
@@ -2782,11 +3225,14 @@
                 "explanation": "Scrum provides a solid framework for iterative development and regular feedback through sprints and reviews. However, it may lack the flexibility required for strict budget and quality monitoring compared to Disciplined Agile®."
             }
         ],
-        "userAnswer": "B. SAFER with predictive budget and quality controls",
         "correctAnswer": "C. Disciplined AgileⓇ",
         "explanation": "This project has unique complexities, which demands application of different agile approaches. Disciplined Agile® is a tool kit of approaches and so offers project practitioners a diverse set of tools, functions, and approaches to plan for the budget and quality controls demanded by the principals and the flexibility for the team to innovate. These approaches can include Scrum, SAFE®, or Scrumban.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "C"
+        ],
+        "type": "single"
     },
     {
         "orig_question_number": 208,
@@ -2814,143 +3260,363 @@
                 "explanation": "Retrospectives are vital for continuous improvement, allowing the team to reflect on past performance and make informed decisions for future iterations. Acting on these results can help avoid similar issues in future releases."
             }
         ],
-        "userAnswer": "A. Conduct a demo and collect user satisfaction levels after each new version is released.",
         "correctAnswer": "D. Schedule frequent product reviews with key users to discuss existing features and future needs. E. Act based on the results of retrospectives.",
         "explanation": "During development, the team should be getting user feedback frequently enough to allow for continuous adjustment of features to meet customer needs, thus optimizing the value delivered. Teams should also hold retrospectives on a regular basis to discuss how to improve and then act based on their discussion. The team should not restrict a demo to only after a version is complete. Though the product owner is the voice of the customer, direct feedback from the intended product user is the optimal way of facilitating a successful fit of features for the customer. Finally, even though teams often deliver training with solutions, training customers about a feature they do not use is equal to forcing them to adopt something they did not want in the first place.",
         "domain": "Domain III: Product",
-        "category": "B"
+        "category": "B",
+        "correctLetters": [
+            "D",
+            "E"
+        ],
+        "type": "multi"
     }
 ];
 
+let currentIndex = 0;
+let score = 0;
+let attempted = 0;
 
-        let currentQuestion = 0;
-        let score = 0;
-        let selectedOption = null;
-        let answerShown = false;
+const totalQuestions = questions.length;
+const qCounterEl = document.getElementById('q-counter');
+const qOrigEl = document.getElementById('q-orig');
+const qDomainEl = document.getElementById('q-domain');
+const qCategoryEl = document.getElementById('q-category');
+const qTextEl = document.getElementById('question-text');
+const multiHintEl = document.getElementById('multi-hint');
+const optionsContainer = document.getElementById('options-container');
+const textareaContainer = document.getElementById('textarea-container');
+const textAnswerEl = document.getElementById('text-answer');
+const explPanel = document.getElementById('explanation-panel');
+const correctAnswerTextEl = document.getElementById('correct-answer-text');
+const optionsExplEl = document.getElementById('options-expl');
+const overallExplEl = document.getElementById('overall-expl');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const checkBtn = document.getElementById('check-btn');
+const scorePill = document.getElementById('score-pill');
+const navGrid = document.getElementById('nav-grid');
+const answerKeyList = document.getElementById('answer-key');
+const saveBtn = document.getElementById('save-btn');
+const saveStatus = document.getElementById('save-status');
 
-        const quiz = document.getElementById('quiz');
-        const progress = document.getElementById('progress');
-        const scoreElement = document.getElementById('score');
-        const counter = document.getElementById('question-counter');
-        const finalScreen = document.getElementById('final-screen');
-        const finalScore = document.getElementById('final-score');
-        const percentage = document.getElementById('percentage');
-        const message = document.getElementById('message');
-        const restart = document.getElementById('restart');
+questions.forEach(q => {
+    q._status = 'unanswered'; // 'correct','incorrect','info'
+    q._userSelection = null;  // single letter or array of letters or text
+});
 
-        function loadQuestion() {
-            const q = questions[currentQuestion];
-            quiz.innerHTML = `
-                <div class="category-badge cat-${q.category.toLowerCase()}">${q.category === 'A' ? 'Unfamiliar' : q.category === 'B' ? 'Guessed Wrong' : 'Minor Mistake'}</div>
-                <div class="question-text">${q.text}</div>
-                ${q.options.map((opt, i) => `<div class="option" data-index="${i}">${opt.text}</div>`).join('')}
-                <button id="show-answer" disabled>Show Answer & Explanation</button>
-                <button id="next-question" disabled>Next Question</button>
-                <div id="explanation"></div>
-            `;
-            selectedOption = null;
-            answerShown = false;
-            document.getElementById('next-question').style.display = 'none';
-            document.getElementById('explanation').style.display = 'none';
+function updateScorePill() {
+    scorePill.textContent = 'Score: ' + score + ' / ' + attempted;
+}
 
-            const options = quiz.querySelectorAll('.option');
-            options.forEach(opt => {
-                opt.addEventListener('click', () => {
-                    options.forEach(o => o.classList.remove('selected'));
-                    opt.classList.add('selected');
-                    selectedOption = opt.dataset.index;
-                    document.getElementById('show-answer').disabled = false;
-                });
-            });
-
-            document.getElementById('show-answer').addEventListener('click', showAnswer);
-            document.getElementById('next-question').addEventListener('click', nextQuestion);
-            updateProgress();
-        }
-
-        function showAnswer() {
-            if (answerShown) return;
-            answerShown = true;
-            const q = questions[currentQuestion];
-            const options = quiz.querySelectorAll('.option');
-            let correctIndex = q.options.findIndex(opt => opt.text === q.correctAnswer);
-
-            options.forEach((opt, i) => {
-                opt.style.cursor = 'default';
-                opt.removeEventListener('click', () => {});
-                if (i == selectedOption) {
-                    if (i == correctIndex) {
-                        opt.classList.add('correct');
-                        score++;
-                        updateScore();
-                    } else {
-                        opt.classList.add('wrong');
-                    }
-                }
-                if (i == correctIndex) {
-                    opt.classList.add('correct');
-                }
-                const optExp = document.createElement('div');
-                optExp.classList.add('option-explanation');
-                optExp.innerHTML = q.options[i].explanation;
-                optExp.style.display = 'block';
-                opt.appendChild(optExp);
-            });
-
-            const expDiv = document.getElementById('explanation');
-            expContent = `<strong>Correct Answer:</strong> ${q.correctAnswer}<br><br><strong>Your Incorrect Answer:</strong> ${q.userAnswer}<br><br><strong>Overall Explanation:</strong> ${q.explanation}<br><br><strong>Domain:</strong> [${q.domain}]`;
-            expDiv.innerHTML = expContent;
-            expDiv.style.display = 'block';
-            document.getElementById('show-answer').disabled = true;
-            document.getElementById('next-question').style.display = 'block';
-            document.getElementById('next-question').disabled = false;
-        }
-
-        function nextQuestion() {
-            currentQuestion++;
-            if (currentQuestion < questions.length) {
-                loadQuestion();
-                counter.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
-            } else {
-                showFinalScreen();
-            }
-        }
-
-        function updateProgress() {
-            const percent = ((currentQuestion + 1) / questions.length) * 100;
-            progress.style.width = `${percent}%`;
-        }
-
-        function updateScore() {
-            scoreElement.textContent = `Live Score: ${score} / ${questions.length}`;
-        }
-
-        function showFinalScreen() {
-            quiz.style.display = 'none';
-            finalScreen.style.display = 'block';
-            finalScore.textContent = score;
-            const perc = (score / questions.length) * 100;
-            percentage.textContent = `${perc.toFixed(2)}%`;
-            if (perc >= 85) {
-                message.textContent = "Excellent! Ready for the real exam";
-            } else if (perc >= 70) {
-                message.textContent = "Good, but needs more practice";
-            } else {
-                message.textContent = "Need to work more on wrong questions";
-            }
-            localStorage.setItem('acp_wrong_set94_score', score);
-        }
-
-        restart.addEventListener('click', () => {
-            currentQuestion = 0;
-            score = 0;
-            updateScore();
-            finalScreen.style.display = 'none';
-            quiz.style.display = 'block';
+function buildNavGrid() {
+    navGrid.innerHTML = '';
+    questions.forEach((q, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'nav-btn';
+        btn.textContent = (idx + 1).toString();
+        btn.dataset.index = idx;
+        btn.addEventListener('click', () => {
+            currentIndex = idx;
             loadQuestion();
         });
+        navGrid.appendChild(btn);
+    });
+}
 
+function updateNavStyles() {
+    const btns = navGrid.querySelectorAll('.nav-btn');
+    btns.forEach((btn, idx) => {
+        const q = questions[idx];
+        btn.classList.remove('current','correct','incorrect','info');
+        if (idx === currentIndex) btn.classList.add('current');
+        if (q.type === 'info') btn.classList.add('info');
+        if (q._status === 'correct') btn.classList.add('correct');
+        if (q._status === 'incorrect') btn.classList.add('incorrect');
+    });
+}
+
+function buildAnswerKey() {
+    answerKeyList.innerHTML = '';
+    questions.forEach((q, idx) => {
+        const li = document.createElement('li');
+        const qLabel = document.createElement('span');
+        qLabel.className = 'q-label';
+        qLabel.textContent = 'Q' + (idx+1) + ': ';
+        li.appendChild(qLabel);
+
+        if (q.type === 'info') {
+            const span = document.createElement('span');
+            span.textContent = 'info / no scoring';
+            li.appendChild(span);
+        } else {
+            const letters = q.correctLetters || [];
+            const span = document.createElement('span');
+            span.className = 'ans-label-correct';
+            if (letters.length > 0) {
+                span.textContent = letters.join(', ');
+            } else {
+                span.textContent = '?';
+            }
+            li.appendChild(span);
+        }
+        answerKeyList.appendChild(li);
+    });
+}
+
+function loadQuestion() {
+    const q = questions[currentIndex];
+    qCounterEl.textContent = 'Q ' + (currentIndex+1) + ' / ' + totalQuestions;
+    qOrigEl.textContent = 'Orig #' + q.orig_question_number;
+    qDomainEl.textContent = q.domain || 'Domain –';
+    let catClass = 'badge';
+    if (q.category === 'A') catClass += ' cat-a';
+    else if (q.category === 'B') catClass += ' cat-b';
+    else if (q.category === 'C') catClass += ' cat-c';
+    qCategoryEl.className = catClass;
+    qCategoryEl.textContent = 'Cat ' + (q.category || '-');
+
+    qTextEl.textContent = q.text || '';
+    explPanel.classList.remove('visible');
+    correctAnswerTextEl.textContent = '';
+    optionsExplEl.innerHTML = '';
+    overallExplEl.textContent = q.explanation || '';
+
+    optionsContainer.innerHTML = '';
+    textareaContainer.style.display = 'none';
+    multiHintEl.style.display = 'none';
+
+    if (q.type === 'info') {
+        textareaContainer.style.display = 'block';
+        multiHintEl.style.display = 'block';
+        multiHintEl.textContent = 'Info question – read the explanation, score is not affected.';
+        textAnswerEl.value = (typeof q._userSelection === 'string') ? q._userSelection : '';
+    } else if (q.type === 'single' || q.type === 'multi') {
+        const isMulti = (q.type === 'multi');
+        if (isMulti) {
+            const howMany = q.correctLetters ? q.correctLetters.length : 0;
+            multiHintEl.style.display = 'block';
+            multiHintEl.textContent = howMany > 0
+                ? ('Multi‑select: choose ' + howMany + ' option(s).')
+                : 'Multi‑select: choose all that apply.';
+        }
+        const stored = q._userSelection;
+        const selectedSet = new Set(Array.isArray(stored) ? stored : (stored ? [stored] : []));
+        q.options.forEach(opt => {
+            const li = document.createElement('li');
+            li.className = 'option-item';
+            const label = document.createElement('label');
+            label.className = 'option-label';
+            const input = document.createElement('input');
+            input.type = isMulti ? 'checkbox' : 'radio';
+            input.name = 'option';
+            const letter = opt.text.split('.')[0].trim();
+            input.value = letter;
+            if (selectedSet.has(letter)) {
+                input.checked = true;
+            }
+            const letterSpan = document.createElement('span');
+            letterSpan.className = 'option-letter';
+            letterSpan.textContent = letter + '.';
+
+            const textSpan = document.createElement('span');
+            textSpan.className = 'option-text';
+            const dotIndex = opt.text.indexOf('.');
+            const textOnly = dotIndex >= 0 ? opt.text.substring(dotIndex+1).trim() : opt.text;
+            textSpan.textContent = textOnly;
+
+            label.appendChild(input);
+            label.appendChild(letterSpan);
+            label.appendChild(textSpan);
+            li.appendChild(label);
+            optionsContainer.appendChild(li);
+        });
+    }
+
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex === totalQuestions - 1;
+    updateNavStyles();
+}
+
+function showExplanationForQuestion(q, isCorrect, userLetters) {
+    explPanel.classList.add('visible');
+
+    if (q.type === 'info') {
+        correctAnswerTextEl.textContent = q.answerText
+            ? ('Correct mapping / key: ' + q.answerText)
+            : '';
+        optionsExplEl.innerHTML = '';
+        return;
+    }
+
+    const letters = q.correctLetters || [];
+    if (letters.length > 0) {
+        correctAnswerTextEl.textContent = 'Correct: ' + letters.join(', ');
+    } else {
+        correctAnswerTextEl.textContent = 'Correct answer not parsed.';
+    }
+
+    const labels = optionsContainer.querySelectorAll('.option-label');
+    labels.forEach(label => {
+        label.classList.remove('correct','incorrect');
+        const input = label.querySelector('input');
+        if (!input) return;
+        const letter = input.value;
+        if (letters.includes(letter)) {
+            label.classList.add('correct');
+        } else if (userLetters && userLetters.includes(letter)) {
+            label.classList.add('incorrect');
+        }
+    });
+
+    optionsExplEl.innerHTML = '';
+    if (q.options && q.options.length) {
+        q.options.forEach(opt => {
+            const letter = opt.text.split('.')[0].trim();
+            const wrapper = document.createElement('div');
+            wrapper.style.marginBottom = '4px';
+            const strong = document.createElement('strong');
+            strong.textContent = letter + ': ';
+            const span = document.createElement('span');
+            span.textContent = opt.explanation || '';
+            wrapper.appendChild(strong);
+            wrapper.appendChild(span);
+            optionsExplEl.appendChild(wrapper);
+        });
+    }
+}
+
+function checkCurrentAnswer() {
+    const q = questions[currentIndex];
+
+    if (q.type === 'info') {
+        const textVal = textAnswerEl.value || '';
+        q._userSelection = textVal;
+        q._status = 'info';
+        showExplanationForQuestion(q, true, null);
+        updateNavStyles();
+        return;
+    }
+
+    if (q.type === 'single') {
+        const selected = optionsContainer.querySelector('input[name="option"]:checked');
+        if (!selected) {
+            alert('Select one option first.');
+            return;
+        }
+        const letter = selected.value;
+        q._userSelection = letter;
+        const correctLetters = q.correctLetters || [];
+        const isCorrect = (correctLetters.length === 0) ? false : correctLetters.includes(letter);
+
+        if (q._status === 'unanswered') {
+            attempted += 1;
+        }
+        if (isCorrect && q._status !== 'correct') {
+            score += 1;
+            q._status = 'correct';
+        } else if (!isCorrect) {
+            q._status = 'incorrect';
+        }
+        updateScorePill();
+        showExplanationForQuestion(q, isCorrect, [letter]);
+    } else if (q.type === 'multi') {
+        const selected = Array.from(optionsContainer.querySelectorAll('input[name="option"]:checked'));
+        if (selected.length === 0) {
+            alert('Select at least one option.');
+            return;
+        }
+        const letters = selected.map(el => el.value).sort();
+        q._userSelection = letters;
+        const correctLetters = (q.correctLetters || []).slice().sort();
+        let isCorrect = false;
+        if (correctLetters.length > 0) {
+            isCorrect = (letters.length === correctLetters.length) &&
+                        letters.every((v, i) => v === correctLetters[i]);
+        }
+        if (q._status === 'unanswered') {
+            attempted += 1;
+        }
+        if (isCorrect && q._status !== 'correct') {
+            score += 1;
+            q._status = 'correct';
+        } else if (!isCorrect) {
+            q._status = 'incorrect';
+        }
+        updateScorePill();
+        showExplanationForQuestion(q, isCorrect, letters);
+    }
+    updateNavStyles();
+}
+
+function saveState() {
+    try {
+        const payload = {
+            currentIndex,
+            score,
+            attempted,
+            answers: questions.map(q => ({
+                id: q.id,
+                type: q.type,
+                status: q._status,
+                selection: q._userSelection
+            }))
+        };
+        localStorage.setItem('pmi_acp_quiz_94_state', JSON.stringify(payload));
+        const ts = new Date().toLocaleTimeString();
+        saveStatus.textContent = 'Saved at ' + ts;
+    } catch (e) {
+        console.error(e);
+        saveStatus.textContent = 'Could not save (browser blocked).';
+    }
+}
+
+function loadState() {
+    try {
+        const raw = localStorage.getItem('pmi_acp_quiz_94_state');
+        if (!raw) return;
+        const payload = JSON.parse(raw);
+        if (!payload || !payload.answers) return;
+        currentIndex = payload.currentIndex || 0;
+        score = payload.score || 0;
+        attempted = payload.attempted || 0;
+        payload.answers.forEach(stored => {
+            const q = questions.find(qq => qq.id === stored.id);
+            if (!q) return;
+            q._status = stored.status || 'unanswered';
+            q._userSelection = (stored.selection === undefined ? null : stored.selection);
+        });
+        updateScorePill();
+        saveStatus.textContent = 'Loaded previous session.';
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+prevBtn.addEventListener('click', () => {
+    if (currentIndex > 0) {
+        currentIndex -= 1;
         loadQuestion();
-    </script>
+    }
+});
+nextBtn.addEventListener('click', () => {
+    if (currentIndex < totalQuestions - 1) {
+        currentIndex += 1;
+        loadQuestion();
+    }
+});
+checkBtn.addEventListener('click', () => {
+    checkCurrentAnswer();
+});
+saveBtn.addEventListener('click', () => {
+    saveState();
+});
+
+// init
+buildNavGrid();
+buildAnswerKey();
+loadState();
+loadQuestion();
+updateScorePill();
+</script>
 </body>
 </html>
