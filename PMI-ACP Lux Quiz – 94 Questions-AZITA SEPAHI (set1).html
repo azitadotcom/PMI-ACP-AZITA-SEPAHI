@@ -305,6 +305,10 @@
                 <div id="nav-grid" class="nav-grid"></div>
             </section>
             <section style="margin-top:14px;">
+<button onclick="toggleVisibility('answer-key')" style="margin-bottom:8px;">
+    Show / Hide Answer Key
+</button>
+
                 <h2>Answer key (letters)</h2>
                 <ol id="answer-key" class="answer-key-list"></ol>
             </section>
@@ -313,6 +317,12 @@
 </div>
 
 <script>
+function toggleVisibility(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.display = (el.style.display === "none") ? "block" : "none";
+}
+
 const questions = [
     {
         "orig_question_number": 1,
